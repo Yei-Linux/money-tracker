@@ -14,11 +14,16 @@ import {
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { useCreateTransactionForm } from '@/hooks/useCreateTransactionForm';
+import { useTransactionStore } from '@/store/transactions';
 import { Controller } from 'react-hook-form';
 
 export const TransactionForm = () => {
   const { register, onSubmit, handleSubmit, errors, control } =
     useCreateTransactionForm();
+  const categories = useTransactionStore((state) => state.categories);
+  const transactionTypes = useTransactionStore(
+    (state) => state.transactionTypes
+  );
   const action: () => void = handleSubmit((data) => onSubmit(data));
 
   return (
@@ -44,8 +49,11 @@ export const TransactionForm = () => {
                 >
                   <SelectGroup>
                     <SelectLabel>Transaction Type</SelectLabel>
-                    <SelectItem value="Income">Income</SelectItem>
-                    <SelectItem value="Expense">Expense</SelectItem>
+                    {transactionTypes.map(({ _id, type }) => (
+                      <SelectItem key={_id} value={_id}>
+                        {type}
+                      </SelectItem>
+                    ))}
                   </SelectGroup>
                 </SelectContent>
               </Select>
@@ -69,11 +77,16 @@ export const TransactionForm = () => {
                 </SelectTrigger>
 
                 <SelectContent id="addForm_category" {...register('category')}>
-                  <SelectGroup>
-                    <SelectLabel>Category</SelectLabel>
-                    <SelectItem value="Income">Income</SelectItem>
-                    <SelectItem value="Expense">Expense</SelectItem>
-                  </SelectGroup>
+                  {categories.map(({ category, categories, _id }) => (
+                    <SelectGroup key={_id}>
+                      <SelectLabel>{category}</SelectLabel>
+                      {categories?.map(({ category, _id }) => (
+                        <SelectItem key={_id} value={_id}>
+                          {category}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  ))}
                 </SelectContent>
               </Select>
             )}

@@ -14,8 +14,8 @@ export const TransactionTypeList: FC<ITransactionTypeList> = ({
 }) => {
   return (
     <ul className="flex justify-between w-100 gap-10 flex-wrap">
-      {summaryListSplit.map(({ theme, type, value, trend, percent }) => (
-        <div>
+      {summaryListSplit.map(({ theme, type, value, trend, percent }, index) => (
+        <li key={index}>
           <TransactionTypeInfo
             title={type}
             theme={theme}
@@ -23,7 +23,7 @@ export const TransactionTypeList: FC<ITransactionTypeList> = ({
             currency={CURRENCY}
           />
           <TrendAnalyzer trend={trend} percent={percent} />
-        </div>
+        </li>
       ))}
     </ul>
   );

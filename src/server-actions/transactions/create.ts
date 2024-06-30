@@ -1,14 +1,25 @@
 'use server';
 
-import { TCreateTransactionTypeSchema } from '@/validators/createTransaction.validator';
+import { transactionsModel } from '@/models';
+import {
+  CreateTransactionZodSchema,
+  TCreateTransactionTypeSchema,
+} from '@/validators/createTransaction.validator';
 
 export const createTransactionServerAction = async (
   data: TCreateTransactionTypeSchema
 ) => {
-  console.log('test', data);
+  const validation = CreateTransactionZodSchema.safeParse(data);
+  if (!validation.success) {
+    return {
+      message: 'There was an error',
+      errors: validation.error.issues,
+    };
+  }
 
+  await transactionsModel.create(data);
   return {
     message: 'Transaction Created',
-    data: {},
+    errors: [],
   };
 };

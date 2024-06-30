@@ -4,9 +4,11 @@ import {
   TCreateTransactionTypeSchema,
 } from '@/validators/createTransaction.validator';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 
 export const useCreateTransactionForm = () => {
+  const queryClient = useQueryClient();
   const {
     register,
     handleSubmit,
@@ -18,6 +20,7 @@ export const useCreateTransactionForm = () => {
 
   const onSubmit = async (data: TCreateTransactionTypeSchema) => {
     await createTransactionServerAction(data);
+    queryClient.invalidateQueries({ queryKey: ['transactions'] });
   };
 
   return { register, handleSubmit, onSubmit, errors, control };

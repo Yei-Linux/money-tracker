@@ -1,6 +1,7 @@
 export type TCategory = {
-  id: string;
+  _id: string;
   category: string;
+  categories?: Array<TCategory>;
 };
 
 export type TCategories = Array<TCategory>;

@@ -1,15 +1,26 @@
+'use client';
+
 import { FC } from 'react';
 import { TransactionDialog } from './TransactionDialog';
+import { TCategories } from '@/types/categories';
+import { useInitTransactionStore } from '@/hooks/useInitTransactionStore';
+import { TTransactionTypes } from '@/types/transaction-types';
 
 interface ITransactionHeader {
   incomes: number;
   expenses: number;
+  categories: TCategories;
+  transactionTypes: TTransactionTypes;
 }
 
 export const TransactionHeader: FC<ITransactionHeader> = ({
   incomes,
   expenses,
+  categories,
+  transactionTypes,
 }) => {
+  useInitTransactionStore({ categories, transactionTypes });
+
   return (
     <header className="flex flex-col">
       <h2 className="font-bold text-2xl">Transactions</h2>
@@ -18,11 +29,7 @@ export const TransactionHeader: FC<ITransactionHeader> = ({
           You had {incomes} incomes and {expenses} expenses this month
         </p>
 
-        <ul>
-          <li>
-            <TransactionDialog />
-          </li>
-        </ul>
+        <TransactionDialog />
       </div>
     </header>
   );
