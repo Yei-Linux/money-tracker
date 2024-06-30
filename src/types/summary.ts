@@ -9,6 +9,7 @@ export type TransactionItem = {
   title: string;
   cost: number;
   description: string;
+  trend: 'up' | 'down';
   date: string;
 };
 export type TransactionList = Record<string, Array<TransactionItem>>;

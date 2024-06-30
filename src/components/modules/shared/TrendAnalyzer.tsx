@@ -1,3 +1,4 @@
+import { trendEmojis } from '@/components/constants';
 import type { FC } from 'react';
 
 interface ITrendAnalyzer {
@@ -6,14 +7,9 @@ interface ITrendAnalyzer {
 }
 
 export const TrendAnalyzer: FC<ITrendAnalyzer> = ({ percent, trend }) => {
-  const textTypes = {
-    up: '↗️',
-    down: '↙️',
-  };
-
   return (
     <p className="text-xs">
-      <span>{textTypes[trend]}</span> {percent}% vs last month
+      <span>{trendEmojis[trend]}</span> {percent}% vs last month
     </p>
   );
 };

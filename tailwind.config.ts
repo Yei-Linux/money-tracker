@@ -47,6 +47,10 @@ const config = {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))',
         },
+        neutral_1: {
+          DEFAULT: 'hsl(var(--neutral_1))',
+          foreground: 'hsl(var(--neutral_1-foreground))',
+        },
         muted: {
           DEFAULT: 'hsl(var(--muted))',
           foreground: 'hsl(var(--muted-foreground))',
@@ -63,6 +67,9 @@ const config = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+      },
+      boxShadow: {
+        muted: 'none',
       },
       borderRadius: {
         lg: 'var(--radius)',
