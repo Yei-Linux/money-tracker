@@ -5,6 +5,8 @@ import { TransactionDialog } from './TransactionDialog';
 import { TCategories } from '@/types/categories';
 import { useInitTransactionStore } from '@/hooks/useInitTransactionStore';
 import { TTransactionTypes } from '@/types/transaction-types';
+import { CategoryFilters } from './CategoryFilters';
+import { TransactionTypeFilters } from './TransactionTypesFilters';
 
 interface ITransactionHeader {
   incomes: number;
@@ -29,7 +31,17 @@ export const TransactionHeader: FC<ITransactionHeader> = ({
           You had {incomes} incomes and {expenses} expenses this month
         </p>
 
-        <TransactionDialog />
+        <ul className="flex gap-4">
+          <li>
+            <TransactionTypeFilters />
+          </li>
+          <li>
+            <CategoryFilters />
+          </li>
+          <li>
+            <TransactionDialog />
+          </li>
+        </ul>
       </div>
     </header>
   );

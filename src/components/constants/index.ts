@@ -9,3 +9,5 @@ export const transactionTypeEmojis = {
   [transactionTypesSeeder[0]._id]: '↗️',
   [transactionTypesSeeder[1]._id]: '↙️',
 };
+
+export const DEFAULT_LIMIT = 4;

@@ -1,44 +1,46 @@
-import { transactionsModel } from '@/models';
+import { DEFAULT_LIMIT } from '@/components/constants';
+import { buildFilters } from '@/lib/utils';
+import { getAllTransactionsRepository } from '@/repository/transactions';
+import { TFilterKeys } from '@/store/transactions';
+import mongoose from 'mongoose';
 import { NextResponse } from 'next/server';
 
 export const GET = async (req: Request) => {
-  try {
-    const transactions = await transactionsModel.aggregate([
-      {
-        $lookup: {
-          from: 'categories',
-          localField: 'category',
-          foreignField: '_id',
-          as: 'categoryDetails',
-        },
-      },
-      { $unwind: '$categoryDetails' },
-      {
-        $lookup: {
-          from: 'transactiontypes',
-          localField: 'transactionType',
-          foreignField: '_id',
-          as: 'transactionTypeDetails',
-        },
-      },
-      { $unwind: '$transactionTypeDetails' },
-      {
-        $group: {
-          _id: { $dateToString: { format: '%Y-%m-%d', date: '$createdAt' } },
-          transactions: {
-            $push: {
-              _id: '$_id',
-              title: '$title',
-              description: '$description',
-              price: '$price',
-              category: '$categoryDetails',
-              transactionType: '$transactionTypeDetails',
-              createdAt: '$createdAt',
-            },
+  const pagination = {
+    limit: DEFAULT_LIMIT,
+    skip: 0,
+  };
+  const filters = [];
+
+  const url = new URL(req.url);
+  const searchParams = new URLSearchParams(url.searchParams);
+
+  for (let [key, value] of searchParams) {
+    if (['limit', 'skip'].includes(key)) {
+      pagination[key as 'limit' | 'skip'] = +value;
+      continue;
+    }
+    filters.push({
+      key: key as TFilterKeys,
+      value: new mongoose.Types.ObjectId(value),
+    });
+  }
+
+  const filtersMatchCondition = !!filters.length
+    ? [
+        {
+          $match: {
+            $and: buildFilters(filters),
           },
         },
-      },
-    ]);
+      ]
+    : [];
+
+  try {
+    const transactions = await getAllTransactionsRepository({
+      filters: filtersMatchCondition,
+      ...pagination,
+    });
 
     const transactionsResponse = transactions.reduce(
       (acc, transaction) => ({

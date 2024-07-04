@@ -2,6 +2,7 @@ import { TransactionHeader } from './TransactionsHeader';
 import { getCategoriesService } from '@/services/categories.service';
 import { getTransactionTypesService } from '@/services/transaction-types.service';
 import { TransactionsGroup } from './TransactionsGroup';
+import { TransactionsPagination } from './TransactionsPagination';
 
 export const Transactions = async () => {
   const categories = await getCategoriesService();
@@ -19,6 +20,7 @@ export const Transactions = async () => {
         expenses={expenses}
       />
       <TransactionsGroup />
+      <TransactionsPagination />
     </div>
   );
 };
