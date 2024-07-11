@@ -1,13 +1,18 @@
-import { summaryList } from '@/mocks/summary';
+'use client';
+
 import { TransactionTypeList } from './TransactionTypeList';
 import { ChartTotal } from './ChartTotal';
 import { Chart } from './Chart';
+import { useFetchTransactionsStore } from '@/hooks/useFetchTransactionStats';
 
-export const Summary = () => {
-  const filterTerm = 'Net Total';
+export const Stats = () => {
+  const { transactionStats } = useFetchTransactionsStore();
+  const filterTerm = 'Total';
 
-  const total = summaryList.find((item) => item.type === filterTerm);
-  const summaryListSplit = summaryList.filter(
+  if (!transactionStats) return;
+
+  const total = transactionStats.find((item) => item.type === filterTerm);
+  const summaryListSplit = transactionStats.filter(
     (item) => item.type !== filterTerm
   );
 

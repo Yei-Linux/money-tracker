@@ -1,17 +1,18 @@
 import { TransactionTypeInfo } from '../../shared/TransactionTypeInfo';
 import { CURRENCY } from '@/mocks/summary';
 
-import type { TSummaryItem, TSummaryTransactionTypes } from '@/types/summary';
 import type { FC } from 'react';
 import { TrendAnalyzer } from '../../shared/TrendAnalyzer';
+import { TTransactionStatItem } from '@/types/transaction-stats';
+import { TThemes } from './utils';
 
 export interface IChartTotal {
-  total: TSummaryItem;
+  total: TTransactionStatItem;
   children: React.ReactNode;
 }
 
 export const ChartTotal: FC<IChartTotal> = ({ total, children }) => {
-  const { type, theme, value, trend, percent } = total;
+  const { type, theme, value } = total;
 
   return (
     <div className="flex flex-wrap justify-between gap-3">
@@ -19,10 +20,10 @@ export const ChartTotal: FC<IChartTotal> = ({ total, children }) => {
         <TransactionTypeInfo
           title={type}
           value={value}
-          theme={theme}
+          theme={theme as TThemes}
           currency={CURRENCY}
         />
-        <TrendAnalyzer trend={trend} percent={percent} />
+        <TrendAnalyzer trend="up" percent={8} />
       </div>
       {children}
     </div>

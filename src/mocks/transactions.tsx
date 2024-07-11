@@ -1,6 +1,4 @@
-import { TransactionList } from '@/types/summary';
-
-export const transactionsGroup: TransactionList = {
+export const transactionsGroup = {
   Today: [
     {
       id: '1',

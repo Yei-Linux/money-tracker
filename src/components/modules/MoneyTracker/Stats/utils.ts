@@ -1,4 +1,4 @@
-import { TSummaryTransactionTypes } from '@/types/summary';
+import { TTransactionStats } from '@/types/transaction-stats';
 
 const themes = {
   primary: 'black',
@@ -8,8 +8,10 @@ const themes = {
   sunny: '#eab308',
 };
 
+export type TThemes = keyof typeof themes;
+
 export const processInfoChart = (
-  chartInfo: TSummaryTransactionTypes,
+  chartInfo: TTransactionStats,
   totalValue: number
 ) => {
   const labels = [];
@@ -18,7 +20,7 @@ export const processInfoChart = (
   for (const { type, value, theme } of chartInfo) {
     labels.push(type);
     data.push((+value * 100) / totalValue);
-    backgrounds.push(themes[theme]);
+    backgrounds.push(themes[theme as TThemes]);
   }
   return { labels, data, backgrounds };
 };

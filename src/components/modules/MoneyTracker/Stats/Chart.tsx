@@ -9,10 +9,10 @@ const PieChart = dynamic(() =>
 );
 
 import { processInfoChart } from './utils';
-import { TSummaryTransactionTypes } from '@/types/summary';
+import { TTransactionStats } from '@/types/transaction-stats';
 
 interface IChart {
-  info: TSummaryTransactionTypes;
+  info: TTransactionStats;
   totalValue: number;
 }
 

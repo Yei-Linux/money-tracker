@@ -1,12 +1,13 @@
 import { CURRENCY } from '@/mocks/summary';
 import { TransactionTypeInfo } from '../../shared/TransactionTypeInfo';
 
-import type { TSummaryTransactionTypes } from '@/types/summary';
 import type { FC } from 'react';
 import { TrendAnalyzer } from '../../shared/TrendAnalyzer';
+import { TTransactionStats } from '@/types/transaction-stats';
+import { TThemes } from './utils';
 
 interface ITransactionTypeList {
-  summaryListSplit: TSummaryTransactionTypes;
+  summaryListSplit: TTransactionStats;
 }
 
 export const TransactionTypeList: FC<ITransactionTypeList> = ({
@@ -14,15 +15,15 @@ export const TransactionTypeList: FC<ITransactionTypeList> = ({
 }) => {
   return (
     <ul className="flex justify-between w-100 gap-10 flex-wrap">
-      {summaryListSplit.map(({ theme, type, value, trend, percent }, index) => (
+      {summaryListSplit.map(({ theme, type, value }, index) => (
         <li key={index}>
           <TransactionTypeInfo
             title={type}
-            theme={theme}
+            theme={theme as TThemes}
             value={value}
             currency={CURRENCY}
           />
-          <TrendAnalyzer trend={trend} percent={percent} />
+          <TrendAnalyzer trend="up" percent={8} />
         </li>
       ))}
     </ul>

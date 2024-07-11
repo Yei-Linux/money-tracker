@@ -1,3 +1,4 @@
+import { ServerError } from '@/errors/ServerError';
 import { TransactionsGroup } from '@/types/transactions';
 
 export const getTransactionsService = async (
@@ -12,6 +13,8 @@ export const getTransactionsService = async (
     const json = await promise.json();
     return json?.data ?? {};
   } catch (error) {
-    return {};
+    throw new ServerError(
+      'There was an error getting your transaction. Please try again...'
+    );
   }
 };

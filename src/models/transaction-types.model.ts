@@ -5,6 +5,9 @@ const transactionTypeDBSchema = new mongoose.Schema(
     type: {
       type: String,
     },
+    theme: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
