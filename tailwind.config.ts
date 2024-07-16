@@ -1,5 +1,25 @@
 import type { Config } from 'tailwindcss';
 
+export const gridTemplateAreaConfig = {
+  gridTemplateAreas: {
+    layout: [
+      'header header header',
+      'main    main   main',
+      'footer  footer footer',
+    ],
+  },
+  gridTemplateRows: {
+    layout: '100px auto 80px',
+  },
+};
+
+export const fontFamily = {
+  fontFamily: {
+    snicker: ['var(--font-snickerSnack)'],
+    inter: ['var(--font-inter)'],
+  },
+};
+
 const config = {
   darkMode: ['class'],
   content: ['./src/**/*.{ts,tsx}'],
@@ -13,6 +33,8 @@ const config = {
       },
     },
     extend: {
+      ...gridTemplateAreaConfig,
+      ...fontFamily,
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
@@ -92,7 +114,10 @@ const config = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [
+    require('tailwindcss-animate'),
+    require('@savvywombat/tailwindcss-grid-areas'),
+  ],
 } satisfies Config;
 
 export default config;

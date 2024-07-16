@@ -1,10 +1,17 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import fontLocal from 'next/font/local';
 
 import './globals.css';
 import { Providers } from './provider';
+import { Layout } from '@/components/layouts/Layout';
+import { cn } from '@/lib/utils';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const snickerSnack = fontLocal({
+  src: '../../public/fonts/snickerSnack.otf',
+  variable: '--font-snickerSnack',
+});
 
 export const metadata: Metadata = {
   title: 'Money Tracker App',
@@ -18,8 +25,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Providers>{children}</Providers>
+      <body
+        className={cn(inter.className, snickerSnack.variable, inter.variable)}
+      >
+        <Providers>
+          <Layout>
+            <Layout.Header />
+            <Layout.Main>{children}</Layout.Main>
+            <Layout.Footer />
+          </Layout>
+        </Providers>
       </body>
     </html>
   );

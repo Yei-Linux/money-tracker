@@ -4,6 +4,7 @@ import { TransactionTypeList } from './TransactionTypeList';
 import { ChartTotal } from './ChartTotal';
 import { Chart } from './Chart';
 import { useFetchTransactionsStore } from '@/hooks/useFetchTransactionStats';
+import { Title } from '@/components/ui/title';
 
 export const Stats = () => {
   const { transactionStats } = useFetchTransactionsStore();
@@ -18,7 +19,7 @@ export const Stats = () => {
 
   return (
     <div className="flex flex-col gap-7 w-100">
-      <h2 className="font-bold text-2xl">Summary of this Month</h2>
+      <Title as="h2">Summary of this Month</Title>
 
       {total && (
         <ChartTotal total={total}>

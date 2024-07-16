@@ -9,6 +9,7 @@ import { CategoryFilters } from '../CategoryFilters';
 import { TransactionTypeFilters } from '../TransactionTypesFilters';
 import { useFetchTransactionsStore } from '@/hooks/useFetchTransactionStats';
 import { pickIncomesAndExpenses } from './utils';
+import { Title } from '@/components/ui/title';
 
 interface ITransactionHeader {
   categories: TCategories;
@@ -25,7 +26,8 @@ export const TransactionHeader: FC<ITransactionHeader> = ({
 
   return (
     <header className="flex flex-col">
-      <h2 className="font-bold text-2xl">My Transactions</h2>
+      <Title as="h2">My Transactions</Title>
+
       <div className="flex justify-between items-center w-100">
         <p className="text-sm text-neutral_1">
           You had {incomes} incomes and {expenses} expenses this month

@@ -12,6 +12,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.6.0",
     "@radix-ui/react-dialog": "^1.1.1",
+    "@radix-ui/react-dropdown-menu": "^2.1.1",
     "@radix-ui/react-popover": "^1.1.1",
     "@radix-ui/react-select": "^2.1.1",
     "@radix-ui/react-separator": "^1.1.0",
@@ -26,6 +27,7 @@
     "lucide-react": "^0.397.0",
     "mongoose": "^8.4.4",
     "next": "14.2.4",
+    "next-auth": "^4.24.7",
     "react": "^18",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18",
@@ -37,6 +39,7 @@
     "zustand": "^4.5.4"
   },
   "devDependencies": {
+    "@savvywombat/tailwindcss-grid-areas": "^4.0.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

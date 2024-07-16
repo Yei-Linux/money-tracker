@@ -1,11 +1,11 @@
-import { Stats } from '@/components/modules/MoneyTracker/Stats';
-import { Transactions } from '@/components/modules/MoneyTracker/Transactions';
+import { Stats } from '@/components/modules/Summary/Stats';
+import { Transactions } from '@/components/modules/Summary/Transactions';
 
 export default async function Home() {
   return (
-    <main className="flex flex-col gap-20 min-h-screen max-w-[1200px] p-24 m-auto">
+    <div className="flex flex-col gap-24 min-h-screen max-w-[1200px] p-14 m-auto">
       <Stats />
       <Transactions />
-    </main>
+    </div>
   );
 }

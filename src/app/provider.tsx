@@ -8,6 +8,8 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import toast from 'react-hot-toast';
 import { PropsWithChildren } from 'react';
 
+import { SessionProvider } from 'next-auth/react';
+
 export const Providers = ({ children }: PropsWithChildren) => {
   const client = new QueryClient({
     queryCache: new QueryCache({
@@ -20,9 +22,11 @@ export const Providers = ({ children }: PropsWithChildren) => {
   });
 
   return (
-    <QueryClientProvider client={client}>
-      {children}
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    <SessionProvider>
+      <QueryClientProvider client={client}>
+        {children}
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </SessionProvider>
   );
 };
