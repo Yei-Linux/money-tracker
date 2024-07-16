@@ -15,4 +15,7 @@ export type TTransaction = {
   createdAt: Date;
 };
 
-export type TransactionsGroup = Record<string, Array<TTransaction>>;
+export type TransactionsGroup = {
+  transactions: Record<string, Array<TTransaction>>;
+  nextCursor: boolean;
+};

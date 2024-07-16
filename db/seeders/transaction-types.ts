@@ -1,11 +1,16 @@
+export const TransactionTypeIds = {
+  Income: '668157bc20b65bf13bb8ca8c',
+  Expense: '668157c11ca7d7a74dcb6cac',
+};
+
 export const transactionTypesSeeder = [
   {
-    _id: '668157bc20b65bf13bb8ca8c',
+    _id: TransactionTypeIds.Income,
     type: '↗️ Income',
     theme: 'success',
   },
   {
-    _id: '668157c11ca7d7a74dcb6cac',
+    _id: TransactionTypeIds.Expense,
     type: '↙️ Expense',
     theme: 'danger',
   },

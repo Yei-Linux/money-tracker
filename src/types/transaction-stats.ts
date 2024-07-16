@@ -3,6 +3,7 @@ export type TTransactionStats = Array<{
   type: string;
   value: number;
   theme: string;
+  length: number;
 }>;
 
 export type TTransactionStatItem = TTransactionStats[number];

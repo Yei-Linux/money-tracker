@@ -2,9 +2,10 @@
 
 import { useFetchTransactions } from '@/hooks/useFetchTransactions';
 import { TransactionsTable } from './TransactionsTable';
+import { TransactionsPagination } from './TransactionsPagination';
 
 export const TransactionsGroup = () => {
-  const { transactions } = useFetchTransactions();
+  const { transactions, nextCursor } = useFetchTransactions();
 
   return (
     <>
@@ -15,6 +16,8 @@ export const TransactionsGroup = () => {
             <TransactionsTable transactions={transactions} />
           </div>
         ))}
+
+      {nextCursor && <TransactionsPagination />}
     </>
   );
 };

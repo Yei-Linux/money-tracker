@@ -1,43 +1,10 @@
-import { firstDayOfMonth } from '@/lib/date';
-import { transactionsModel } from '@/models';
+import { getStatsOfMonth } from '@/repository/stats';
 import { NextResponse } from 'next/server';
 
 export const GET = async (req: Request) => {
   try {
-    const transactionsStats = await transactionsModel.aggregate([
-      {
-        $match: { createdAt: { $gte: new Date(firstDayOfMonth()) } },
-      },
-      {
-        $lookup: {
-          from: 'transactiontypes',
-          localField: 'transactionType',
-          foreignField: '_id',
-          as: 'transactionTypeDetails',
-        },
-      },
-      {
-        $unwind: '$transactionTypeDetails',
-      },
-      {
-        $group: {
-          _id: {
-            id: '$transactionTypeDetails._id',
-            type: '$transactionTypeDetails.type',
-            theme: '$transactionTypeDetails.theme',
-          },
-          total: { $sum: '$price' },
-        },
-      },
-      {
-        $project: {
-          _id: '$_id.id',
-          type: '$_id.type',
-          value: '$total',
-          theme: '$_id.theme',
-        },
-      },
-    ]);
+    const transactionsStats = await getStatsOfMonth();
+
     const totalStats = transactionsStats.reduce((acc, item) => {
       return acc + item.value;
     }, 0);

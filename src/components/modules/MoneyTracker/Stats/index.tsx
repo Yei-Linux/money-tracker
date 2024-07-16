@@ -18,7 +18,7 @@ export const Stats = () => {
 
   return (
     <div className="flex flex-col gap-7 w-100">
-      <h2 className="font-bold text-2xl">Summary</h2>
+      <h2 className="font-bold text-2xl">Summary of this Month</h2>
 
       {total && (
         <ChartTotal total={total}>

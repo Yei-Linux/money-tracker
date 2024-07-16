@@ -20,7 +20,9 @@ export const useCreateTransactionForm = () => {
 
   const onSubmit = async (data: TCreateTransactionTypeSchema) => {
     await createTransactionServerAction(data);
-    queryClient.invalidateQueries({ queryKey: ['transactions'] });
+    queryClient.invalidateQueries({
+      queryKey: ['transactions', 'transaction/stats'],
+    });
   };
 
   return { register, handleSubmit, onSubmit, errors, control };

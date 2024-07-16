@@ -14,14 +14,22 @@ export const useFetchTransactions = () => {
   });
 
   const {
-    data: transactions,
+    data: transactionsResponse,
     isLoading,
     isError,
   } = useQuery({
     queryKey: ['transactions', filters, skip, limit],
     queryFn: () => getTransactionsService(formDataFilters),
-    select: (data) => Object.entries(data),
+    select: ({ transactions, nextCursor }) => ({
+      transactions: Object.entries(transactions),
+      nextCursor: nextCursor,
+    }),
   });
 
-  return { transactions, isLoading, isError };
+  return {
+    transactions: transactionsResponse?.transactions,
+    nextCursor: transactionsResponse?.nextCursor,
+    isLoading,
+    isError,
+  };
 };

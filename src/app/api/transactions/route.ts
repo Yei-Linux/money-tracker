@@ -37,7 +37,7 @@ export const GET = async (req: Request) => {
     : [];
 
   try {
-    const transactions = await getAllTransactionsRepository({
+    const { transactions, nextCursor } = await getAllTransactionsRepository({
       filters: filtersMatchCondition,
       ...pagination,
     });
@@ -51,7 +51,7 @@ export const GET = async (req: Request) => {
     );
 
     return NextResponse.json({
-      data: transactionsResponse ?? {},
+      data: { transactions: transactionsResponse ?? {}, nextCursor },
       message: 'Transactions retrieved successfull',
     });
   } catch (error) {

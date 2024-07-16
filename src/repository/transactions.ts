@@ -17,7 +17,7 @@ export const getAllTransactionsRepository = async ({
   skip: number;
   limit: number;
 }) => {
-  return await transactionsModel.aggregate([
+  const promiseTransactions = transactionsModel.aggregate([
     { $sort: { createdAt: -1 } },
 
     ...filters,
@@ -60,4 +60,19 @@ export const getAllTransactionsRepository = async ({
       },
     },
   ]);
+  const promiseCounter = transactionsModel.aggregate([
+    ...filters,
+    {
+      $count: 'totalCount',
+    },
+  ]);
+  const [transactions, counter] = await Promise.all([
+    promiseTransactions,
+    promiseCounter,
+  ]);
+
+  const totalDocuments = counter[0]?.totalCount || 0;
+  const nextCursor = skip + limit < totalDocuments;
+
+  return { transactions, nextCursor };
 };
