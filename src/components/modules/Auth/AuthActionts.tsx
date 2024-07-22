@@ -1,6 +1,7 @@
 'use client';
 import { useAuthSession } from '@/hooks/useAuthSession';
 import { signIn } from '@/lib/auth';
+import { Signup } from './Signup';
 
 export const AuthActions = () => {
   const { user } = useAuthSession();
@@ -20,7 +21,7 @@ export const AuthActions = () => {
           Sign In
         </li>
       )}
-      {!user && <li>Sign Up</li>}
+      {!user && <Signup />}
     </>
   );
 };
