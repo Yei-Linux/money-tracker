@@ -1,4 +1,4 @@
-import { DEFAULT_LIMIT } from '@/components/constants';
+import { DEFAULT_LIMIT } from '@/constants';
 import { buildFilters } from '@/lib/utils';
 import { getAllTransactionsRepository } from '@/repository/transactions';
 import { TFilterKeys } from '@/store/transactions';

@@ -1,4 +1,4 @@
-import { DEFAULT_LIMIT } from '@/components/constants';
+import { DEFAULT_LIMIT } from '@/constants';
 import { TCategories } from '@/types/categories';
 import { TTransactionTypes } from '@/types/transaction-types';
 import { create } from 'zustand';

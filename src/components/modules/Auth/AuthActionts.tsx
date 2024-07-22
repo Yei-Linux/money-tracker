@@ -7,7 +7,19 @@ export const AuthActions = () => {
 
   return (
     <>
-      {!user && <li onClick={() => signIn()}>Sign In</li>}
+      {!user && (
+        <li
+          onClick={() =>
+            signIn('credentials', {
+              email: 'test@gmail.com',
+              password: '123',
+              redirect: false,
+            })
+          }
+        >
+          Sign In
+        </li>
+      )}
       {!user && <li>Sign Up</li>}
     </>
   );

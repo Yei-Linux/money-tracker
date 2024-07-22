@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import Link from 'next/link';
 import { useAuthSession } from '@/hooks/useAuthSession';
+import { signOut } from '@/lib/auth';
 
 export const UserDropdown = () => {
   const { user } = useAuthSession();
@@ -61,6 +62,7 @@ export const UserDropdown = () => {
               <Button
                 variant="outline"
                 className="border-none outline-none ![box-shadow:none]"
+                onClick={() => signOut()}
               >
                 Log out
               </Button>

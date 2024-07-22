@@ -1,4 +1,4 @@
-import { transactionTypesSeeder } from '../../../db/seeders/transaction-types';
+import { transactionTypesSeeder } from '../../db/seeders/transaction-types';
 
 export const trendEmojis = {
   up: '↗️',

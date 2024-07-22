@@ -1,4 +1,4 @@
-import { trendEmojis } from '@/components/constants';
+import { trendEmojis } from '@/constants';
 import type { FC } from 'react';
 
 interface ITrendAnalyzer {

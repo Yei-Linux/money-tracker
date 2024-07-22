@@ -1,4 +1,4 @@
-import dbConnect from '../../src/lib/db';
+import dbConnect from '../../src/lib/db/mongoose';
 import categoriesModel from '../../src/models/categories.model';
 import transactionTypesModel from '../../src/models/transaction-types.model';
 import parentCategoriesModel from '../../src/models/parent-categories.model';

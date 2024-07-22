@@ -1,4 +1,4 @@
-import { transactionTypeEmojis } from '@/components/constants';
+import { transactionTypeEmojis } from '@/constants';
 import { Badge } from '@/components/ui/badge';
 import { Table, TableRow, TableBody, TableCell } from '@/components/ui/table';
 import { cn } from '@/lib/utils';
