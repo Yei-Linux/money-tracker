@@ -3,3 +3,5 @@ export type UserSession = {
   email: string;
   name: string;
 };
+
+export type AuthStatesForm = 'signin' | 'signup';

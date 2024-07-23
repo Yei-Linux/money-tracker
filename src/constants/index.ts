@@ -11,3 +11,6 @@ export const transactionTypeEmojis = {
 };
 
 export const DEFAULT_LIMIT = 4;
+
+export const INTIAL_STEP = 0;
+export const MAX_AUTH_FORM_STEP = 1;

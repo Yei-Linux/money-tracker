@@ -1,7 +1,7 @@
 'use client';
 import { useAuthSession } from '@/hooks/useAuthSession';
 import { signIn } from '@/lib/auth';
-import { Signup } from './Signup';
+import { Signup } from './Popup';
 
 export const AuthActions = () => {
   const { user } = useAuthSession();
