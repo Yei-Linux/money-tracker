@@ -1,6 +1,6 @@
 import { useAuthFormStore } from '@/store/auth-form';
 import { FC, PropsWithChildren } from 'react';
-import { DialogTitle, DialogHeader } from '../ui/dialog';
+import { DialogTitle, DialogHeader, DialogDescription } from '../ui/dialog';
 import { ReplyIcon } from 'lucide-react';
 
 type EmailPopupAuthLayout = PropsWithChildren;
@@ -14,17 +14,19 @@ export const EmailPopupAuthLayout: FC<EmailPopupAuthLayout> = ({
 
   return (
     <div className="flex flex-col gap-10">
-      <header className="flex flex-col gap-3">
+      <DialogHeader className="flex flex-col gap-3">
         <button
+          type="button"
           onClick={previousStep}
           className="flex gap-1 items-center text-sm text-muted-foreground"
         >
           <ReplyIcon size={20} /> <span>Back</span>
         </button>
-        <DialogHeader className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2">
           <DialogTitle>{title} with your email</DialogTitle>
-        </DialogHeader>
-      </header>
+          <DialogDescription>Are you ready?</DialogDescription>
+        </div>
+      </DialogHeader>
 
       {children}
     </div>

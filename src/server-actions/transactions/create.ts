@@ -1,5 +1,6 @@
 'use server';
 
+import { TransactionError } from '@/errors/TransactionError';
 import { transactionsModel } from '@/models';
 import {
   CreateTransactionZodSchema,
@@ -9,17 +10,18 @@ import {
 export const createTransactionServerAction = async (
   data: TCreateTransactionTypeSchema
 ) => {
-  const validation = CreateTransactionZodSchema.safeParse(data);
-  if (!validation.success) {
-    return {
-      message: 'There was an error',
-      errors: validation.error.issues,
-    };
-  }
+  try {
+    const validation = CreateTransactionZodSchema.safeParse(data);
+    if (!validation.success) {
+      throw new Error('There was an error: ' + validation.error.issues);
+    }
 
-  await transactionsModel.create(data);
-  return {
-    message: 'Transaction Created',
-    errors: [],
-  };
+    await transactionsModel.create(data);
+    return {
+      message: 'Transaction Created',
+      errors: [],
+    };
+  } catch (error) {
+    throw new TransactionError((error as Error).message);
+  }
 };

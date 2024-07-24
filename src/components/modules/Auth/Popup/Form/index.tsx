@@ -4,7 +4,7 @@ import { SignInForm } from './SignIn';
 import { MainContent } from './MainContenxt';
 import { EmailPopupAuthLayout } from '@/components/layouts/EmailPopupAuthLayout';
 
-export const SignupForm = () => {
+export const AuthForm = () => {
   const authState = useAuthFormStore((store) => store.state);
   const authStep = useAuthFormStore((store) => store.step);
 

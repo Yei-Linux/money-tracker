@@ -5,7 +5,7 @@ import {
   QueryCache,
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import { PropsWithChildren } from 'react';
 
 import { SessionProvider } from 'next-auth/react';
@@ -27,6 +27,7 @@ export const Providers = ({ children }: PropsWithChildren) => {
         {children}
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
+      <Toaster />
     </SessionProvider>
   );
 };

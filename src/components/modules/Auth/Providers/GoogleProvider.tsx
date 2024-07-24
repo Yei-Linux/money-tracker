@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { GoogleIcon } from '@/components/ui/icons/GoogleIcon';
+import { signIn } from '@/lib/auth';
 import { useAuthFormStore } from '@/store/auth-form';
 import { AuthStatesForm } from '@/types/auth';
 
@@ -11,7 +12,7 @@ const gmailText: Record<AuthStatesForm, string> = {
 export const GoogleProvider = () => {
   const authState = useAuthFormStore((store) => store.state);
   const text = gmailText[authState];
-  const handleGoogleAuth = () => {};
+  const handleGoogleAuth = () => signIn('google');
 
   return (
     <Button

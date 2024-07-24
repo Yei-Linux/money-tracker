@@ -12,7 +12,7 @@ const handler = NextAuth({
     strategy: 'jwt',
   },
   adapter: MongoDBAdapter(connectClient),
-  secret: envs.SECRET,
+  secret: envs.TOKEN_SECRET,
   providers: [
     GoogleProvider({
       clientId: envs.GOOGLE_CLIENT_ID,
