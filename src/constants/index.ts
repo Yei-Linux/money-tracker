@@ -18,3 +18,5 @@ export const MAX_AUTH_FORM_STEP = 1;
 export const PASSWORD_VALIDATOR_SETTINGS = {
   min: 8,
 };
+
+export const AUTH_HEADER = 'x-user-id';

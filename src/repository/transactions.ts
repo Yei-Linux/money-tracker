@@ -1,5 +1,5 @@
 import { transactionsModel } from '@/models';
-import { TFilterKeys } from '@/store/transactions';
+import { TFilterKeysTransactionsAPI } from '@/types/transactions';
 
 export const getAllTransactionsRepository = async ({
   filters,
@@ -9,7 +9,7 @@ export const getAllTransactionsRepository = async ({
   filters: {
     $match: {
       $and: {
-        $or: Record<TFilterKeys, string>[];
+        $or: Record<TFilterKeysTransactionsAPI, string>[];
       }[];
     };
   }[];

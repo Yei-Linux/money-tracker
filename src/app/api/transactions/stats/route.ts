@@ -1,9 +1,11 @@
+import { getUserIdFromReq } from '@/lib/auth';
 import { getStatsOfMonth } from '@/repository/stats';
 import { NextResponse } from 'next/server';
 
-export const GET = async (req: Request) => {
+export const GET = async (req: NextRequest) => {
   try {
-    const transactionsStats = await getStatsOfMonth();
+    const userId = getUserIdFromReq(req);
+    const transactionsStats = await getStatsOfMonth(userId);
 
     const totalStats = transactionsStats.reduce((acc, item) => {
       return acc + item.value;

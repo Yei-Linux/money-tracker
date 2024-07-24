@@ -1,3 +1,5 @@
+import { TFilterKeys } from '@/store/transactions';
+
 export type TTransaction = {
   _id: string;
   title: string;
@@ -19,3 +21,5 @@ export type TransactionsGroup = {
   transactions: Record<string, Array<TTransaction>>;
   nextCursor: boolean;
 };
+
+export type TFilterKeysTransactionsAPI = TFilterKeys | 'user';

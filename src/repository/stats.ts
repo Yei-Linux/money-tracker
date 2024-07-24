@@ -1,10 +1,14 @@
 import { firstDayOfMonth } from '@/lib/date';
 import { transactionsModel } from '@/models';
+import mongoose from 'mongoose';
 
-export const getStatsOfMonth = async () => {
+export const getStatsOfMonth = async (userId: string) => {
   return await transactionsModel.aggregate([
     {
-      $match: { createdAt: { $gte: new Date(firstDayOfMonth()) } },
+      $match: {
+        createdAt: { $gte: new Date(firstDayOfMonth()) },
+        user: new mongoose.Types.ObjectId(userId),
+      },
     },
     {
       $lookup: {

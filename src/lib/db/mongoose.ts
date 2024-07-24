@@ -14,28 +14,30 @@ if (!cached) {
 }
 
 async function dbConnect() {
-  if (cached.conn) {
-    return cached.conn;
-  }
-  if (!cached.promise) {
-    const opts = {
-      bufferCommands: false,
-    };
-    cached.promise = mongoose
-      .connect(MONGODB_URI as string, opts)
-      .then((mongoose) => {
-        console.log('Db connected');
-        return mongoose;
-      });
-  }
   try {
-    cached.conn = await cached.promise;
-  } catch (e) {
-    cached.promise = null;
-    throw e;
-  }
+    if (cached.conn) {
+      return cached.conn;
+    }
+    if (!cached.promise) {
+      const opts = {
+        bufferCommands: false,
+      };
+      cached.promise = mongoose
+        .connect(MONGODB_URI as string, opts)
+        .then((mongoose) => {
+          console.log('Db connected');
+          return mongoose;
+        });
+    }
+    try {
+      cached.conn = await cached.promise;
+    } catch (e) {
+      cached.promise = null;
+      throw e;
+    }
 
-  return cached.conn;
+    return cached.conn;
+  } catch (error) {}
 }
 
 export default dbConnect;

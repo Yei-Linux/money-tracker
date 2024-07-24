@@ -2,6 +2,7 @@ import { type ClassValue, clsx } from 'clsx';
 import type { TFilterKeys } from '@/store/transactions';
 import { twMerge } from 'tailwind-merge';
 import mongoose from 'mongoose';
+import { TFilterKeysTransactionsAPI } from '@/types/transactions';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -27,7 +28,10 @@ export function transformRecordArrayToFormData(
 }
 
 export function buildFilters(
-  filters: Array<{ key: TFilterKeys; value: mongoose.Types.ObjectId }>
+  filters: Array<{
+    key: TFilterKeysTransactionsAPI;
+    value: mongoose.Types.ObjectId;
+  }>
 ) {
   const group = filters.reduce(
     (acc, item) => ({
@@ -36,7 +40,10 @@ export function buildFilters(
         ? [{ [item.key]: item.value }]
         : [...acc[item.key], { [item.key]: item.value }],
     }),
-    {} as Record<TFilterKeys, Array<Record<TFilterKeys, string>>>
+    {} as Record<
+      TFilterKeysTransactionsAPI,
+      Array<Record<TFilterKeysTransactionsAPI, string>>
+    >
   );
   const $filters = Object.entries(group)
     .filter(([key, values]) => values.length > 0)

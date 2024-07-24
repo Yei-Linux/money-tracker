@@ -22,6 +22,10 @@ const transactionDBSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Categories',
     },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Users',
+    },
   },
   { timestamps: true }
 );
