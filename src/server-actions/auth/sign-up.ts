@@ -11,7 +11,7 @@ export const signUpServerAction = async (data: TSignUpSchema) => {
       throw new Error('There was an error: ' + validation.error.issues);
     }
 
-    await userModel.create({ data });
+    await userModel.create(data);
     return {
       message: 'User Created',
       errors: [],

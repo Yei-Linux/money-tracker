@@ -37,7 +37,10 @@ export const FormHeader = () => {
       <DialogTitle>{title}</DialogTitle>
       <DialogDescription>
         {description}
-        <button className="underline ml-[1px]" onClick={switchAuthOption}>
+        <button
+          className="underline ml-[1px]"
+          onClick={() => switchAuthOption()}
+        >
           {actionText}
         </button>
       </DialogDescription>
