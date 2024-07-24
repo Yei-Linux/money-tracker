@@ -28,7 +28,7 @@ const userDBSchema = new mongoose.Schema<User>(
 userDBSchema.pre('save', async function (next) {
   const user = this;
   if (!user?.password) {
-    return next(Error('User Password is required'));
+    return next();
   }
 
   try {
