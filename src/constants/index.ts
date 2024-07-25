@@ -1,4 +1,4 @@
-import { transactionTypesSeeder } from '../../db/seeders/transaction-types';
+import { TransactionTypeIds } from '../../db/seeders/transaction-types';
 
 export const trendEmojis = {
   up: '↗️',
@@ -6,8 +6,8 @@ export const trendEmojis = {
 };
 
 export const transactionTypeEmojis = {
-  [transactionTypesSeeder[0]._id]: '↗️',
-  [transactionTypesSeeder[1]._id]: '↙️',
+  [TransactionTypeIds.Income]: '↗️',
+  [TransactionTypeIds.Expense]: '↙️',
 };
 
 export const DEFAULT_LIMIT = 4;
@@ -20,3 +20,11 @@ export const PASSWORD_VALIDATOR_SETTINGS = {
 };
 
 export const AUTH_HEADER = 'x-user-id';
+export const I_DONT_HAVE_MONEY = 0;
+
+export const operationsForTransactionTypes = {
+  [TransactionTypeIds.Income]: (money: number, transaction: number) =>
+    money + transaction,
+  [TransactionTypeIds.Expense]: (money: number, transaction: number) =>
+    money - transaction,
+};

@@ -1,4 +1,5 @@
 import { DEFAULT_LIMIT } from '@/constants';
+import { catchApiError } from '@/lib/api-error-handler';
 import { getUserIdFromReq } from '@/lib/auth';
 import { buildFilters } from '@/lib/utils';
 import { getAllTransactionsRepository } from '@/repository/transactions';
@@ -62,9 +63,6 @@ export const GET = async (req: NextRequest) => {
       message: 'Transactions retrieved successfull',
     });
   } catch (error) {
-    return NextResponse.json({
-      data: {},
-      message: 'There was an error',
-    });
+    return catchApiError(error);
   }
 };

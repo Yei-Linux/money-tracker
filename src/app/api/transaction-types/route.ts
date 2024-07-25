@@ -1,7 +1,8 @@
+import { catchApiError } from '@/lib/api-error-handler';
 import { transactionTypesModel } from '@/models';
 import { NextResponse } from 'next/server';
 
-export const GET = async (req: Request) => {
+export const GET = async () => {
   try {
     const transactionTypes = await transactionTypesModel.find().select({
       _id: true,
@@ -13,9 +14,6 @@ export const GET = async (req: Request) => {
       message: 'Transaction Types retrieved successfull',
     });
   } catch (error) {
-    return NextResponse.json({
-      data: [],
-      message: 'Transaction Type error',
-    });
+    return catchApiError(error);
   }
 };

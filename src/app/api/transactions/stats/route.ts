@@ -1,3 +1,4 @@
+import { catchApiError } from '@/lib/api-error-handler';
 import { getUserIdFromReq } from '@/lib/auth';
 import { getStatsOfMonth } from '@/repository/stats';
 import { NextResponse } from 'next/server';
@@ -21,6 +22,6 @@ export const GET = async (req: NextRequest) => {
       message: 'Transactions Stats',
     });
   } catch (error) {
-    return NextResponse.json({ message: 'There was an error' });
+    return catchApiError(error);
   }
 };

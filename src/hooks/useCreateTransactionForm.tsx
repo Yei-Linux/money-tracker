@@ -23,7 +23,7 @@ export const useCreateTransactionForm = () => {
     try {
       await createTransactionServerAction(data);
       queryClient.invalidateQueries({
-        queryKey: ['transactions', 'transaction/stats'],
+        queryKey: ['transactions', 'transaction/stats', 'user/money-account'],
       });
     } catch (error) {
       toast.error((error as Error).message);

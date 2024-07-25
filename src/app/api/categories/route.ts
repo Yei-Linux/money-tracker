@@ -1,8 +1,9 @@
+import { catchApiError } from '@/lib/api-error-handler';
 import { parentCategoriesModel } from '@/models';
 import { TCategories } from '@/types/categories';
 import { NextResponse } from 'next/server';
 
-export const GET = async (req: Request) => {
+export const GET = async () => {
   try {
     const parentCategories: TCategories = await parentCategoriesModel
       .find()
@@ -17,8 +18,7 @@ export const GET = async (req: Request) => {
       message: 'Categories retrieved',
     });
   } catch (error) {
-    console.log(error);
-    return NextResponse.json({ message: 'Error getting categories' });
+    return catchApiError(error);
   }
 };
 

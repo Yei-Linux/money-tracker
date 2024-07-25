@@ -1,5 +1,6 @@
 import { Crypt } from '@/lib/crypt';
 import mongoose from 'mongoose';
+import moneyAccountModel from '../money-account.model';
 
 interface User {
   _id: mongoose.Types.ObjectId;
@@ -34,6 +35,19 @@ userDBSchema.pre('save', async function (next) {
   try {
     const passwordHashed = await Crypt.hash(user.password);
     user.password = passwordHashed;
+
+    next();
+  } catch (error) {
+    return next(Error((error as Error).message));
+  }
+});
+
+userDBSchema.post('save', async function (userCreated, next) {
+  try {
+    await moneyAccountModel.create({
+      money: 0,
+      user: userCreated._id,
+    });
     next();
   } catch (error) {
     return next(Error((error as Error).message));
