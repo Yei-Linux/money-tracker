@@ -4,6 +4,7 @@ import { useFetchMoneyAccount } from '@/hooks/useFetchMoneyAccount';
 import { FakeCard } from './FakeCard';
 import { useAuthSession } from '@/hooks/useAuthSession';
 import { Title } from '@/components/ui/title';
+import { Settings } from './Settings';
 
 export const MoneyAccount = () => {
   const { user } = useAuthSession();
@@ -20,6 +21,8 @@ export const MoneyAccount = () => {
           userName={user?.name ?? ''}
         />
       </div>
+
+      <Settings />
     </div>
   );
 };
