@@ -1,4 +1,6 @@
+import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
+import { CURRENCY } from '@/mocks/summary';
 import { FC, PropsWithChildren } from 'react';
 
 type ContentLayout = PropsWithChildren;
@@ -11,11 +13,14 @@ export const HeaderLayout: FC<HeaderLayout> = ({ children }) => (
   <div className="flex justify-between">{children}</div>
 );
 
-type SettingValue = PropsWithChildren;
-export const SettingValue: FC<SettingValue> = ({ children }) => (
+type SettingValue = {
+  percent: number;
+  description: string;
+};
+export const SettingValue: FC<SettingValue> = ({ percent, description }) => (
   <div className="flex flex-col items-end">
-    <p className="font-semibold text-xl">{children}</p>
-    <p className="text-[8px]">Achieved</p>
+    <p className="font-semibold text-xl">{percent}%</p>
+    <p className="text-[8px]">{description}</p>
   </div>
 );
 
@@ -27,6 +32,27 @@ export const Title: FC<Title> = ({ children }) => (
 type Description = PropsWithChildren;
 export const Description: FC<Description> = ({ children }) => (
   <p className="text-xs">{children}</p>
+);
+
+type GoalWithCurrentResult = {
+  goal: number;
+  currentResult: number;
+};
+export const GoalWithCurrentResult: FC<GoalWithCurrentResult> = ({
+  goal,
+  currentResult,
+}) => (
+  <Badge className="flex gap-1 font-semibold shadow-md">
+    <span className="text-xs">
+      {CURRENCY}
+      {currentResult}
+    </span>
+    <span>/</span>
+    <span className="text-xs">
+      {CURRENCY}
+      {goal}
+    </span>
+  </Badge>
 );
 
 const variants = {
@@ -53,18 +79,27 @@ type ComposeSettingCard = {
   ContentLayout: typeof ContentLayout;
   HeaderLayout: typeof HeaderLayout;
   SettingValue: typeof SettingValue;
+  GoalWithCurrentResult: typeof GoalWithCurrentResult;
 };
 type SettingCard = PropsWithChildren<{
   variant: Variants;
+  className?: string;
 }>;
 
 export const SettingCard: FC<SettingCard> & ComposeSettingCard = ({
   children,
   variant,
+  className,
 }) => {
   const bg = variants[variant].bgCard;
   return (
-    <div className={cn('flex flex-col gap-6 rounded-2xl p-4 shadow-md', bg)}>
+    <div
+      className={cn(
+        'flex flex-col gap-6 rounded-2xl p-4 shadow-md',
+        bg,
+        className
+      )}
+    >
       {children}
     </div>
   );
@@ -76,3 +111,4 @@ SettingCard.Icon = Icon;
 SettingCard.ContentLayout = ContentLayout;
 SettingCard.HeaderLayout = HeaderLayout;
 SettingCard.SettingValue = SettingValue;
+SettingCard.GoalWithCurrentResult = GoalWithCurrentResult;

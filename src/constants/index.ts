@@ -28,3 +28,12 @@ export const operationsForTransactionTypes = {
   [TransactionTypeIds.Expense]: (money: number, transaction: number) =>
     money - transaction,
 };
+
+export const WatcherToggleSettings = {
+  Active: 'You have actived it! 😉',
+  Inactive: 'You dont active it yet 😔',
+};
+
+export const COOKIES = {
+  NextAuthSession: 'next-auth.session-token',
+};

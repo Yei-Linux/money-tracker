@@ -1,5 +1,5 @@
-import { ButtonAuthSteps } from '@/components/modules/shared/Auth/ButtonAuthSteps';
-import { EmailWithPassAuthStep } from '@/components/modules/shared/Auth/EmailWithPassAuthStep';
+import { ButtonAuthSteps } from '@/components/modules/@shared/Auth/ButtonAuthSteps';
+import { EmailWithPassAuthStep } from '@/components/modules/@shared/Auth/EmailWithPassAuthStep';
 import { useSignUpUserForm } from '@/hooks/useSIgnUpUserForm';
 import { useAuthFormStore } from '@/store/auth-form';
 import { FormProvider } from 'react-hook-form';

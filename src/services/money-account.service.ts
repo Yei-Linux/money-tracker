@@ -1,9 +1,15 @@
 import { ServerError } from '@/errors/ServerError';
 import { MyMoneyAccount } from '@/types/money-account';
 
-export const getMoneyAccountService = async (): Promise<MyMoneyAccount> => {
+export const getMoneyAccountService = async (
+  cookie = ''
+): Promise<MyMoneyAccount> => {
   try {
-    const response = await fetch(`/api/money-account`);
+    const response = await fetch(`${process.env.URL}/api/money-account`, {
+      headers: {
+        cookie,
+      },
+    });
     const json = await response.json();
     return json.data;
   } catch (error) {

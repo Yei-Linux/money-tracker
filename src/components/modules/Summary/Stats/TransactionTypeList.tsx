@@ -1,8 +1,8 @@
 import { CURRENCY } from '@/mocks/summary';
-import { TransactionTypeInfo } from '../../shared/TransactionTypeInfo';
+import { TransactionTypeInfo } from '../../@shared/TransactionTypeInfo';
 
 import type { FC } from 'react';
-import { TrendAnalyzer } from '../../shared/TrendAnalyzer';
+import { TrendAnalyzer } from '../../@shared/TrendAnalyzer';
 import { TTransactionStats } from '@/types/transaction-stats';
 import { TThemes } from './utils';
 

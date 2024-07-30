@@ -1,25 +1,46 @@
+import { MoneyAccountSettings } from '@/types/settings';
 import { AtomIcon, EyeIcon, LucideEyeOff } from 'lucide-react';
 
-export const SettingOptions = {
+export const SettingOptions = ({
+  expenseLimit,
+  incomeGoal,
+  watcherLimit,
+}: MoneyAccountSettings) => ({
   ExpenseLimit: {
     variant: 'primary' as const,
     title: 'My Expense Limit',
-    description: 'By month!',
+    description: expenseLimit?.goal
+      ? 'This month:'
+      : 'You can active it just setting your limit!',
     Icon: LucideEyeOff,
-    settingValue: '90%',
+    settingDescription: 'Of your limit',
+    settingValue: expenseLimit?.settingsValue,
+    currentResult: expenseLimit?.currentResult,
+    goal: expenseLimit?.goal,
+    watcherLimit: undefined,
   },
   IncomeGoal: {
     variant: 'secondary' as const,
     title: 'My Icome Goal',
-    description: 'By month!',
+    description: incomeGoal?.goal
+      ? 'This month:'
+      : 'You can active it just setting your goal!',
     Icon: AtomIcon,
-    settingValue: '90%',
+    settingDescription: 'Achieved',
+    settingValue: incomeGoal?.settingsValue,
+    currentResult: incomeGoal?.currentResult,
+    goal: incomeGoal?.goal,
+    watcherLimit: undefined,
   },
   ExpenseWatch: {
     variant: 'tertiary' as const,
     title: 'My Expense Watcher',
     description: 'By month!',
     Icon: EyeIcon,
-    settingValue: '',
+    settingValue: undefined,
+    settingDescription: undefined,
+    currentResult: undefined,
+    goal: undefined,
+    watcherLimit,
   },
-};
+});

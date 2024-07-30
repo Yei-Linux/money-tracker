@@ -1,7 +1,7 @@
 import { FormProvider } from 'react-hook-form';
 
-import { ButtonAuthSteps } from '@/components/modules/shared/Auth/ButtonAuthSteps';
-import { EmailWithPassAuthStep } from '@/components/modules/shared/Auth/EmailWithPassAuthStep';
+import { ButtonAuthSteps } from '@/components/modules/@shared/Auth/ButtonAuthSteps';
+import { EmailWithPassAuthStep } from '@/components/modules/@shared/Auth/EmailWithPassAuthStep';
 import { useSignInUserForm } from '@/hooks/useSignInUserForm';
 
 export const SignInForm = () => {
