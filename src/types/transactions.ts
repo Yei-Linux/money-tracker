@@ -1,5 +1,3 @@
-import { TFilterKeys } from '@/store/transactions';
-
 export type TTransaction = {
   _id: string;
   title: string;
@@ -22,4 +20,5 @@ export type TransactionsGroup = {
   nextCursor: boolean;
 };
 
+export type TFilterKeys = 'category' | 'transactionType';
 export type TFilterKeysTransactionsAPI = TFilterKeys | 'user';

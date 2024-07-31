@@ -7,7 +7,7 @@ interface FakeCard {
 
 export const FakeCard: FC<FakeCard> = ({ moneyAccount, userName }) => {
   return (
-    <div className="min-w-[300px] bg-black text-white rounded-3xl p-4 flex flex-col gap-10">
+    <div className="min-w-[250px] md:min-w-[300px] bg-black text-white rounded-3xl p-4 flex flex-col gap-10">
       <div className="flex justify-between">
         <data className="text-2xl flex gap-1 items-center" value={moneyAccount}>
           <span className="text-sm">$</span> {moneyAccount}

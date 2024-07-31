@@ -4,7 +4,7 @@ import { WithLanding } from '@/hocs/WithLanding';
 
 async function Home() {
   return (
-    <div className="flex flex-col gap-24 min-h-screen max-w-[1200px] p-14 m-auto">
+    <div className="flex flex-col gap-20 min-h-screen">
       <MoneyAccount />
       <Transactions />
     </div>

@@ -2,26 +2,14 @@
 
 import { FC } from 'react';
 import { TransactionDialog } from '../TransactionDialog';
-import { TCategories } from '@/types/categories';
-import { useInitTransactionStore } from '@/hooks/useInitTransactionStore';
-import { TTransactionTypes } from '@/types/transaction-types';
 import { CategoryFilters } from '../CategoryFilters';
 import { TransactionTypeFilters } from '../TransactionTypesFilters';
 import { useFetchTransactionsStore } from '@/hooks/useFetchTransactionStats';
 import { pickIncomesAndExpenses } from './utils';
 import { Title } from '@/components/ui/title';
 
-interface ITransactionHeader {
-  categories: TCategories;
-  transactionTypes: TTransactionTypes;
-}
-
-export const TransactionHeader: FC<ITransactionHeader> = ({
-  categories,
-  transactionTypes,
-}) => {
+export const TransactionHeader = () => {
   const { transactionStats } = useFetchTransactionsStore();
-  useInitTransactionStore({ categories, transactionTypes });
   const { incomes, expenses } = pickIncomesAndExpenses(transactionStats);
 
   return (

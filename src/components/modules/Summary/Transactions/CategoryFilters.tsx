@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { useTransactionStore } from '@/store/transactions';
 import { MultiSelect } from '@/components/ui/multiselect';
+import { useDropdownsStore } from '@/store/dropdowns';
 
 export function CategoryFilters() {
   const updateFiltersByKey = useTransactionStore(
@@ -10,7 +11,7 @@ export function CategoryFilters() {
   const filters = useTransactionStore((store) => store.filters);
   const selectedFilters = filters['category'];
 
-  const categories = useTransactionStore((store) => store.categories);
+  const categories = useDropdownsStore((store) => store.categories);
   const multiselectOptions = categories
     .map((category) => category.categories ?? [])
     .flat()

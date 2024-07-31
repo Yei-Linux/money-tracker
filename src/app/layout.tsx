@@ -6,6 +6,8 @@ import './globals.css';
 import { Providers } from './provider';
 import { Layout } from '@/components/layouts/Layout';
 import { cn } from '@/lib/utils';
+import { getCategoriesService } from '@/services/categories.service';
+import { getTransactionTypesService } from '@/services/transaction-types.service';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const snickerSnack = fontLocal({
@@ -18,17 +20,20 @@ export const metadata: Metadata = {
   description: 'Aplication where you can register all your transactions',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const categories = await getCategoriesService();
+  const transactionTypes = await getTransactionTypesService();
+
   return (
     <html lang="en">
       <body
         className={cn(inter.className, snickerSnack.variable, inter.variable)}
       >
-        <Providers>
+        <Providers categories={categories} transactionTypes={transactionTypes}>
           <Layout>
             <Layout.Header />
             <Layout.Main>{children}</Layout.Main>

@@ -1,3 +1,4 @@
+import { useDropdownsStore } from '@/store/dropdowns';
 import { useTransactionStore } from '@/store/transactions';
 import { TCategories } from '@/types/categories';
 import { TTransactionTypes } from '@/types/transaction-types';
@@ -12,8 +13,8 @@ export const useInitTransactionStore = ({
   categories,
   transactionTypes,
 }: TUseInitTransactionStore) => {
-  const setCategories = useTransactionStore((store) => store.setCategories);
-  const setTransactionTypes = useTransactionStore(
+  const setCategories = useDropdownsStore((store) => store.setCategories);
+  const setTransactionTypes = useDropdownsStore(
     (store) => store.setTransactionTypes
   );
 

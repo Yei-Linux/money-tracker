@@ -11,7 +11,7 @@ export const Settings = (props: Settings) => {
   const settings = Object.values(SettingOptions(props));
 
   return (
-    <div className="flex justify-around p-2 items-center flex-wrap gap-3 w-full max-w-[800px] m-auto">
+    <div className="flex items-center gap-2 overflow-x-auto max-w-[96vw] md:justify-center md:w-full p-2">
       {settings.map(
         ({
           type,

@@ -14,16 +14,14 @@ import {
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { useCreateTransactionForm } from '@/hooks/useCreateTransactionForm';
-import { useTransactionStore } from '@/store/transactions';
+import { useDropdownsStore } from '@/store/dropdowns';
 import { Controller } from 'react-hook-form';
 
 export const TransactionForm = () => {
   const { register, onSubmit, handleSubmit, errors, control } =
     useCreateTransactionForm();
-  const categories = useTransactionStore((state) => state.categories);
-  const transactionTypes = useTransactionStore(
-    (state) => state.transactionTypes
-  );
+  const categories = useDropdownsStore((state) => state.categories);
+  const transactionTypes = useDropdownsStore((state) => state.transactionTypes);
   const action: () => void = handleSubmit(onSubmit);
 
   return (

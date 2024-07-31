@@ -1,5 +1,4 @@
 import { type ClassValue, clsx } from 'clsx';
-import type { TFilterKeys } from '@/store/transactions';
 import { twMerge } from 'tailwind-merge';
 import mongoose from 'mongoose';
 import { TFilterKeysTransactionsAPI } from '@/types/transactions';
@@ -27,7 +26,7 @@ export function transformRecordArrayToFormData(
   return formData;
 }
 
-export function buildFilters(
+export function buildAdvancedFiltersFromTransactions(
   filters: Array<{
     key: TFilterKeysTransactionsAPI;
     value: mongoose.Types.ObjectId;

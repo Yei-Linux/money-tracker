@@ -9,8 +9,20 @@ import toast, { Toaster } from 'react-hot-toast';
 import { PropsWithChildren } from 'react';
 
 import { SessionProvider } from 'next-auth/react';
+import { TCategories } from '@/types/categories';
+import { TTransactionTypes } from '@/types/transaction-types';
+import { useInitTransactionStore } from '@/hooks/useInitTransactionStore';
 
-export const Providers = ({ children }: PropsWithChildren) => {
+type Providers = PropsWithChildren<{
+  categories: TCategories;
+  transactionTypes: TTransactionTypes;
+}>;
+
+export const Providers = ({
+  children,
+  categories,
+  transactionTypes,
+}: Providers) => {
   const client = new QueryClient({
     queryCache: new QueryCache({
       onError: (error, query) => {
@@ -20,6 +32,8 @@ export const Providers = ({ children }: PropsWithChildren) => {
       },
     }),
   });
+
+  useInitTransactionStore({ categories, transactionTypes });
 
   return (
     <SessionProvider>

@@ -1,22 +1,56 @@
 import { transactionsModel } from '@/models';
+import { Pagination } from '@/types/@shared/pagination';
 import { TFilterKeysTransactionsAPI } from '@/types/transactions';
+
+export const getAllSimpleTransactionsRepository = async ({
+  skip,
+  limit,
+  filters,
+}: Pagination<{
+  $and: {
+    $or: Record<TFilterKeysTransactionsAPI, string>[];
+  }[];
+}>) => {
+  const promiseTransactions = transactionsModel
+    .find({ ...filters })
+    .select({
+      _id: true,
+      title: true,
+      description: true,
+      price: true,
+      category: true,
+      transactionType: true,
+      createdAt: true,
+    })
+    .populate('categories', '_id category')
+    .populate('transactionTypes', '_id type')
+    .sort({ createdAt: -1 })
+    .skip(skip)
+    .limit(limit);
+  const promiseCounter = transactionsModel.countDocuments({ ...filters });
+
+  const [transactions, totalDocuments] = await Promise.all([
+    promiseTransactions,
+    promiseCounter,
+  ]);
+  const nextCursor = skip + limit < totalDocuments;
+
+  return { transactions, nextCursor };
+};
 
 export const getAllTransactionsRepository = async ({
   filters,
   skip,
   limit,
-}: {
-  filters: {
+}: Pagination<
+  {
     $match: {
       $and: {
         $or: Record<TFilterKeysTransactionsAPI, string>[];
       }[];
     };
-  }[];
-
-  skip: number;
-  limit: number;
-}) => {
+  }[]
+>) => {
   const promiseTransactions = transactionsModel.aggregate([
     { $sort: { createdAt: -1 } },
 
