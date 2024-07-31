@@ -2,7 +2,7 @@
 
 import { Switch } from '@/components/ui/switch';
 import { WatcherToggleSettings } from '@/constants';
-import { useToggle } from '@/hooks/@shared/useToggle';
+import { useToggleWatcherLimit } from '@/hooks/useToggleWatcherLimit';
 import { FC } from 'react';
 
 type WatcherToggle = {
@@ -10,7 +10,9 @@ type WatcherToggle = {
 };
 
 export const WatcherToggle: FC<WatcherToggle> = ({ watcherLimit }) => {
-  const { active, toggle } = useToggle({ defaultValue: watcherLimit });
+  const { active, toggle } = useToggleWatcherLimit({
+    watcherLimitDefaultValue: watcherLimit,
+  });
   const textSettingts = [
     WatcherToggleSettings.Inactive,
     WatcherToggleSettings.Active,

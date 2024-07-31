@@ -1,6 +1,10 @@
 import { ServerError } from '@/errors/ServerError';
 import { catchApiError } from '@/lib/api-error-handler';
 import { getUserIdFromReq } from '@/lib/auth';
+import {
+  assertPercentValue,
+  computePercent,
+} from '@/lib/money-account/settings';
 import moneyAccountModel from '@/models/money-account.model';
 import { NextResponse } from 'next/server';
 
@@ -20,10 +24,15 @@ export const GET = async (req: NextRequest) => {
       throw new ServerError('You dont have any money account asigned yet');
     }
 
-    const expensePercent =
-      (+moneyAccount.expenses * 100) / +moneyAccount.expenseLimit;
-    const incomePercent =
-      (+moneyAccount.incomes * 100) / +moneyAccount.incomeGoal;
+    const expensePercent = computePercent(
+      moneyAccount.expenses,
+      moneyAccount.expenseLimit
+    );
+    const incomePercent = computePercent(
+      moneyAccount.incomes,
+      moneyAccount.incomeGoal
+    );
+
     const response = {
       money: moneyAccount.money,
       user: moneyAccount.user,
@@ -31,12 +40,18 @@ export const GET = async (req: NextRequest) => {
       expenseLimit: {
         goal: +moneyAccount.expenseLimit,
         currentResult: +moneyAccount.expenses,
-        settingValue: isNaN(expensePercent) ? 0 : expensePercent,
+        settingValue: assertPercentValue(
+          expensePercent,
+          moneyAccount.expenseLimit
+        ),
       },
       incomeGoal: {
         goal: +moneyAccount.incomeGoal,
         currentResult: +moneyAccount.incomes,
-        settingValue: isNaN(incomePercent) ? 0 : incomePercent,
+        settingValue: assertPercentValue(
+          incomePercent,
+          moneyAccount.incomeGoal
+        ),
       },
     };
 

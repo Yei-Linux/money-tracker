@@ -2,6 +2,8 @@ import { SettingOptions } from '@/utils/settings';
 import { SettingCard } from './SettingCard';
 import { WatcherToggle } from './WatcherToggle';
 import { MoneyAccountSettings } from '@/types/settings';
+import { SettingsOptionsKeys } from '@/constants';
+import { EitherExpenseOrLimit } from './EitherExpenseOrIncomes';
 
 type Settings = MoneyAccountSettings;
 
@@ -12,6 +14,7 @@ export const Settings = (props: Settings) => {
     <div className="flex justify-around p-2 items-center flex-wrap gap-3 w-full max-w-[800px] m-auto">
       {settings.map(
         ({
+          type,
           variant,
           title,
           description,
@@ -21,40 +24,41 @@ export const Settings = (props: Settings) => {
           goal,
           currentResult,
           watcherLimit,
+          ComponentWrapper,
         }) => (
           <SettingCard
             variant={variant}
-            className={watcherLimit === undefined ? 'cursor-pointer' : ''}
+            className={
+              type !== SettingsOptionsKeys.ExpenseWatch ? 'cursor-pointer' : ''
+            }
+            ComponentWrapper={ComponentWrapper}
+            goal={goal}
+            key={type}
           >
             <SettingCard.HeaderLayout>
               <SettingCard.Icon variant={variant}>
                 <Icon size={20} />
               </SettingCard.Icon>
-              {settingValue && settingDescription && (
-                <SettingCard.SettingValue
-                  percent={settingValue}
-                  description={settingDescription}
-                />
-              )}
+              {settingValue !== undefined &&
+                settingValue !== null &&
+                settingDescription && (
+                  <SettingCard.SettingValue
+                    percent={settingValue}
+                    description={settingDescription}
+                  />
+                )}
             </SettingCard.HeaderLayout>
             <SettingCard.ContentLayout>
               <SettingCard.Title>{title}</SettingCard.Title>
 
-              {watcherLimit === undefined ? (
-                <div className="flex justify-between items-center">
-                  <SettingCard.Description>
-                    {description}
-                  </SettingCard.Description>
-
-                  {!!goal && (
-                    <SettingCard.GoalWithCurrentResult
-                      goal={goal}
-                      currentResult={currentResult ?? 0}
-                    />
-                  )}
-                </div>
+              {type !== SettingsOptionsKeys.ExpenseWatch ? (
+                <EitherExpenseOrLimit
+                  description={description}
+                  goal={goal}
+                  currentResult={currentResult}
+                />
               ) : (
-                <WatcherToggle watcherLimit={watcherLimit} />
+                <WatcherToggle watcherLimit={!!watcherLimit} />
               )}
             </SettingCard.ContentLayout>
           </SettingCard>

@@ -1,7 +1,7 @@
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { CURRENCY } from '@/mocks/summary';
-import { FC, PropsWithChildren } from 'react';
+import { FC, Fragment, PropsWithChildren } from 'react';
 
 type ContentLayout = PropsWithChildren;
 export const ContentLayout: FC<ContentLayout> = ({ children }) => (
@@ -26,12 +26,12 @@ export const SettingValue: FC<SettingValue> = ({ percent, description }) => (
 
 type Title = PropsWithChildren;
 export const Title: FC<Title> = ({ children }) => (
-  <p className="font-bold text-md min-w-[170px]">{children}</p>
+  <p className="font-bold text-left text-md min-w-[170px]">{children}</p>
 );
 
 type Description = PropsWithChildren;
 export const Description: FC<Description> = ({ children }) => (
-  <p className="text-xs">{children}</p>
+  <p className="text-left text-xs">{children}</p>
 );
 
 type GoalWithCurrentResult = {
@@ -84,24 +84,32 @@ type ComposeSettingCard = {
 type SettingCard = PropsWithChildren<{
   variant: Variants;
   className?: string;
+  ComponentWrapper?: React.ElementType;
+  goal?: number;
 }>;
 
 export const SettingCard: FC<SettingCard> & ComposeSettingCard = ({
   children,
   variant,
   className,
+  ComponentWrapper,
+  goal,
 }) => {
   const bg = variants[variant].bgCard;
+  const Wrapper = ComponentWrapper ?? Fragment;
+
   return (
-    <div
-      className={cn(
-        'flex flex-col gap-6 rounded-2xl p-4 shadow-md',
-        bg,
-        className
-      )}
-    >
-      {children}
-    </div>
+    <Wrapper {...(ComponentWrapper ? { goal } : {})}>
+      <div
+        className={cn(
+          'flex flex-col gap-6 rounded-2xl p-4 shadow-md w-[250px]',
+          bg,
+          className
+        )}
+      >
+        {children}
+      </div>
+    </Wrapper>
   );
 };
 

@@ -1,7 +1,7 @@
 export type SettingItem = {
   goal: number;
   currentResult: number;
-  settingsValue: number;
+  settingValue: number;
 };
 
 export type SharedSettings = {

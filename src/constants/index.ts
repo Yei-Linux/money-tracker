@@ -37,3 +37,9 @@ export const WatcherToggleSettings = {
 export const COOKIES = {
   NextAuthSession: 'next-auth.session-token',
 };
+
+export const SettingsOptionsKeys = {
+  IncomeGoal: 'IncomeGoal',
+  ExpenseLimit: 'ExpenseLimit',
+  ExpenseWatch: 'ExpenseWatch',
+};

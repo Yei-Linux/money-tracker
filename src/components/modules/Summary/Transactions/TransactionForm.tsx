@@ -24,7 +24,7 @@ export const TransactionForm = () => {
   const transactionTypes = useTransactionStore(
     (state) => state.transactionTypes
   );
-  const action: () => void = handleSubmit((data) => onSubmit(data));
+  const action: () => void = handleSubmit(onSubmit);
 
   return (
     <form action={action} className="flex flex-col gap-7">

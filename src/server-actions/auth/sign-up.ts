@@ -1,16 +1,19 @@
 'use server';
 
+import { InvalidFieldFormError } from '@/errors/InvalidFieldFormError';
 import { SignUpError } from '@/errors/SignUpError';
 import userModel from '@/models/auth/user.model';
 import { SignUpZodSchema, TSignUpSchema } from '@/validators/sign-up.validator';
 
 export const signUpServerAction = async (data: TSignUpSchema) => {
-  try {
-    const validation = SignUpZodSchema.safeParse(data);
-    if (!validation.success) {
-      throw new Error('There was an error: ' + validation.error.issues);
-    }
+  const validation = SignUpZodSchema.safeParse(data);
+  if (!validation.success) {
+    throw new InvalidFieldFormError(
+      'There was an error: ' + validation.error.issues
+    );
+  }
 
+  try {
     await userModel.create(data);
     return {
       message: 'User Created',
