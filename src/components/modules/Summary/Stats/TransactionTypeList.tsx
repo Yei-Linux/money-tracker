@@ -1,5 +1,5 @@
 import { CURRENCY } from '@/mocks/summary';
-import { TransactionTypeInfo } from '../../@shared/TransactionTypeInfo';
+import { TransactionTypeInfo } from '../../@shared/Transactions/TransactionTypeInfo';
 
 import type { FC } from 'react';
 import { TrendAnalyzer } from '../../@shared/TrendAnalyzer';

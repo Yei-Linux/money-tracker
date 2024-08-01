@@ -30,6 +30,7 @@ export const GET = async (req: NextRequest) => {
       message: 'Transactions retrieved successfull',
     });
   } catch (error) {
+    console.log(error);
     return catchApiError(error);
   }
 };

@@ -11,6 +11,7 @@ import { TransactionTypeIds } from '../../../db/seeders/transaction-types';
 import { I_DONT_HAVE_MONEY, operationsForTransactionTypes } from '@/constants';
 import { getAuthSessionInServerAction } from '@/lib/auth-session-handler';
 import { InvalidFieldFormError } from '@/errors/InvalidFieldFormError';
+import { getIncomesAndExpensesRepository } from '@/repository/sum-transactions';
 
 export const createTransactionServerAction = async (
   data: TCreateTransactionTypeSchema
@@ -43,8 +44,12 @@ export const createTransactionServerAction = async (
     if (isNaN(moneyUpdated)) {
       throw new Error('Ocurred an unexpected error doing this transaction');
     }
+    const { expenses, incomes } = await getIncomesAndExpensesRepository(user);
 
-    await moneyAccountModel.updateOne({ user }, { money: moneyUpdated });
+    await moneyAccountModel.updateOne(
+      { user },
+      { money: moneyUpdated, incomes, expenses }
+    );
     return {
       message: 'Transaction Created',
       errors: [],

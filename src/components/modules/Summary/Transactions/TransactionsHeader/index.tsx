@@ -1,7 +1,7 @@
 'use client';
 
 import { FC } from 'react';
-import { TransactionDialog } from '../TransactionDialog';
+import { TransactionDialog } from '../../../@shared/Transactions/TransactionDialog';
 import { CategoryFilters } from '../CategoryFilters';
 import { TransactionTypeFilters } from '../TransactionTypesFilters';
 import { useFetchTransactionsStore } from '@/hooks/useFetchTransactionStats';

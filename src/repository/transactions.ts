@@ -22,8 +22,8 @@ export const getAllSimpleTransactionsRepository = async ({
       transactionType: true,
       createdAt: true,
     })
-    .populate('categories', '_id category')
-    .populate('transactionTypes', '_id type')
+    .populate('category', '_id category')
+    .populate('transactionType', '_id type')
     .sort({ createdAt: -1 })
     .skip(skip)
     .limit(limit);

@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -8,10 +10,13 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { TransactionForm } from './TransactionForm';
+import { useToggle } from '@/hooks/@shared/useToggle';
 
 export const TransactionDialog = () => {
+  const { active, toggle } = useToggle({ defaultValue: false });
+
   return (
-    <Dialog>
+    <Dialog open={active} onOpenChange={toggle}>
       <DialogTrigger asChild>
         <Button className="rounded-full p-2">+ Add</Button>
       </DialogTrigger>
@@ -25,7 +30,7 @@ export const TransactionDialog = () => {
         </DialogHeader>
 
         <div className="flex flex-col gap-2">
-          <TransactionForm />
+          <TransactionForm toggle={toggle} />
         </div>
       </DialogContent>
     </Dialog>

@@ -13,13 +13,19 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
+import { TTogleFn } from '@/hooks/@shared/useToggle';
 import { useCreateTransactionForm } from '@/hooks/useCreateTransactionForm';
 import { useDropdownsStore } from '@/store/dropdowns';
+import { FC } from 'react';
 import { Controller } from 'react-hook-form';
 
-export const TransactionForm = () => {
-  const { register, onSubmit, handleSubmit, errors, control } =
-    useCreateTransactionForm();
+type TransactionForm = {
+  toggle: TTogleFn;
+};
+
+export const TransactionForm: FC<TransactionForm> = ({ toggle }) => {
+  const { register, onSubmit, handleSubmit, errors, control, isLoading } =
+    useCreateTransactionForm({ onComplete: toggle });
   const categories = useDropdownsStore((state) => state.categories);
   const transactionTypes = useDropdownsStore((state) => state.transactionTypes);
   const action: () => void = handleSubmit(onSubmit);
@@ -133,7 +139,7 @@ export const TransactionForm = () => {
         </FormField>
       </div>
 
-      <Button className="rounded-md p-2" type="submit">
+      <Button className="rounded-md p-2" type="submit" loading={isLoading}>
         Add Transaction
       </Button>
     </form>

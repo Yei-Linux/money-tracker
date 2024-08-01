@@ -1,11 +1,21 @@
 'use client';
 
-import { useFetchTransactions } from '@/hooks/useFetchTransactions';
 import { TransactionsTable } from './TransactionsTable';
-import { TransactionsPagination } from './TransactionsPagination';
+import { TransactionsPagination } from '../../@shared/Transactions/TransactionsPagination';
+import { useFetchTransactionsAdapter } from '@/hooks/@shared/useTransactionAdapter';
+import { TTransaction } from '@/types/transactions';
+import { useTransactionStore } from '@/store/transactions';
+import { getTransactionsService } from '@/services/transaction.service';
 
 export const TransactionsGroup = () => {
-  const { transactions, nextCursor } = useFetchTransactions();
+  const { transactions, nextCursor } = useFetchTransactionsAdapter<
+    Record<string, Array<TTransaction>>,
+    [string, TTransaction[]][] | undefined
+  >({
+    useStore: useTransactionStore,
+    queryKey: 'transactions',
+    service: getTransactionsService,
+  });
 
   return (
     <>
@@ -17,7 +27,7 @@ export const TransactionsGroup = () => {
           </div>
         ))}
 
-      {nextCursor && <TransactionsPagination />}
+      {nextCursor && <TransactionsPagination useStore={useTransactionStore} />}
     </>
   );
 };

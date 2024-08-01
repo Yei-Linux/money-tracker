@@ -18,7 +18,7 @@ export const MoneyAccount = async () => {
 
   return (
     <div>
-      <div className="flex flex-col gap-7 w-100 max-w-[1200px] p-7 md:py-7 md:px-14">
+      <div className="flex flex-col gap-7 w-100 max-w-[1200px] p-7 md:py-7 md:px-14 mx-auto">
         <Title as="h2">My Personal Budget</Title>
         <div className="flex justify-center">
           <FakeCard moneyAccount={myMoneyAccount.money} userName={''} />

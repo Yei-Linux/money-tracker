@@ -1,5 +1,5 @@
 import { Title } from '@/components/ui/title';
-import { TransactionDialog } from '../../Summary/Transactions/TransactionDialog';
+import { TransactionDialog } from '../../@shared/Transactions/TransactionDialog';
 
 export const TransactionsHeader = () => {
   return (

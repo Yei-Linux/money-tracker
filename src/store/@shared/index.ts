@@ -2,7 +2,7 @@ import { TFilterKeys } from '@/types/transactions';
 import { create } from 'zustand';
 
 type TObjectID = string;
-type TTransactionStore = {
+export type TTransactionStore = {
   skip: number;
   limit: number;
   filters: Record<TFilterKeys, TObjectID[]>;

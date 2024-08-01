@@ -1,4 +1,4 @@
-import { TransactionTypeInfo } from '../../@shared/TransactionTypeInfo';
+import { TransactionTypeInfo } from '../../@shared/Transactions/TransactionTypeInfo';
 import { CURRENCY } from '@/mocks/summary';
 
 import type { FC } from 'react';

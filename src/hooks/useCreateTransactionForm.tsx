@@ -5,10 +5,20 @@ import {
 } from '@/validators/createTransaction.validator';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
+import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 
-export const useCreateTransactionForm = () => {
+type UseCreateTransactionForm = {
+  onComplete?: () => void;
+};
+
+export const useCreateTransactionForm = ({
+  onComplete,
+}: UseCreateTransactionForm) => {
+  const [isLoading, startTransition] = useTransition();
+  const { refresh } = useRouter();
   const queryClient = useQueryClient();
   const {
     register,
@@ -20,15 +30,24 @@ export const useCreateTransactionForm = () => {
   });
 
   const onSubmit = async (data: TCreateTransactionTypeSchema) => {
-    try {
-      await createTransactionServerAction(data);
-      queryClient.invalidateQueries({
-        queryKey: ['transactions', 'transaction/stats'],
-      });
-    } catch (error) {
-      toast.error((error as Error).message);
-    }
+    startTransition(async () => {
+      try {
+        await createTransactionServerAction(data);
+        await queryClient.invalidateQueries({
+          queryKey: [
+            'transactions',
+            'transaction/stats',
+            'transactions/short-resume',
+          ],
+        });
+        refresh();
+        onComplete?.();
+        toast.success('Your transaction was added sucessfully');
+      } catch (error) {
+        toast.error((error as Error).message);
+      }
+    });
   };
 
-  return { register, handleSubmit, onSubmit, errors, control };
+  return { register, handleSubmit, onSubmit, errors, control, isLoading };
 };
