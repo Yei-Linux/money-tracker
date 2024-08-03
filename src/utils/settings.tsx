@@ -1,5 +1,5 @@
-import { ExpenseLimitPopup } from '@/components/modules/Home/MoneyAccount/Settings/Popups/ExpenseLimitPopup';
-import { IncomeGoalPopup } from '@/components/modules/Home/MoneyAccount/Settings/Popups/IncomeGoalPopup';
+import { ExpenseLimitPopup } from '@/components/modules/Home/MyMoney/MoneySettings/Popups/ExpenseLimitPopup';
+import { IncomeGoalPopup } from '@/components/modules/Home/MyMoney/MoneySettings/Popups/IncomeGoalPopup';
 import { SettingsOptionsKeys } from '@/constants';
 import { MoneyAccountSettings } from '@/types/settings';
 import { AtomIcon, EyeIcon, LucideEyeOff } from 'lucide-react';
@@ -11,7 +11,7 @@ export const SettingOptions = ({
 }: MoneyAccountSettings) => ({
   ExpenseLimit: {
     type: SettingsOptionsKeys.ExpenseLimit,
-    variant: 'primary' as const,
+    variant: 'secondary' as const,
     title: 'My Expense Limit',
     description: expenseLimit?.goal
       ? 'This month:'
@@ -41,7 +41,7 @@ export const SettingOptions = ({
   },
   ExpenseWatch: {
     type: SettingsOptionsKeys.ExpenseWatch,
-    variant: 'tertiary' as const,
+    variant: 'secondary' as const,
     title: 'My Expense Watcher',
     description: 'By month!',
     Icon: EyeIcon,

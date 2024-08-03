@@ -1,11 +1,11 @@
-import { MoneyAccount } from '@/components/modules/Home/MoneyAccount';
+import { MyMoney } from '@/components/modules/Home/MyMoney';
 import { Transactions } from '@/components/modules/Home/Transactions';
 import { WithLanding } from '@/hocs/WithLanding';
 
 async function Home() {
   return (
-    <div className="grid gap-20 min-h-screen">
-      <MoneyAccount />
+    <div className="grid min-h-screen">
+      <MyMoney />
       <Transactions />
     </div>
   );

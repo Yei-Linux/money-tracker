@@ -4,12 +4,12 @@ import { CURRENCY } from '@/mocks/summary';
 import { FC, Fragment, PropsWithChildren } from 'react';
 
 type ContentLayout = PropsWithChildren;
-export const ContentLayout: FC<ContentLayout> = ({ children }) => (
+const ContentLayout: FC<ContentLayout> = ({ children }) => (
   <div className="flex flex-col gap-1">{children}</div>
 );
 
 type HeaderLayout = PropsWithChildren;
-export const HeaderLayout: FC<HeaderLayout> = ({ children }) => (
+const HeaderLayout: FC<HeaderLayout> = ({ children }) => (
   <div className="flex justify-between">{children}</div>
 );
 
@@ -17,7 +17,7 @@ type SettingValue = {
   percent: number;
   description: string;
 };
-export const SettingValue: FC<SettingValue> = ({ percent, description }) => (
+const SettingValue: FC<SettingValue> = ({ percent, description }) => (
   <div className="flex flex-col items-end">
     <p className="font-semibold text-xl">{percent}%</p>
     <p className="text-[8px]">{description}</p>
@@ -25,12 +25,12 @@ export const SettingValue: FC<SettingValue> = ({ percent, description }) => (
 );
 
 type Title = PropsWithChildren;
-export const Title: FC<Title> = ({ children }) => (
+const Title: FC<Title> = ({ children }) => (
   <p className="font-bold text-left text-md min-w-[170px]">{children}</p>
 );
 
 type Description = PropsWithChildren;
-export const Description: FC<Description> = ({ children }) => (
+const Description: FC<Description> = ({ children }) => (
   <p className="text-left text-xs">{children}</p>
 );
 
@@ -38,7 +38,7 @@ type GoalWithCurrentResult = {
   goal: number;
   currentResult: number;
 };
-export const GoalWithCurrentResult: FC<GoalWithCurrentResult> = ({
+const GoalWithCurrentResult: FC<GoalWithCurrentResult> = ({
   goal,
   currentResult,
 }) => (
@@ -58,12 +58,12 @@ export const GoalWithCurrentResult: FC<GoalWithCurrentResult> = ({
 const variants = {
   primary: { bgCard: 'bg-success', bgIcon: 'bg-white' },
   secondary: { bgCard: 'bg-muted', bgIcon: 'bg-white' },
-  tertiary: { bgCard: 'bg-purple', bgIcon: 'bg-white' },
+  tertiary: { bgCard: 'bg-sunny', bgIcon: 'bg-white' },
 };
 type Variants = keyof typeof variants;
 
 type Icon = PropsWithChildren<{ variant: Variants }>;
-export const Icon: FC<Icon> = ({ children, variant }) => {
+const Icon: FC<Icon> = ({ children, variant }) => {
   const bg = variants[variant].bgIcon;
   return (
     <div className={cn('rounded-full overflow-hidden shadow-lg w-fit p-2', bg)}>
