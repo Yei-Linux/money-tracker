@@ -1,23 +1,21 @@
-import { transactionTypeEmojis } from '@/constants';
-import { Badge } from '@/components/ui/badge';
-import { Table, TableRow, TableBody, TableCell } from '@/components/ui/table';
-import { cn } from '@/lib/utils';
-import { TTransaction } from '@/types/transactions';
 import { FC } from 'react';
-import { transactionTypesSeeder } from '../../../../../db/seeders/transaction-types';
+
+import { TransactionsHomeContent } from './type';
+import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
+import { cn } from '@/lib/utils';
+import { transactionTypesSeeder } from '../../../../../../db/seeders/transaction-types';
+import { Badge } from '@/components/ui/badge';
 import { getEmoji, getPriceSymbol } from '@/utils/transactions';
 
-interface ITransactionTable {
-  transactions: Array<TTransaction>;
-}
+type DesktopContent = TransactionsHomeContent;
 
-export const TransactionsTable: FC<ITransactionTable> = ({ transactions }) => {
+export const DesktopContent: FC<DesktopContent> = ({ transactions }) => {
   return (
     <Table>
       <TableBody>
-        {transactions.map(
+        {transactions?.map(
           ({ _id, category, title, price, description, transactionType }) => (
-            <TableRow className="!border-b-2 border-b-accent" key={_id}>
+            <TableRow className="!border-b-2 border-b" key={_id}>
               <TableCell className="font-medium">
                 {getEmoji(transactionType)} {title}
               </TableCell>

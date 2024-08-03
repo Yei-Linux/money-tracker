@@ -43,3 +43,8 @@ export const SettingsOptionsKeys = {
   ExpenseLimit: 'ExpenseLimit',
   ExpenseWatch: 'ExpenseWatch',
 };
+
+export const Breakpoints = {
+  phone: 768,
+  tablet: 1024,
+};

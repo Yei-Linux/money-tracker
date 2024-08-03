@@ -3,9 +3,9 @@ import { formatDateByDayNumber } from '@/lib/date';
 import { TTransaction } from '@/types/transactions';
 import { FC } from 'react';
 
-type TransactionItem = TTransaction;
+type PhoneTransactionItem = TTransaction;
 
-export const TransactionItem: FC<TransactionItem> = ({
+export const PhoneTransactionItem: FC<PhoneTransactionItem> = ({
   price,
   title,
   description,
