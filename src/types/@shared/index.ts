@@ -1,4 +1,5 @@
 export type SettingItem = {
+  counter: number;
   goal: number;
   currentResult: number;
   settingValue: number;

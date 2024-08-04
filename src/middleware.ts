@@ -1,8 +1,12 @@
-import { isAuthenticatedOnServer } from '@/lib/auth';
+import { isAuthenticatedOnServer } from '@/lib/auth/auth';
 import { NextResponse } from 'next/server';
 
 export const config = {
-  matcher: ['/api/transactions/:path*', '/api/money-account/:path*'],
+  matcher: [
+    '/api/transactions/:path*',
+    '/api/money-account/:path*',
+    '/api/categories/me',
+  ],
 };
 
 export async function middleware(req: NextRequest) {

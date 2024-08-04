@@ -2,7 +2,7 @@
 
 import { InvalidFieldFormError } from '@/errors/InvalidFieldFormError';
 import { SettingsError } from '@/errors/SettingsError';
-import { getAuthSessionInServerAction } from '@/lib/auth-session-handler';
+import { getAuthSessionInServerAction } from '@/lib/auth/auth-session-handler';
 import { moneyAccountModel } from '@/models';
 import {
   IncomesGoalZodSchema,

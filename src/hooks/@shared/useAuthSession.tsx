@@ -1,4 +1,4 @@
-import { useSession } from 'next-auth/react';
+import { useSession } from '@/lib/auth/auth';
 
 export const useAuthSession = () => {
   const { data: session, status } = useSession();

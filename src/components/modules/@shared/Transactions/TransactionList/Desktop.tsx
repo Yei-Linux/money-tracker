@@ -10,6 +10,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { getEmoji, getPriceSymbol } from '@/utils/transactions';
 import { TransactionTypeIcon } from './TransactionTypeIcon';
+import { MoneyCurrency } from '../../MoneyCurrency';
 
 type TransactionsDesktop = TransactionsHomeContent;
 
@@ -40,8 +41,10 @@ export const TransactionsDesktop: FC<TransactionsDesktop> = ({
                     transactionType._id === TransactionTypeIds.Expense,
                 })}
               >
-                {getPriceSymbol(transactionType)}
-                {price}
+                <span className="flex gap-2">
+                  {getPriceSymbol(transactionType)}
+                  <MoneyCurrency money={price} variant="sm" />
+                </span>
               </TableCell>
             </TableRow>
           )

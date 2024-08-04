@@ -1,5 +1,5 @@
 import { catchApiError } from '@/lib/api-error-handler';
-import { getUserIdFromReq } from '@/lib/auth';
+import { getUserIdFromReq } from '@/lib/auth/auth';
 import { getStatsOfMonth } from '@/repository/stats';
 import { NextResponse } from 'next/server';
 

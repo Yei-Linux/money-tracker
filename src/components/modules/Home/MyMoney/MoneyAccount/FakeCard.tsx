@@ -1,8 +1,10 @@
+import { UserName } from '@/components/modules/@shared/Auth/UserName';
+
 export const FakeCard = () => {
   return (
     <div className="min-w-[200px] md:min-w-[300px] bg-black text-white rounded-2xl p-4 flex flex-col gap-10 shadow-md">
       <div className="flex justify-between">
-        <p>Cardzzz</p>
+        <p>My Budget Card</p>
         <img
           width={60}
           className="h-fit"
@@ -21,7 +23,7 @@ export const FakeCard = () => {
       <div className="flex text-xs justify-between">
         <div className="flex flex-col gap-1">
           <p>Card Holder Name</p>
-          <p className="font-bold">Jesus</p>
+          <UserName />
         </div>
 
         <div className="flex flex-col gap-1">

@@ -2,7 +2,7 @@ import { ExpenseLimitPopup } from '@/components/modules/Home/MyMoney/MoneySettin
 import { IncomeGoalPopup } from '@/components/modules/Home/MyMoney/MoneySettings/Popups/IncomeGoalPopup';
 import { SettingsOptionsKeys } from '@/constants';
 import { MoneyAccountSettings } from '@/types/settings';
-import { AtomIcon, EyeIcon, LucideEyeOff } from 'lucide-react';
+import { AtomIcon, EyeIcon, WalletIcon } from 'lucide-react';
 
 export const SettingOptions = ({
   expenseLimit,
@@ -14,9 +14,9 @@ export const SettingOptions = ({
     variant: 'secondary' as const,
     title: 'My Expense Limit',
     description: expenseLimit?.goal
-      ? 'This month:'
+      ? 'This month ➡️'
       : 'You can active it just setting your limit!',
-    Icon: LucideEyeOff,
+    Icon: WalletIcon,
     settingDescription: 'Of your limit',
     settingValue: expenseLimit?.settingValue,
     currentResult: expenseLimit?.currentResult,
@@ -29,7 +29,7 @@ export const SettingOptions = ({
     variant: 'secondary' as const,
     title: 'My Icome Goal',
     description: incomeGoal?.goal
-      ? 'This month:'
+      ? 'This month ➡️'
       : 'You can active it just setting your goal!',
     Icon: AtomIcon,
     settingDescription: 'Achieved',

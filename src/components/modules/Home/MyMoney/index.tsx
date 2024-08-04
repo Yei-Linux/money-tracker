@@ -22,8 +22,11 @@ export const MyMoney = async () => {
       <div className="flex gap-14 md:gap-10 flex-wrap lg:flex-nowrap">
         <MoneyAccount money={myMoneyAccount.money} />
         <div className="w-full flex flex-col gap-7">
-          <IncomesWithExpenses transactionExpenses={1} transactionIncomes={4} />
-          <MyCategories />
+          <IncomesWithExpenses
+            transactionExpenses={myMoneyAccount.expenseLimit?.counter ?? 0}
+            transactionIncomes={myMoneyAccount.incomeGoal?.counter ?? 0}
+          />
+          <MyCategories sessionCookieString={sessionCookieString} />
         </div>
       </div>
 

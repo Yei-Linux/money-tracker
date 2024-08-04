@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Roboto_Mono } from 'next/font/google';
 import fontLocal from 'next/font/local';
 
 import './globals.css';
@@ -10,6 +10,11 @@ import { getCategoriesService } from '@/services/categories.service';
 import { getTransactionTypesService } from '@/services/transaction-types.service';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const roboto_mono = Roboto_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-roboto',
+});
 const snickerSnack = fontLocal({
   src: '../../public/fonts/snickerSnack.otf',
   variable: '--font-snickerSnack',
@@ -31,7 +36,12 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={cn(inter.className, snickerSnack.variable, inter.variable)}
+        className={cn(
+          inter.className,
+          inter.variable,
+          roboto_mono.variable,
+          snickerSnack.variable
+        )}
       >
         <Providers categories={categories} transactionTypes={transactionTypes}>
           <Layout>

@@ -17,6 +17,7 @@ export const fontFamily = {
   fontFamily: {
     snicker: ['var(--font-snickerSnack)'],
     inter: ['var(--font-inter)'],
+    roboto: ['var(--font-roboto)'],
   },
 };
 

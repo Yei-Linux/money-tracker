@@ -12,6 +12,7 @@ import { SessionProvider } from 'next-auth/react';
 import { TCategories } from '@/types/categories';
 import { TTransactionTypes } from '@/types/transaction-types';
 import { useInitTransactionStore } from '@/hooks/useInitTransactionStore';
+import { SessionWrapper } from '@/components/modules/@shared/Auth/SessionWrapper';
 
 type Providers = PropsWithChildren<{
   categories: TCategories;
@@ -37,11 +38,13 @@ export const Providers = ({
 
   return (
     <SessionProvider>
-      <QueryClientProvider client={client}>
-        {children}
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-      <Toaster />
+      <SessionWrapper>
+        <QueryClientProvider client={client}>
+          {children}
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+        <Toaster />
+      </SessionWrapper>
     </SessionProvider>
   );
 };

@@ -13,15 +13,15 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import Link from 'next/link';
-import { useAuthSession } from '@/hooks/useAuthSession';
-import { signOut } from '@/lib/auth';
+import { signOut } from '@/lib/auth/auth';
+import { useAuthStore } from '@/store/auth';
 
 export const UserDropdown = () => {
-  const { user } = useAuthSession();
+  const session = useAuthStore((store) => store.session);
 
   return (
     <>
-      {user && (
+      {session && (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button

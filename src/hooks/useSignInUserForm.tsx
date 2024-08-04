@@ -1,5 +1,5 @@
 import { SignInError } from '@/errors/SignInError';
-import { signIn } from '@/lib/auth';
+import { signIn } from '@/lib/auth/auth';
 import { AuthLibSignInServer } from '@/types/auth';
 import { SignInZodSchema, TSignInSchema } from '@/validators/sign-in.validator';
 import { zodResolver } from '@hookform/resolvers/zod';

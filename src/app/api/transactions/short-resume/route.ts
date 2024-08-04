@@ -1,5 +1,5 @@
 import { catchApiError } from '@/lib/api-error-handler';
-import { getUserIdFromReq } from '@/lib/auth';
+import { getUserIdFromReq } from '@/lib/auth/auth';
 import { getFilterPaginationTransactions } from '@/lib/transactions';
 import { buildAdvancedFiltersFromTransactions } from '@/lib/utils';
 import { getAllSimpleTransactionsRepository } from '@/repository/transactions';

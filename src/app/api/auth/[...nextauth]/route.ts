@@ -4,7 +4,7 @@ import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
 
-import { authorize } from '@/lib/auth';
+import { authorize } from '@/lib/auth/auth';
 import connectClient from '@/lib/db/mongodb';
 
 export const authOptions: AuthOptions = {

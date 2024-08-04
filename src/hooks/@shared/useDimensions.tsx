@@ -2,14 +2,12 @@ import { getCorrectDevice } from '@/lib/dom';
 import { TDevices } from '@/types/@shared/dimensions';
 import { useEffect, useState } from 'react';
 
-const getWidthSite = () => document.documentElement.clientWidth;
+const getWidthSite = () => document?.documentElement?.clientWidth;
 
 export const useDimensions = () => {
-  const [device, setDevice] = useState<TDevices>(
-    getCorrectDevice(getWidthSite())
-  );
+  const [device, setDevice] = useState<TDevices>('desktop');
 
-  const handleEvent = (e: UIEvent) => {
+  const handleEvent = () => {
     const width = getWidthSite();
     const deviceRecognized = getCorrectDevice(width);
     setDevice(deviceRecognized);
@@ -19,6 +17,10 @@ export const useDimensions = () => {
     window.addEventListener('resize', handleEvent);
 
     return () => window.removeEventListener('resize', handleEvent);
+  }, []);
+
+  useEffect(() => {
+    handleEvent();
   }, []);
 
   return { device };

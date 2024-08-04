@@ -9,7 +9,7 @@ import {
 } from '@/validators/createTransaction.validator';
 import { TransactionTypeIds } from '../../../db/seeders/transaction-types';
 import { I_DONT_HAVE_MONEY, operationsForTransactionTypes } from '@/constants';
-import { getAuthSessionInServerAction } from '@/lib/auth-session-handler';
+import { getAuthSessionInServerAction } from '@/lib/auth/auth-session-handler';
 import { InvalidFieldFormError } from '@/errors/InvalidFieldFormError';
 import { getIncomesAndExpensesRepository } from '@/repository/sum-transactions';
 

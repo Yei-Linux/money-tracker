@@ -2,17 +2,19 @@ import {
   getSession,
   signIn as signInNextAuth,
   signOut as signOutNextAuth,
+  useSession as useSessionNextAuth,
 } from 'next-auth/react';
 
 import userModel from '@/models/auth/user.model';
 import { UserSession } from '@/types/auth';
-import { Crypt } from './crypt';
+import { Crypt } from '../crypt';
 import { ServerError } from '@/errors/ServerError';
 import { NextResponse } from 'next/server';
 import { AUTH_HEADER } from '@/constants';
 
 export const signIn = signInNextAuth;
 export const signOut = signOutNextAuth;
+export const useSession = useSessionNextAuth;
 
 export const authorize = async (
   credentials: Record<'email' | 'password', string> | undefined

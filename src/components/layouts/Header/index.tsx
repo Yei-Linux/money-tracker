@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import { UserDropdown } from '../modules/Auth/UserDropdown';
-import { AuthActions } from '../modules/Auth/AuthActionts';
+import { UserDropdown } from '../../modules/Auth/UserDropdown';
+import { AuthActions } from '../../modules/Auth/AuthActionts';
+import { LinkActions } from './LinkActions';
 
 export const Header = () => (
   <header className="sticky top-0 backdrop-blur-sm bg-white/30 grid-in-header flex items-center p-4 justify-between">
@@ -16,9 +17,7 @@ export const Header = () => (
 
     <nav>
       <ul className="flex items-center gap-5 [&_li]:cursor-pointer">
-        <li>
-          <Link href="/summary">Summary</Link>
-        </li>
+        <LinkActions />
         <AuthActions />
         <li>
           <UserDropdown />

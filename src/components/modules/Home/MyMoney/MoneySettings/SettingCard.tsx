@@ -1,3 +1,4 @@
+import { MoneyCurrency } from '@/components/modules/@shared/MoneyCurrency';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { CURRENCY } from '@/mocks/summary';
@@ -20,7 +21,7 @@ type SettingValue = {
 const SettingValue: FC<SettingValue> = ({ percent, description }) => (
   <div className="flex flex-col items-end">
     <p className="font-semibold text-xl">{percent}%</p>
-    <p className="text-[8px]">{description}</p>
+    <p className="text-[10px]">{description}</p>
   </div>
 );
 
@@ -43,15 +44,9 @@ const GoalWithCurrentResult: FC<GoalWithCurrentResult> = ({
   currentResult,
 }) => (
   <Badge className="flex gap-1 font-semibold shadow-md">
-    <span className="text-xs">
-      {CURRENCY}
-      {currentResult}
-    </span>
+    <MoneyCurrency money={currentResult} variant="sm" />
     <span>/</span>
-    <span className="text-xs">
-      {CURRENCY}
-      {goal}
-    </span>
+    <MoneyCurrency money={goal} variant="sm" />
   </Badge>
 );
 
@@ -66,7 +61,12 @@ type Icon = PropsWithChildren<{ variant: Variants }>;
 const Icon: FC<Icon> = ({ children, variant }) => {
   const bg = variants[variant].bgIcon;
   return (
-    <div className={cn('rounded-full overflow-hidden shadow-lg w-fit p-2', bg)}>
+    <div
+      className={cn(
+        'rounded-full overflow-hidden shadow-lg w-[36px] h-[36px] p-2',
+        bg
+      )}
+    >
       {children}
     </div>
   );

@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { GoogleIcon } from '@/components/ui/icons/GoogleIcon';
-import { signIn } from '@/lib/auth';
+import { signIn } from '@/lib/auth/auth';
 import { useAuthFormStore } from '@/store/auth-form';
 import { AuthStatesForm } from '@/types/auth';
 

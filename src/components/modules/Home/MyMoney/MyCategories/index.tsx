@@ -1,18 +1,21 @@
-'use client';
-
 import { Badge } from '@/components/ui/badge';
 import { ScrollContainer } from '@/components/ui/scroll-container';
-import { getFlatCategories } from '@/lib/categories';
-import { useDropdownsStore } from '@/store/dropdowns';
+import { getMyCategoriesService } from '@/services/categories.service';
+import { FC } from 'react';
 
-export const MyCategories = () => {
-  const categories = useDropdownsStore((store) => store.categories);
-  const categoriesFlat = getFlatCategories(categories);
+type MyCategories = {
+  sessionCookieString: string;
+};
+
+export const MyCategories: FC<MyCategories> = async ({
+  sessionCookieString,
+}) => {
+  const categories = await getMyCategoriesService(sessionCookieString);
 
   return (
     <ScrollContainer>
-      {categoriesFlat.map(({ category }) => (
-        <Badge variant="secondary" className="shadow-md">
+      {categories.map(({ category, _id }) => (
+        <Badge key={_id} variant="secondary" className="shadow-md">
           {category}
         </Badge>
       ))}

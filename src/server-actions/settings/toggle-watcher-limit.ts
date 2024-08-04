@@ -1,7 +1,7 @@
 'use server';
 
 import { SettingsError } from '@/errors/SettingsError';
-import { getAuthSessionInServerAction } from '@/lib/auth-session-handler';
+import { getAuthSessionInServerAction } from '@/lib/auth/auth-session-handler';
 import { moneyAccountModel } from '@/models';
 
 export const toggleWatcherLimitServerAction = async (

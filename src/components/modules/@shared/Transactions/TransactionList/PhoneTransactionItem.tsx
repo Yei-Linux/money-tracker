@@ -3,6 +3,7 @@ import { formatDateByDayNumber } from '@/lib/date';
 import { TTransaction } from '@/types/transactions';
 import { FC } from 'react';
 import { TransactionTypeIcon } from './TransactionTypeIcon';
+import { MoneyCurrency } from '../../MoneyCurrency';
 
 type PhoneTransactionItem = TTransaction;
 
@@ -30,7 +31,7 @@ export const PhoneTransactionItem: FC<PhoneTransactionItem> = ({
         </div>
       </div>
 
-      <p className="font-bold">${price}</p>
+      <MoneyCurrency money={price} variant="sm" />
 
       <p className="text-xs absolute right-[5px] bottom-[5px] text-muted-foreground">
         {formatDateByDayNumber(createdAt.toString())}
