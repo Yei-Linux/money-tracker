@@ -13,12 +13,12 @@ export const IncomesWithExpenses: FC<IncomesWithExpenses> = ({
   return (
     <div className="flex gap-3 w-full border p-4 rounded-xl h-fit">
       <TransactionTypeItem
-        type="Income"
+        type="Income(s)"
         counter={transactionIncomes}
         fillIcon="green"
       />
       <TransactionTypeItem
-        type="Expense"
+        type="Expense(s)"
         counter={transactionExpenses}
         fillIcon="red"
       />

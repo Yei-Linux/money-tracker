@@ -1,6 +1,6 @@
 export const FakeCard = () => {
   return (
-    <div className="min-w-[250px] md:min-w-[300px] bg-black text-white rounded-2xl p-4 flex flex-col gap-10 shadow-md">
+    <div className="min-w-[200px] md:min-w-[300px] bg-black text-white rounded-2xl p-4 flex flex-col gap-10 shadow-md">
       <div className="flex justify-between">
         <p>Cardzzz</p>
         <img

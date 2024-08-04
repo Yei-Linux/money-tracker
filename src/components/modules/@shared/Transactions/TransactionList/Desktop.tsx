@@ -3,9 +3,13 @@ import { FC } from 'react';
 import { TransactionsHomeContent } from './type';
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
 import { cn } from '@/lib/utils';
-import { transactionTypesSeeder } from '../../../../../../db/seeders/transaction-types';
+import {
+  TransactionTypeIds,
+  transactionTypesSeeder,
+} from '../../../../../../db/seeders/transaction-types';
 import { Badge } from '@/components/ui/badge';
 import { getEmoji, getPriceSymbol } from '@/utils/transactions';
+import { TransactionTypeIcon } from './TransactionTypeIcon';
 
 type TransactionsDesktop = TransactionsHomeContent;
 
@@ -17,18 +21,23 @@ export const TransactionsDesktop: FC<TransactionsDesktop> = ({
       <TableBody>
         {transactions?.map(
           ({ _id, category, title, price, description, transactionType }) => (
-            <TableRow className="!border-b-2 border-b-muted" key={_id}>
+            <TableRow className="!border-none" key={_id}>
+              <TableCell className="font-medium">
+                <TransactionTypeIcon transactionType={transactionType} />
+              </TableCell>
               <TableCell className="font-medium">
                 {getEmoji(transactionType)} {title}
               </TableCell>
               <TableCell>
-                <Badge variant="outline">{category.category}</Badge>
+                <Badge variant="secondary">{category.category}</Badge>
               </TableCell>
               <TableCell>{description}</TableCell>
               <TableCell
                 className={cn('text-right font-bold', {
                   'text-success':
-                    transactionType._id === transactionTypesSeeder[0]._id,
+                    transactionType._id === TransactionTypeIds.Income,
+                  'text-danger':
+                    transactionType._id === TransactionTypeIds.Expense,
                 })}
               >
                 {getPriceSymbol(transactionType)}

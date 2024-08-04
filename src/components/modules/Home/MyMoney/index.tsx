@@ -5,6 +5,7 @@ import { cookies } from 'next/headers';
 import { MoneyAccount } from './MoneyAccount';
 import { MoneySettings } from './MoneySettings';
 import { IncomesWithExpenses } from './IncomesWithExpenses';
+import { MyCategories } from './MyCategories';
 
 export const MyMoney = async () => {
   const cookiesRes = cookies();
@@ -17,10 +18,13 @@ export const MyMoney = async () => {
   }
 
   return (
-    <div className="flex flex-col gap-10 p-4">
-      <div className="flex gap-10">
+    <div className="flex flex-col gap-20">
+      <div className="flex gap-14 md:gap-10 flex-wrap lg:flex-nowrap">
         <MoneyAccount money={myMoneyAccount.money} />
-        <IncomesWithExpenses transactionExpenses={1} transactionIncomes={4} />
+        <div className="w-full flex flex-col gap-7">
+          <IncomesWithExpenses transactionExpenses={1} transactionIncomes={4} />
+          <MyCategories />
+        </div>
       </div>
 
       <MoneySettings

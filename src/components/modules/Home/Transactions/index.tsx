@@ -3,11 +3,9 @@ import { TransactionsHeader } from './Header';
 
 export const Transactions = () => {
   return (
-    <div className="bg-muted w-full">
-      <div className="flex flex-col gap-14 max-w-[1200px] p-7 md:p-14 w-full h-full mx-auto">
-        <TransactionsHeader />
-        <TransactionsContent />
-      </div>
+    <div className="flex flex-col gap-10 max-w-[1200px] w-full h-full mx-auto">
+      <TransactionsHeader />
+      <TransactionsContent />
     </div>
   );
 };

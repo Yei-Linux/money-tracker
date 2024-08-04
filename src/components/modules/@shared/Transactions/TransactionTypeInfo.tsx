@@ -25,7 +25,7 @@ export const TransactionTypeInfo: FC<ITransactionTypeInfo> = ({
   theme,
 }) => {
   return (
-    <dl className={cn('font-semibold')}>
+    <dl className={cn('font-semibold min-w-[115px]')}>
       <dt>
         <span className={cn('text-sm', themes[theme])}>{title}</span>
       </dt>

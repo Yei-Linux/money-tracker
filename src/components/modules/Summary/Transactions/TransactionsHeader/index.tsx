@@ -13,10 +13,10 @@ export const TransactionHeader = () => {
   const { incomes, expenses } = pickIncomesAndExpenses(transactionStats);
 
   return (
-    <header className="flex flex-col">
+    <header className="flex flex-col gap-3 md:gap-1">
       <Title as="h2">My Transactions</Title>
 
-      <div className="flex justify-between items-center w-100">
+      <div className="flex justify-between items-center w-100 flex-wrap gap-3">
         <p className="text-sm text-neutral_1">
           You had {incomes} incomes and {expenses} expenses this month
         </p>

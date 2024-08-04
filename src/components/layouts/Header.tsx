@@ -7,11 +7,10 @@ export const Header = () => (
     <Link href="/">
       <div className="flex gap-1 items-center">
         <img
-          src="./logo.png"
+          src="./app-logo.webp"
           alt="Money Tracker Logo"
-          className="h-[80px] w-[80px]"
+          className="h-[60px] w-[60px]"
         />
-        <p className="text-2xl font-snicker">Money Tracker</p>
       </div>
     </Link>
 

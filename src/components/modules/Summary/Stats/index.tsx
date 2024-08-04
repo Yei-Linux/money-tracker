@@ -18,7 +18,7 @@ export const Stats = () => {
   );
 
   return (
-    <div className="flex flex-col gap-7 w-100">
+    <div className="flex flex-col gap-10 w-100">
       <Title as="h2">Summary of this Month</Title>
 
       {total && (

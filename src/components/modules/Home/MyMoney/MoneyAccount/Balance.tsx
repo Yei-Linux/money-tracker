@@ -7,7 +7,7 @@ export type Balance = {
 
 export const Balance: FC<Balance> = ({ money }) => {
   return (
-    <div className="rounded-xl h-full shadow-md p-3 flex flex-col items-center gap-3 h-full bg-purple text-white">
+    <div className="rounded-xl shadow-md p-3 flex flex-col items-center gap-3 h-auto bg-purple text-white">
       <p className="text-sm">Balance</p>
       <data
         className="text-2xl flex gap-1 items-center font-bold"
