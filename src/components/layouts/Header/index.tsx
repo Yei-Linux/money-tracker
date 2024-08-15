@@ -1,17 +1,14 @@
-import Link from 'next/link';
-import { UserDropdown } from '../../modules/Auth/UserDropdown';
-import { AuthActions } from '../../modules/Auth/AuthActionts';
-import { LinkActions } from './LinkActions';
+import Link from "next/link";
+import { UserDropdown } from "../../modules/Auth/UserDropdown";
+import { AuthActions } from "../../modules/Auth/AuthActionts";
+import { LinkActions } from "./LinkActions";
+import { Logo } from "@/components/modules/@shared/Logo";
 
 export const Header = () => (
   <header className="sticky top-0 backdrop-blur-sm bg-white/30 grid-in-header flex items-center p-4 justify-between">
     <Link href="/">
       <div className="flex gap-1 items-center">
-        <img
-          src="./app-logo.webp"
-          alt="Money Tracker Logo"
-          className="h-[60px] w-[60px]"
-        />
+        <Logo />
       </div>
     </Link>
 

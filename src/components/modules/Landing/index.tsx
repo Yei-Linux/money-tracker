@@ -1,3 +1,9 @@
+import { Hero } from "./Hero";
+
 export const Landing = () => {
-  return <div></div>;
+  return (
+    <div>
+      <Hero />
+    </div>
+  );
 };
