@@ -25,22 +25,6 @@ export const Features = () => {
           title="Multiple Devices"
           description="Safely synchronize across devices with Bank standard security."
         />
-
-        <Feature
-          Icon={PhoneCallIcon}
-          title="Multiple Devices"
-          description="Safely synchronize across devices with Bank standard security."
-        />
-        <Feature
-          Icon={PhoneCallIcon}
-          title="Multiple Devices"
-          description="Safely synchronize across devices with Bank standard security."
-        />
-        <Feature
-          Icon={PhoneCallIcon}
-          title="Multiple Devices"
-          description="Safely synchronize across devices with Bank standard security."
-        />
       </ul>
     </div>
   );

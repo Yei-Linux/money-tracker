@@ -1,4 +1,6 @@
 import { TextRotated } from "@/components/ui/TextRotated";
+import { TestimonialsMocked } from "@/constants";
+import { Testimonial } from "./Testimonial";
 
 export const Testimonials = () => {
   return (
@@ -7,7 +9,11 @@ export const Testimonials = () => {
         See what others have to say
       </TextRotated>
 
-      <div></div>
+      <div className="flex gap-3 flex-wrap md:flex-nowrap">
+        {TestimonialsMocked.map((props) => (
+          <Testimonial {...props} />
+        ))}
+      </div>
     </div>
   );
 };
