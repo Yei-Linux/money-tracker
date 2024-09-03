@@ -1,26 +1,28 @@
-import { INTIAL_STEP, MAX_AUTH_FORM_STEP } from '@/constants';
-import { AuthStatesForm, SwitchStateMethod } from '@/types/auth';
-import { StepFactory, VoidMethod } from '@/types/factories';
-import { create } from 'zustand';
+import { INTIAL_STEP, MAX_AUTH_FORM_STEP } from "@/constants";
+import { Popup } from "@/types/@shared/popup";
+import { AuthStatesForm, SwitchStateMethod } from "@/types/auth";
+import { StepFactory } from "@/types/factories";
+import { create } from "zustand";
 
 type GeneralAuthStep = StepFactory<
-  'step',
-  'nextStep',
-  'previousStep',
-  'setStep'
+  "step",
+  "nextStep",
+  "previousStep",
+  "setStep"
 >;
 type SignUpStep = StepFactory<
-  'signUpStep',
-  'nextSignUpStep',
-  'previousSignUpStep',
-  'setSignUpStep'
+  "signUpStep",
+  "nextSignUpStep",
+  "previousSignUpStep",
+  "setSignUpStep"
 >;
 
 type UseAuthFormStore = {
   state: AuthStatesForm;
   switchState: SwitchStateMethod;
 } & GeneralAuthStep &
-  SignUpStep;
+  SignUpStep &
+  Popup;
 
 type StepFactoryObjects = {
   stepName: string;
@@ -62,26 +64,32 @@ const stepFactoryObjects = <T>({
   } as T);
 
 export const useAuthFormStore = create<UseAuthFormStore>((set) => ({
-  state: 'signup',
+  open: false,
+  state: "signup",
+
+  setOpen: (value) =>
+    set(() => ({
+      open: value,
+    })),
   switchState: (state) =>
     set((store) => ({
-      state: state ?? (store.state === 'signin' ? 'signup' : 'signin'),
+      state: state ?? (store.state === "signin" ? "signup" : "signin"),
     })),
 
   ...stepFactoryObjects<GeneralAuthStep>({
-    stepName: 'step',
-    nextStepName: 'nextStep',
-    previousStepName: 'previousStep',
+    stepName: "step",
+    nextStepName: "nextStep",
+    previousStepName: "previousStep",
     set,
     maxStep: MAX_AUTH_FORM_STEP,
-    setStepName: 'setStep',
+    setStepName: "setStep",
   }),
   ...stepFactoryObjects<SignUpStep>({
-    stepName: 'signUpStep',
-    nextStepName: 'nextSignUpStep',
-    previousStepName: 'previousSignUpStep',
+    stepName: "signUpStep",
+    nextStepName: "nextSignUpStep",
+    previousStepName: "previousSignUpStep",
     set,
     maxStep: MAX_AUTH_FORM_STEP,
-    setStepName: 'setSignUpStep',
+    setStepName: "setSignUpStep",
   }),
 }));

@@ -1,6 +1,6 @@
-import { PhoneCallIcon } from "lucide-react";
 import { Feature } from "./Feature";
 import { TextRotated } from "@/components/ui/TextRotated";
+import { FeaturesInTheApp } from "@/constants";
 
 export const Features = () => {
   return (
@@ -10,21 +10,9 @@ export const Features = () => {
       </TextRotated>
 
       <ul className="flex flex-wrap gap-10 mx-auto justify-center">
-        <Feature
-          Icon={PhoneCallIcon}
-          title="Multiple Devices"
-          description="Safely synchronize across devices with Bank standard security."
-        />
-        <Feature
-          Icon={PhoneCallIcon}
-          title="Multiple Devices"
-          description="Safely synchronize across devices with Bank standard security."
-        />
-        <Feature
-          Icon={PhoneCallIcon}
-          title="Multiple Devices"
-          description="Safely synchronize across devices with Bank standard security."
-        />
+        {FeaturesInTheApp.map(({ Icon, title, description }) => (
+          <Feature Icon={Icon} title={title} description={description} />
+        ))}
       </ul>
     </div>
   );

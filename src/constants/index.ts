@@ -2,6 +2,19 @@ import { TAvatars } from "@/types/avatars";
 import { TransactionTypeIds } from "../../db/seeders/transaction-types";
 import type { TTestimonials } from "@/types/testiomonials";
 import { TPricingPlans } from "@/types/pricing";
+import { FeaturesOn } from "@/types/featured-on";
+import { ProductHuntIcon } from "@/components/ui/icons/ProductHuntIcon";
+import { HackerNewsIcon } from "@/components/ui/icons/HackerNewsIcon";
+import { XIcon } from "@/components/ui/icons/XIcon";
+import { RedditIcon } from "@/components/ui/icons/RedditIcon";
+import { FeaturesApp } from "@/types/features-app";
+import {
+  BookIcon,
+  BoxIcon,
+  MailIcon,
+  PhoneCallIcon,
+  UserIcon,
+} from "lucide-react";
 
 export const trendEmojis = {
   up: "↗️",
@@ -135,14 +148,54 @@ export const PlansMocked: TPricingPlans = [
     theme: "light",
     image: "/assets/company-plan.png",
     type: "Enterprise",
-    price: "Contact Us",
+    price: "Coming Soon",
     description: "For companies that required something advanced",
-    callToActionText: "Contact Us",
+    callToActionText: "Coming Soon",
     benefits: [
       "Up to 10 participants in an event at once",
       "Unlimited events",
       "Unlimited organizers",
       "Standard and advanced mathcing",
     ],
+  },
+];
+
+export const FeaturedOnPlatforms: FeaturesOn = [
+  {
+    Icon: ProductHuntIcon,
+    link: "https://www.producthunt.com/products/trigger-dev",
+  },
+  {
+    Icon: HackerNewsIcon,
+    link: "https://news.ycombinator.com/show",
+  },
+  {
+    Icon: XIcon,
+    link: "https://x.com/triggerdotdev",
+  },
+  {
+    Icon: RedditIcon,
+    link: "https://www.reddit.com/r/CFB/comments/1f7pthn/postgame_thread_boston_college_defeats_florida",
+  },
+];
+
+export const FeaturesInTheApp: FeaturesApp = [
+  {
+    Icon: MailIcon,
+    title: "Email Notifications",
+    description:
+      "Get alerted about upcoming bills, budget thresholds, and financial milestones, ensuring you're always in control.",
+  },
+  {
+    Icon: BookIcon,
+    title: "Goals and Expense Limits",
+    description:
+      "Lets you define goals and set expense limits, helping you stay focused and disciplined.",
+  },
+  {
+    Icon: UserIcon,
+    title: "Nice Experience",
+    description:
+      "Enjoy a visually appealing and user-friendly interface that makes tracking your finances a breeze",
   },
 ];

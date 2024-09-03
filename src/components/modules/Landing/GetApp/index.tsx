@@ -1,5 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { Logo } from "../../@shared/Logo";
+import { StartAppButton } from "../../@shared/StartAppButton";
 
 export const GetApp = () => {
   return (
@@ -11,12 +10,7 @@ export const GetApp = () => {
         <p>Control your money every time and improve your budget...</p>
       </div>
 
-      <Button className="w-fit">
-        <span>
-          <Logo />
-        </span>
-        Start Money Tracker
-      </Button>
+      <StartAppButton />
     </div>
   );
 };

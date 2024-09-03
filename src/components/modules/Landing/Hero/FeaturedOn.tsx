@@ -1,7 +1,5 @@
-import { HackerNewsIcon } from "@/components/ui/icons/HackerNewsIcon";
-import { ProductHuntIcon } from "@/components/ui/icons/ProductHuntIcon";
-import { RedditIcon } from "@/components/ui/icons/RedditIcon";
-import { XIcon } from "@/components/ui/icons/XIcon";
+import { FeaturedOnPlatforms } from "@/constants";
+import Link from "next/link";
 
 export const FeaturedOn = () => {
   return (
@@ -9,10 +7,11 @@ export const FeaturedOn = () => {
       <p className="text-xs">Featured On</p>
 
       <div className="flex gap-4 [&>svg]:drop-shadow-2xl [&>svg]:cursor-pointer">
-        <ProductHuntIcon />
-        <HackerNewsIcon />
-        <XIcon />
-        <RedditIcon />
+        {FeaturedOnPlatforms.map(({ Icon, link }) => (
+          <Link href={link} target="__blank" rel="noopener">
+            <Icon />
+          </Link>
+        ))}
       </div>
     </div>
   );

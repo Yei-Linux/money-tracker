@@ -8,6 +8,7 @@ import { Rating } from "@/components/ui/rating";
 import Image from "next/image";
 
 import HeroIcon from "../../../../../public/assets/hero.svg";
+import { CallToAction } from "./CallToAction";
 
 export const Hero = () => {
   return (
@@ -27,14 +28,7 @@ export const Hero = () => {
           </h1>
         </div>
 
-        <div>
-          <Button className="w-fit">
-            <span>
-              <Logo />
-            </span>
-            Start Money Tracker
-          </Button>
-        </div>
+        <CallToAction />
 
         <div className="flex gap-3 items-center">
           <AvatarGroup>
