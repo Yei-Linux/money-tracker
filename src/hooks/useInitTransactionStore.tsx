@@ -1,8 +1,7 @@
-import { useDropdownsStore } from '@/store/dropdowns';
-import { useTransactionStore } from '@/store/transactions';
-import { TCategories } from '@/types/categories';
-import { TTransactionTypes } from '@/types/transaction-types';
-import { useEffect } from 'react';
+import { useDropdownsStore } from "@/store/dropdowns";
+import { TCategories } from "@/types/categories";
+import { TTransactionTypes } from "@/types/transaction-types";
+import { useEffect } from "react";
 
 type TUseInitTransactionStore = {
   categories: TCategories;

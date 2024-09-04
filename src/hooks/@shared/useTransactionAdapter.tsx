@@ -1,11 +1,12 @@
-import { transformRecordArrayToFormData } from '@/lib/utils';
-import { TTransactionStore } from '@/store/@shared';
+import { transformRecordArrayToFormData } from "@/lib/utils";
+import { TTransactionStore } from "@/store/@shared";
 import {
   TGetTransactionService,
   TransactionApiResponse,
-} from '@/types/transactions';
-import { useQuery } from '@tanstack/react-query';
-import { StoreApi, UseBoundStore } from 'zustand';
+} from "@/types/transactions";
+import { useQuery } from "@tanstack/react-query";
+import { StoreApi, UseBoundStore } from "zustand";
+import { useTransactionStorePaginationAdapter } from "./useTransactionStorePaginationAdapter";
 
 type UseFetchTransactionsAdapter<T> = {
   useStore: UseBoundStore<StoreApi<TTransactionStore>>;
@@ -18,9 +19,9 @@ export const useFetchTransactionsAdapter = <T, R = T>({
   queryKey,
   service,
 }: UseFetchTransactionsAdapter<T>) => {
-  const skip = useStore((store) => store.skip);
-  const limit = useStore((store) => store.limit);
-  const filters = useStore((store) => store.filters);
+  const { skip, limit, filters } = useTransactionStorePaginationAdapter({
+    useStore,
+  });
   const formDataFilters = transformRecordArrayToFormData({
     ...filters,
     skip: skip.toString(),

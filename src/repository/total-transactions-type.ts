@@ -1,6 +1,6 @@
-import { transactionsModel } from '@/models';
-import mongoose from 'mongoose';
-import { TransactionTypeIds } from '../../db/seeders/transaction-types';
+import { transactionsModel } from "@/models";
+import mongoose from "mongoose";
+import { TransactionTypeIds } from "../../db/seeders/transaction-types";
 
 type GetTotalTransactionTypes = {
   user: string;
@@ -15,7 +15,7 @@ export const getTotalTransactionTypes = async ({
   });
   const counterExpenses = await transactionsModel.countDocuments({
     user: new mongoose.Types.ObjectId(user),
-    transactionType: new mongoose.Types.ObjectId(TransactionTypeIds.Income),
+    transactionType: new mongoose.Types.ObjectId(TransactionTypeIds.Expense),
   });
 
   return { counterIncomes, counterExpenses };
