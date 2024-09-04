@@ -1,8 +1,8 @@
-import { MoneyCurrency } from '@/components/modules/@shared/MoneyCurrency';
-import { Badge } from '@/components/ui/badge';
-import { cn } from '@/lib/utils';
-import { CURRENCY } from '@/mocks/summary';
-import { FC, Fragment, PropsWithChildren } from 'react';
+import { MoneyCurrency } from "@/components/modules/@shared/MoneyCurrency";
+import { Badge } from "@/components/ui/badge";
+import { SettingsOptionsKeys } from "@/constants";
+import { cn } from "@/lib/utils";
+import { FC, Fragment, PropsWithChildren } from "react";
 
 type ContentLayout = PropsWithChildren;
 const ContentLayout: FC<ContentLayout> = ({ children }) => (
@@ -17,10 +17,16 @@ const HeaderLayout: FC<HeaderLayout> = ({ children }) => (
 type SettingValue = {
   percent: number;
   description: string;
+  type: string;
 };
-const SettingValue: FC<SettingValue> = ({ percent, description }) => (
+const SettingValue: FC<SettingValue> = ({ percent, description, type }) => (
   <div className="flex flex-col items-end">
-    <p className="font-semibold text-xl">{percent}%</p>
+    <p className="font-semibold text-xl">
+      {percent}%{" "}
+      {percent === 100 && (
+        <span> {type === SettingsOptionsKeys.IncomeGoal ? "✅" : "⛔"} </span>
+      )}
+    </p>
     <p className="text-[10px]">{description}</p>
   </div>
 );
@@ -51,9 +57,9 @@ const GoalWithCurrentResult: FC<GoalWithCurrentResult> = ({
 );
 
 const variants = {
-  primary: { bgCard: 'bg-success', bgIcon: 'bg-white' },
-  secondary: { bgCard: 'bg-muted', bgIcon: 'bg-white' },
-  tertiary: { bgCard: 'bg-sunny', bgIcon: 'bg-white' },
+  primary: { bgCard: "bg-success", bgIcon: "bg-white" },
+  secondary: { bgCard: "bg-muted", bgIcon: "bg-white" },
+  tertiary: { bgCard: "bg-sunny", bgIcon: "bg-white" },
 };
 type Variants = keyof typeof variants;
 
@@ -63,7 +69,7 @@ const Icon: FC<Icon> = ({ children, variant }) => {
   return (
     <div
       className={cn(
-        'rounded-full overflow-hidden shadow-lg w-[36px] h-[36px] p-2',
+        "rounded-full overflow-hidden shadow-lg w-[36px] h-[36px] p-2",
         bg
       )}
     >
@@ -102,7 +108,7 @@ export const SettingCard: FC<SettingCard> & ComposeSettingCard = ({
     <Wrapper {...(ComponentWrapper ? { goal } : {})}>
       <div
         className={cn(
-          'flex flex-col gap-6 rounded-2xl p-4 shadow-md min-w-[250px]',
+          "flex flex-col gap-6 rounded-2xl p-4 shadow-md min-w-[250px]",
           bg,
           className
         )}

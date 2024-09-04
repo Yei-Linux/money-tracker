@@ -1,12 +1,12 @@
-import { SettingOptions } from '@/utils/settings';
-import { SettingCard } from './SettingCard';
-import { WatcherToggle } from './WatcherToggle';
-import { MoneyAccountSettings } from '@/types/settings';
-import { SettingsOptionsKeys } from '@/constants';
-import { EitherExpenseOrLimit } from './EitherExpenseOrIncomes';
-import { Title } from '@/components/ui/title';
-import { ScrollContainer } from '@/components/ui/scroll-container';
-import { HandyArrowToLeftIcon } from '@/components/ui/icons/HandyArrowToLeftIcon';
+import { SettingOptions } from "@/utils/settings";
+import { SettingCard } from "./SettingCard";
+import { WatcherToggle } from "./WatcherToggle";
+import { MoneyAccountSettings } from "@/types/settings";
+import { SettingsOptionsKeys } from "@/constants";
+import { EitherExpenseOrLimit } from "./EitherExpenseOrIncomes";
+import { Title } from "@/components/ui/title";
+import { ScrollContainer } from "@/components/ui/scroll-container";
+import { HandyArrowToLeftIcon } from "@/components/ui/icons/HandyArrowToLeftIcon";
 
 type MoneySettings = MoneyAccountSettings;
 
@@ -37,8 +37,8 @@ export const MoneySettings = (props: MoneySettings) => {
                 variant={variant}
                 className={
                   type !== SettingsOptionsKeys.ExpenseWatch
-                    ? 'cursor-pointer'
-                    : ''
+                    ? "cursor-pointer"
+                    : ""
                 }
                 ComponentWrapper={ComponentWrapper}
                 goal={goal}
@@ -54,6 +54,7 @@ export const MoneySettings = (props: MoneySettings) => {
                       <SettingCard.SettingValue
                         percent={settingValue}
                         description={settingDescription}
+                        type={type}
                       />
                     )}
                 </SettingCard.HeaderLayout>
