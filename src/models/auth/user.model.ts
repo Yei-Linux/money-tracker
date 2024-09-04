@@ -1,6 +1,6 @@
-import { Crypt } from '@/lib/crypt';
-import mongoose from 'mongoose';
-import moneyAccountModel from '../money-account.model';
+import { Crypt } from "@/lib/crypt";
+import mongoose from "mongoose";
+import moneyAccountModel from "../money-account.model";
 
 interface User {
   _id: mongoose.Types.ObjectId;
@@ -26,7 +26,7 @@ const userDBSchema = new mongoose.Schema<User>(
   { timestamps: true }
 );
 
-userDBSchema.pre('save', async function (next) {
+userDBSchema.pre("save", async function (next) {
   const user = this;
   if (!user?.password) {
     return next();
@@ -42,7 +42,7 @@ userDBSchema.pre('save', async function (next) {
   }
 });
 
-userDBSchema.post('save', async function (userCreated, next) {
+userDBSchema.post("save", async function (userCreated, next) {
   try {
     await moneyAccountModel.create({
       money: 0,
@@ -50,8 +50,10 @@ userDBSchema.post('save', async function (userCreated, next) {
     });
     next();
   } catch (error) {
-    return next(Error((error as Error).message));
+    const errorMessage = (error as Error).message;
+    console.error("Error: ", errorMessage);
+    return next(Error(errorMessage));
   }
 });
 
-export default mongoose?.models?.Users || mongoose.model('Users', userDBSchema);
+export default mongoose?.models?.Users || mongoose.model("Users", userDBSchema);

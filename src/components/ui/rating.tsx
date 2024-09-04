@@ -18,7 +18,7 @@ export const Rating: FC<Rating> = ({ rating }) => {
       {Array(5)
         .fill("")
         .map((_, index) => (
-          <Star fill={getFill(index)} />
+          <Star fill={getFill(index)} key={index} />
         ))}
     </div>
   );

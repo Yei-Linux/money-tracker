@@ -1,10 +1,10 @@
-import { envs } from '@/constants/env';
-import mongoose from 'mongoose';
+import { envs } from "../../constants/env";
+import mongoose from "mongoose";
 
 const MONGODB_URI = envs.DB_URI;
 if (!MONGODB_URI) {
   throw new Error(
-    'Please define the MONGODB_URI environment variable inside .env.local'
+    "Please define the MONGODB_URI environment variable inside .env.local"
   );
 }
 
@@ -25,7 +25,7 @@ async function dbConnect() {
       cached.promise = mongoose
         .connect(MONGODB_URI as string, opts)
         .then((mongoose) => {
-          console.log('Db connected');
+          console.log("Db connected");
           return mongoose;
         });
     }

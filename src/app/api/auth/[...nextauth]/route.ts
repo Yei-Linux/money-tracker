@@ -1,15 +1,16 @@
-import { envs } from '@/constants/env';
-import NextAuth, { AuthOptions } from 'next-auth';
-import GoogleProvider from 'next-auth/providers/google';
-import CredentialsProvider from 'next-auth/providers/credentials';
-import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
+import { envs } from "@/constants/env";
+import NextAuth, { AuthOptions } from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 
-import { authorize } from '@/lib/auth/auth';
-import connectClient from '@/lib/db/mongodb';
+import { authorize } from "@/lib/auth/auth";
+import connectClient from "@/lib/db/mongodb";
+import { createMoneyAccountIfIsNewUser } from "@/use-cases";
 
 export const authOptions: AuthOptions = {
   session: {
-    strategy: 'jwt',
+    strategy: "jwt",
   },
   adapter: MongoDBAdapter(connectClient),
   secret: envs.TOKEN_SECRET,
@@ -19,11 +20,17 @@ export const authOptions: AuthOptions = {
       clientSecret: envs.GOOGLE_CLIENT_SECRET,
     }),
     CredentialsProvider({
-      name: 'Sign in',
+      name: "Sign in",
       credentials: { email: {}, password: {} },
       authorize,
     }),
   ],
+  events: {
+    async signIn(message) {
+      const { isNewUser, user } = message;
+      isNewUser && (await createMoneyAccountIfIsNewUser(user.id));
+    },
+  },
   callbacks: {
     jwt({ token, user }) {
       if (!user) {

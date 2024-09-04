@@ -32,8 +32,8 @@ export const Hero = () => {
 
         <div className="flex gap-3 items-center">
           <AvatarGroup>
-            {Avatars.map(({ avatar, fallbackName }) => (
-              <Avatar className="shadow-md">
+            {Avatars.map(({ avatar, fallbackName }, index) => (
+              <Avatar className="shadow-md" key={index}>
                 <AvatarImage src={avatar} />
                 <AvatarFallback>{fallbackName}</AvatarFallback>
               </Avatar>

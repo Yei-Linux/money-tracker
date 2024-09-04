@@ -8,7 +8,7 @@ export const FeaturedOn = () => {
 
       <div className="flex gap-4 [&>svg]:drop-shadow-2xl [&>svg]:cursor-pointer">
         {FeaturedOnPlatforms.map(({ Icon, link }) => (
-          <Link href={link} target="__blank" rel="noopener">
+          <Link href={link} target="__blank" rel="noopener" key={link}>
             <Icon />
           </Link>
         ))}

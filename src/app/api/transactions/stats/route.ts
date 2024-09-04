@@ -1,7 +1,8 @@
-import { catchApiError } from '@/lib/api-error-handler';
-import { getUserIdFromReq } from '@/lib/auth/auth';
-import { getStatsOfMonth } from '@/repository/stats';
-import { NextResponse } from 'next/server';
+import { catchApiError } from "@/lib/api-error-handler";
+import { getUserIdFromReq } from "@/lib/auth/auth";
+import { getStatsOfMonth } from "@/repository/stats";
+import { getStats } from "@/use-cases/transactions";
+import { NextResponse } from "next/server";
 
 export const GET = async (req: NextRequest) => {
   try {
@@ -12,14 +13,11 @@ export const GET = async (req: NextRequest) => {
       return acc + item.value;
     }, 0);
 
-    const completedStats = [
-      ...transactionsStats,
-      { _id: 'total', type: 'Total', value: totalStats, theme: 'primary' },
-    ];
+    const completedStats = getStats(transactionsStats, totalStats);
 
     return NextResponse.json({
       data: completedStats,
-      message: 'Transactions Stats',
+      message: "Transactions Stats",
     });
   } catch (error) {
     return catchApiError(error);

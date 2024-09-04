@@ -1,15 +1,16 @@
-'use client';
+"use client";
 
-import dynamic from 'next/dynamic';
-import type { FC } from 'react';
+import dynamic from "next/dynamic";
+import type { FC } from "react";
 
-import 'chart.js/auto';
+import "chart.js/auto";
 const PieChart = dynamic(() =>
-  import('react-chartjs-2').then((mod) => mod.Pie)
+  import("react-chartjs-2").then((mod) => mod.Pie)
 );
 
-import { processInfoChart } from './utils';
-import { TTransactionStats } from '@/types/transaction-stats';
+import { processInfoChart } from "./utils";
+import { TTransactionStats } from "@/types/transaction-stats";
+import { EmptyIcon } from "@/components/ui/empty";
 
 interface IChart {
   info: TTransactionStats;
@@ -31,7 +32,11 @@ export const Chart: FC<IChart> = ({ info, totalValue }) => {
 
   return (
     <div style={{ width: chartSize, height: chartSize }}>
-      <PieChart data={dataChart} />
+      {data.every((item) => item !== 0) ? (
+        <PieChart data={dataChart}>Browser does not support js</PieChart>
+      ) : (
+        <EmptyIcon />
+      )}
     </div>
   );
 };

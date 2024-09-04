@@ -1,8 +1,9 @@
-'use client';
+"use client";
 
-import { Button } from '@/components/ui/button';
-import { FormField } from '@/components/ui/form-field';
-import { Input } from '@/components/ui/input';
+import { Button } from "@/components/ui/button";
+import { EmptyState, EmptyText } from "@/components/ui/empty";
+import { FormField } from "@/components/ui/form-field";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -11,13 +12,13 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Textarea } from '@/components/ui/textarea';
-import { TTogleFn } from '@/hooks/@shared/useToggle';
-import { useCreateTransactionForm } from '@/hooks/useCreateTransactionForm';
-import { useDropdownsStore } from '@/store/dropdowns';
-import { FC } from 'react';
-import { Controller } from 'react-hook-form';
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { TTogleFn } from "@/hooks/@shared/useToggle";
+import { useCreateTransactionForm } from "@/hooks/useCreateTransactionForm";
+import { useDropdownsStore } from "@/store/dropdowns";
+import { FC } from "react";
+import { Controller } from "react-hook-form";
 
 type TransactionForm = {
   toggle: TTogleFn;
@@ -49,15 +50,16 @@ export const TransactionForm: FC<TransactionForm> = ({ toggle }) => {
                 </SelectTrigger>
                 <SelectContent
                   id="addForm_transactionType"
-                  {...register('transactionType')}
+                  {...register("transactionType")}
                 >
                   <SelectGroup>
-                    <SelectLabel>Transaction Type</SelectLabel>
-                    {transactionTypes.map(({ _id, type }) => (
-                      <SelectItem key={_id} value={_id}>
-                        {type}
-                      </SelectItem>
-                    ))}
+                    <EmptyText>
+                      {transactionTypes.map(({ _id, type }) => (
+                        <SelectItem key={_id} value={_id}>
+                          {type}
+                        </SelectItem>
+                      ))}
+                    </EmptyText>
                   </SelectGroup>
                 </SelectContent>
               </Select>
@@ -80,17 +82,19 @@ export const TransactionForm: FC<TransactionForm> = ({ toggle }) => {
                   <SelectValue placeholder="Select a category..." />
                 </SelectTrigger>
 
-                <SelectContent id="addForm_category" {...register('category')}>
-                  {categories.map(({ category, categories, _id }) => (
-                    <SelectGroup key={_id}>
-                      <SelectLabel>{category}</SelectLabel>
-                      {categories?.map(({ category, _id }) => (
-                        <SelectItem key={_id} value={_id}>
-                          {category}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  ))}
+                <SelectContent id="addForm_category" {...register("category")}>
+                  <EmptyText>
+                    {categories.map(({ category, categories, _id }) => (
+                      <SelectGroup key={_id}>
+                        <SelectLabel>{category}</SelectLabel>
+                        {categories?.map(({ category, _id }) => (
+                          <SelectItem key={_id} value={_id}>
+                            {category}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    ))}
+                  </EmptyText>
                 </SelectContent>
               </Select>
             )}
@@ -104,7 +108,7 @@ export const TransactionForm: FC<TransactionForm> = ({ toggle }) => {
           label="Type your title"
         >
           <Input
-            {...register('title')}
+            {...register("title")}
             id="addForm_title"
             type="text"
             placeholder="Type your title..."
@@ -118,7 +122,7 @@ export const TransactionForm: FC<TransactionForm> = ({ toggle }) => {
           label="Type your description"
         >
           <Textarea
-            {...register('description')}
+            {...register("description")}
             id="addForm_description"
             placeholder="Type your description..."
           />
@@ -131,7 +135,7 @@ export const TransactionForm: FC<TransactionForm> = ({ toggle }) => {
           label="Type the price"
         >
           <Input
-            {...register('price')}
+            {...register("price")}
             id="addForm_price"
             type="number"
             placeholder="Type the price..."

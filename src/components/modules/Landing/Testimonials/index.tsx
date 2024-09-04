@@ -10,8 +10,8 @@ export const Testimonials = () => {
       </TextRotated>
 
       <div className="flex gap-3 flex-wrap md:flex-nowrap">
-        {TestimonialsMocked.map((props) => (
-          <Testimonial {...props} />
+        {TestimonialsMocked.map((props, index) => (
+          <Testimonial {...props} key={index} />
         ))}
       </div>
     </div>

@@ -1,11 +1,11 @@
-import { TTransactionStats } from '@/types/transaction-stats';
+import { TTransactionStats } from "@/types/transaction-stats";
 
 const themes = {
-  primary: 'black',
-  success: '#84cc16',
-  danger: '#f43f5e',
-  purple: '#8b5cf6',
-  sunny: '#eab308',
+  primary: "black",
+  success: "#84cc16",
+  danger: "#f43f5e",
+  purple: "#8b5cf6",
+  sunny: "#eab308",
 };
 
 export type TThemes = keyof typeof themes;
@@ -19,7 +19,7 @@ export const processInfoChart = (
   const backgrounds = [];
   for (const { type, value, theme } of chartInfo) {
     labels.push(type);
-    data.push((+value * 100) / totalValue);
+    data.push(value ? (+value * 100) / totalValue : 0);
     backgrounds.push(themes[theme as TThemes]);
   }
   return { labels, data, backgrounds };

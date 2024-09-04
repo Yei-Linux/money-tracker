@@ -10,8 +10,13 @@ export const Features = () => {
       </TextRotated>
 
       <ul className="flex flex-wrap gap-10 mx-auto justify-center">
-        {FeaturesInTheApp.map(({ Icon, title, description }) => (
-          <Feature Icon={Icon} title={title} description={description} />
+        {FeaturesInTheApp.map(({ Icon, title, description }, index) => (
+          <Feature
+            key={index}
+            Icon={Icon}
+            title={title}
+            description={description}
+          />
         ))}
       </ul>
     </div>

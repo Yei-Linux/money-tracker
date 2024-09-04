@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { TransactionTypeList } from './TransactionTypeList';
-import { ChartTotal } from './ChartTotal';
-import { Chart } from './Chart';
-import { useFetchTransactionsStore } from '@/hooks/useFetchTransactionStats';
-import { Title } from '@/components/ui/title';
+import { TransactionTypeList } from "./TransactionTypeList";
+import { ChartTotal } from "./ChartTotal";
+import { Chart } from "./Chart";
+import { useFetchTransactionsStore } from "@/hooks/useFetchTransactionStats";
+import { Title } from "@/components/ui/title";
 
 export const Stats = () => {
   const { transactionStats } = useFetchTransactionsStore();
-  const filterTerm = 'Total';
+  const filterTerm = "Total";
 
   if (!transactionStats) return;
 
