@@ -1,6 +1,7 @@
-import { Crypt } from '@moneytrack/web/lib/crypt';
 import mongoose from 'mongoose';
-import moneyAccountModel from '../money-account.model';
+
+import { Crypt } from '../helpers';
+import moneyAccountModel from './account.model';
 
 interface User {
   _id: mongoose.Types.ObjectId;
@@ -56,4 +57,5 @@ userDBSchema.post('save', async function (userCreated, next) {
   }
 });
 
-export default mongoose?.models?.Users || mongoose.model('Users', userDBSchema);
+export default mongoose?.models?.['Users'] ||
+  mongoose.model('Users', userDBSchema);

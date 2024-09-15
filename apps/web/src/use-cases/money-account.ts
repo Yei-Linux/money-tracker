@@ -1,9 +1,6 @@
+import { assertPercentValue, computePercent } from '@moneytrack/shared/helpers';
 import { ServerError } from '@moneytrack/web/errors/ServerError';
-import {
-  assertPercentValue,
-  computePercent,
-} from '@moneytrack/web/helpers/money-account/settings';
-import { moneyAccountModel } from '@moneytrack/web/models';
+import { moneyAccountModel } from '@moneytrack/shared/models';
 import { getTotalTransactionTypes } from '@moneytrack/web/repository/total-transactions-type';
 import mongoose from 'mongoose';
 

@@ -6,10 +6,10 @@ type ExpenseLimitEmailTemplate = {
 };
 
 const getTemplateMessageForExpenseLimit = (
-  percentExpensesLimit: ExpenseLimitEmailTemplate["percentExpensesLimit"]
+  percentExpensesLimit: ExpenseLimitEmailTemplate['percentExpensesLimit']
 ) => {
   if (percentExpensesLimit >= 100)
-    return "You are still doing transactions but your expense limit was surpassed 💀";
+    return 'You are still doing transactions but your expense limit was surpassed 💀';
 
   if (percentExpensesLimit >= 80)
     return `You are close to surpassed the limit 🫠. Plese take into account that your expense limit are in ${percentExpensesLimit}%`;
@@ -27,10 +27,11 @@ export const expenseLimitEmailTemplate = ({
 
   return `
     Hello ${userName}. ${
-    transactionExpenseName &&
-    `You have made a new expense: ${transactionExpenseName}.`
+    transactionExpenseName
+      ? `You have made a new expense: ${transactionExpenseName}.`
+      : ''
   } 
-    Your current expenses in total of the month are ${monthExpenses}. 
+    Your current expenses in total of the month are $${monthExpenses}. 
     ${message}
 `;
 };

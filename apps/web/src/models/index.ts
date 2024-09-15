@@ -1,4 +1,3 @@
-import moneyAccountModel from './money-account.model';
 import categoriesModel from './categories.model';
 import parentCategoriesModel from './parent-categories.model';
 import transactionTypesModel from './transaction-types.model';
@@ -9,5 +8,4 @@ export {
   parentCategoriesModel,
   transactionTypesModel,
   transactionsModel,
-  moneyAccountModel,
 };

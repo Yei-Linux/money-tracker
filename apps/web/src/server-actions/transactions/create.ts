@@ -2,7 +2,7 @@
 
 import { TransactionError } from '@moneytrack/web/errors/TransactionError';
 import { transactionsModel } from '@moneytrack/web/models';
-import moneyAccountModel from '@moneytrack/web/models/money-account.model';
+import { moneyAccountModel } from '@moneytrack/shared/models';
 import {
   CreateTransactionZodSchema,
   TCreateTransactionTypeSchema,
@@ -15,7 +15,7 @@ import {
 import { getAuthSessionInServerAction } from '@moneytrack/web/lib/auth/auth-session-handler';
 import { InvalidFieldFormError } from '@moneytrack/web/errors/InvalidFieldFormError';
 import { getIncomesAndExpensesRepository } from '@moneytrack/web/repository/sum-transactions';
-import { sendEmailWatchingExpenseLimit } from '@moneytrack/web/use-cases/watcher-limit';
+import { sendEmailWatchingExpenseLimit } from '@moneytrack/shared/use-cases';
 
 export const createTransactionServerAction = async (
   data: TCreateTransactionTypeSchema

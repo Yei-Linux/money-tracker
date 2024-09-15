@@ -17,6 +17,7 @@ const buildUpsert = (doc: { _id: string } & Record<string, any>) => ({
 
 const executeSeeders = async () => {
   try {
+    //TODO: Remove this one and use the one of shared lib
     await dbConnect();
 
     const transactionTypes = transactionTypesSeeder.map(buildUpsert);

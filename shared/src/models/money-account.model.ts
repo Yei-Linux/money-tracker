@@ -29,5 +29,5 @@ const moneyAccountDBSchema = new mongoose.Schema<MoneyAccount>(
   }
 );
 
-export default mongoose.models?.MoneyAccounts ||
+export default mongoose.models?.['MoneyAccounts'] ||
   mongoose.model('MoneyAccounts', moneyAccountDBSchema);

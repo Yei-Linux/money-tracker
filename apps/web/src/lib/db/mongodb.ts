@@ -1,9 +1,9 @@
 import { envs } from '@moneytrack/web/constants/env';
 import { MongoClient, ServerApiVersion } from 'mongodb';
 
-const uri = envs.DB_URI;
+const uri = envs.MONGO_URI;
 if (!uri) {
-  throw new Error('Invalid/Missing environment variable: "MONGODB_URI"');
+  throw new Error('Invalid/Missing environment variable: "MONGO_URI"');
 }
 
 const options = {

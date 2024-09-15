@@ -1,15 +1,15 @@
 import {
-  getSession,
   signIn as signInNextAuth,
   signOut as signOutNextAuth,
   useSession as useSessionNextAuth,
 } from 'next-auth/react';
 
-import userModel from '@moneytrack/web/models/auth/user.model';
 import { UserSession } from '@moneytrack/web/types/auth';
-import { Crypt } from '../crypt';
 import { ServerError } from '@moneytrack/web/errors/ServerError';
 import { AUTH_HEADER } from '@moneytrack/web/constants/auth';
+
+import { Crypt } from '@moneytrack/shared/helpers';
+import { userModel } from '@moneytrack/shared/models';
 
 export const signIn = signInNextAuth;
 export const signOut = signOutNextAuth;

@@ -35,5 +35,5 @@ const accountDBSchema = new mongoose.Schema<Account>({
   session_state: { type: String },
 });
 
-export default mongoose?.models?.Accounts ||
+export default mongoose?.models?.['Accounts'] ||
   mongoose.model('Accounts', accountDBSchema);

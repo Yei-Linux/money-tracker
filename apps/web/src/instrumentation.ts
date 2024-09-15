@@ -1,5 +1,5 @@
-import connect from '@moneytrack/web/lib/db/mongoose';
+import connectDB from '@moneytrack/shared/lib/mongoose';
 
 export async function register() {
-  await connect();
+  await connectDB();
 }

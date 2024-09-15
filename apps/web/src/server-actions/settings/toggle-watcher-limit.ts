@@ -2,7 +2,7 @@
 
 import { SettingsError } from '@moneytrack/web/errors/SettingsError';
 import { getAuthSessionInServerAction } from '@moneytrack/web/lib/auth/auth-session-handler';
-import { moneyAccountModel } from '@moneytrack/web/models';
+import { moneyAccountModel } from '@moneytrack/shared/models';
 
 export const toggleWatcherLimitServerAction = async (
   enableWatcherLimit: boolean
