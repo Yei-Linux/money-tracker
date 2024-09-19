@@ -8,7 +8,8 @@
     "nx:lambdas": "nx serve lambdas",
     "nx:lambdas:build": "nx build lambdas",
     "nx:lambdas:deploy": "nx deploy lambdas",
-    "nx:lambdas:invoke": "nx invoke lambdas"
+    "nx:lambdas:invoke": "nx invoke lambdas",
+    "nx:web:e2e": "nx e2e web-e2e --debug"
   },
   "private": true,
   "dependencies": {
