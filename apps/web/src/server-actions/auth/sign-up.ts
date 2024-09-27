@@ -17,6 +17,9 @@ export const signUpServerAction = async (data: TSignUpSchema) => {
   }
 
   try {
+    const user = await userModel.findOne({ email: data.email });
+    if (user) throw new Error('This user already exists');
+
     await userModel.create(data);
     return {
       message: 'User Created',

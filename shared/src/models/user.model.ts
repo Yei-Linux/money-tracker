@@ -52,7 +52,6 @@ userDBSchema.post('save', async function (userCreated, next) {
     next();
   } catch (error) {
     const errorMessage = (error as Error).message;
-    console.error('Error: ', errorMessage);
     return next(Error(errorMessage));
   }
 });

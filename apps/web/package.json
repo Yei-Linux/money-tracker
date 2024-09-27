@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "env-cmd -f .env.prod next dev",
+    "dev:uat": "env-cmd -f .env.uat next dev",
     "build": "next build",
+    "build:uat": "env-cmd .env.uat next build",
     "start": "next start",
+    "start:uat": "env-cmd .env.uat next start",
     "lint": "next lint",
     "db:seed": "ts-node -r dotenv/config --compiler-options \"{\\\"module\\\":\\\"CommonJS\\\"}\" db/seeders/index.ts"
   },

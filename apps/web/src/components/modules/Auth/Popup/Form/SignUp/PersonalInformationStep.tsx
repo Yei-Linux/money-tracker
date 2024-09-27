@@ -12,11 +12,11 @@ export const PersonalInformation = () => {
   return (
     <div className="flex flex-col gap-3">
       <FormField error={errors.name?.message}>
-        <Input {...register('name')} type="text" />
+        <Input {...register('name')} placeholder="Name" type="text" />
       </FormField>
 
       <FormField error={errors.phone?.message}>
-        <Input {...register('phone')} type="text" />
+        <Input {...register('phone')} placeholder="Phone" type="text" />
       </FormField>
     </div>
   );

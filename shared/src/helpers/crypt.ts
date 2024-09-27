@@ -7,6 +7,6 @@ export class Crypt {
   }
 
   static async hash(password: string) {
-    return await hash(password, process.env['PASSWORD_SALT']!);
+    return await hash(password, +process.env['AUTH_PASSWORD_SALT']!);
   }
 }

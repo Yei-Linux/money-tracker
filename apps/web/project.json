@@ -4,6 +4,38 @@
   "sourceRoot": "apps/web/src",
   "projectType": "application",
   "tags": [],
-  "// targets": "to see all targets run: nx show project web --web",
-  "targets": {}
+  "targets": {
+    "dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/web",
+        "color": true,
+        "command": "npm run dev"
+      }
+    },
+    "dev:uat": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/web",
+        "color": true,
+        "command": "npm run dev:uat"
+      }
+    }
+  },
+  "build": {
+    "executor": "nx:run-commands",
+    "options": {
+      "cwd": "apps/web",
+      "color": true,
+      "command": "npm run build"
+    }
+  },
+  "build:uat": {
+    "executor": "nx:run-commands",
+    "options": {
+      "cwd": "apps/web",
+      "color": true,
+      "command": "npm run build:uat"
+    }
+  }
 }

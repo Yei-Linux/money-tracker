@@ -12,11 +12,15 @@ export const EmailWithPassAuthStep = () => {
   return (
     <div className="flex flex-col gap-3">
       <FormField error={errors.email?.message}>
-        <Input {...register('email')} type="email" />
+        <Input {...register('email')} placeholder="Email" type="email" />
       </FormField>
 
       <FormField error={errors.password?.message}>
-        <Input {...register('password')} type="password" />
+        <Input
+          {...register('password')}
+          placeholder="Password"
+          type="password"
+        />
       </FormField>
     </div>
   );
