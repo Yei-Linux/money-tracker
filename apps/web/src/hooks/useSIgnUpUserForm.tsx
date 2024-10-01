@@ -9,8 +9,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 export const useSignUpUserForm = () => {
+  const router = useRouter();
   const [isLoading, startTransition] = useTransition();
   const switchState = useAuthFormStore((store) => store.switchState);
   const setStep = useAuthFormStore((store) => store.setStep);

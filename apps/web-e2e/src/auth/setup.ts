@@ -20,3 +20,22 @@ export const signUpSetup = async (page: Page) => {
 
   await signUpButton.click();
 };
+
+export const signInSetup = async (page: Page) => {
+  await page.goto('/');
+  const signInButtonLaunchPopup = page.locator('button', {
+    hasText: 'Sign In',
+  });
+
+  expect(await signInButtonLaunchPopup.isVisible()).toBeTruthy();
+
+  await signInButtonLaunchPopup.click();
+
+  const signInButton = page.locator('button', {
+    hasText: 'Continue with Email',
+  });
+
+  expect(await signInButton.isVisible()).toBeTruthy();
+
+  await signInButton.click();
+};

@@ -28,7 +28,7 @@ export const authorize = async (
   if (!userFound) return null;
 
   const passwordDB = userFound.password;
-  const isSamePass = Crypt.compare(passwordDB, password);
+  const isSamePass = await Crypt.compare(passwordDB, password);
   if (!isSamePass) return null;
 
   return {

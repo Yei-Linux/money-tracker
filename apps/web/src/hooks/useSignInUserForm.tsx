@@ -9,8 +9,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 export const useSignInUserForm = () => {
+  const { refresh } = useRouter();
   const [isLoading, startTransition] = useTransition();
   const methods = useForm<TSignInSchema>({
     resolver: zodResolver(SignInZodSchema),
@@ -35,6 +37,7 @@ export const useSignInUserForm = () => {
           throw new SignInError('Invalid Credentials');
         }
 
+        refresh();
         toast.success('Login successfull');
       } catch (error) {
         toast.error((error as Error).message);

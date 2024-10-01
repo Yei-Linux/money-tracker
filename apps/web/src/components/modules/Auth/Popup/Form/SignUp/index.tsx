@@ -4,37 +4,52 @@ import { useSignUpUserForm } from '@moneytrack/web/hooks/useSIgnUpUserForm';
 import { useAuthFormStore } from '@moneytrack/web/store/auth-form';
 import { FormProvider } from 'react-hook-form';
 import { PersonalInformation } from './PersonalInformationStep';
-import { MAX_AUTH_FORM_STEP } from '@moneytrack/web/constants';
+import { INTIAL_STEP, MAX_AUTH_FORM_STEP } from '@moneytrack/web/constants';
+import { TSignUpSchema } from '@moneytrack/web/validators/sign-up.validator';
 
 export const SignUpForm = () => {
   const signUpStep = useAuthFormStore((store) => store.signUpStep);
+  const isFirstStep = signUpStep === INTIAL_STEP;
+  const isFinalStep = signUpStep === MAX_AUTH_FORM_STEP;
+  const buttonType = isFinalStep ? 'final' : 'continue';
+
   const previousSignUpStep = useAuthFormStore(
     (store) => store.previousSignUpStep
   );
   const nextSignUpStep = useAuthFormStore((store) => store.nextSignUpStep);
 
   const methods = useSignUpUserForm();
-  const action: () => void = methods.handleSubmit((data) =>
-    methods.onSubmit(data)
-  );
 
-  const steps = [<EmailWithPassAuthStep />, <PersonalInformation />];
-  const isFinalStep = signUpStep === MAX_AUTH_FORM_STEP;
+  const steps = [
+    { component: <EmailWithPassAuthStep />, keys: ['email', 'password'] },
+    { component: <PersonalInformation />, keys: ['name', 'phone'] },
+  ];
+
+  const handleNext = async () => {
+    const { keys } = steps[signUpStep];
+
+    const isValid = await methods.trigger(keys as (keyof TSignUpSchema)[]);
+    if (!isValid) return;
+
+    nextSignUpStep();
+  };
 
   return (
     <FormProvider {...methods}>
       <form
-        action={action}
+        action="#"
+        onSubmit={methods.handleSubmit(methods.onSubmit)}
         className="[&_button]:![box-shadow:none]  [&_input]:![box-shadow:none]"
       >
-        {steps[signUpStep]}
+        {steps[signUpStep].component}
 
         <ButtonAuthSteps
           isLoading={methods.isLoading}
-          hasBackButton
+          hasBackButton={!isFirstStep}
           onPrev={previousSignUpStep}
-          onNext={nextSignUpStep}
-          type={isFinalStep ? 'final' : 'continue'}
+          onNext={handleNext}
+          type={buttonType}
+          key={buttonType}
         />
       </form>
     </FormProvider>
