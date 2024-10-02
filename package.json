@@ -10,7 +10,8 @@
     "nx:lambdas:build": "nx build lambdas",
     "nx:lambdas:deploy": "nx deploy lambdas",
     "nx:lambdas:invoke": "nx invoke lambdas",
-    "nx:web:e2e": "nx e2e web-e2e"
+    "nx:web:e2e": "nx e2e web-e2e",
+    "nx:web:e2e-report": "npx playwright show-report dist/.playwright/apps/web-e2e/playwright-report"
   },
   "private": true,
   "dependencies": {

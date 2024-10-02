@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { signUpSetup } from './setup';
 
-// test.use({ storageState: { cookies: [], origins: [] } });
+test.use({ storageState: { cookies: [], origins: [] } });
 
 test.describe.serial('Sign Up Flow', () => {
   let uniqueEmail = `jesusalvan2010+${Date.now()}@gmail.com`;
