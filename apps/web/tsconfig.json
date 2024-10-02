@@ -30,7 +30,8 @@
     "../../shared/src/constants/templates.ts",
     "../../shared/src/lib/send-grid.ts",
     "../../shared/src/constants/watcher-limit.ts",
-    "../../shared/src/helpers/settings.ts"
+    "../../shared/src/helpers/settings.ts",
+    "../../shared/src/models/session.model.ts"
   ],
   "exclude": ["node_modules", "jest.config.ts", "**/*.spec.ts", "**/*.test.ts"]
 }

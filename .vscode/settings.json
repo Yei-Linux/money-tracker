@@ -1,0 +1,6 @@
+{
+  "playwright.env": {
+    "BASE_URL": "http://localhost:3000",
+    "MONGO_URI": "mongodb://127.0.0.1:27017/money_tracker_test?retryWrites=true&w=majority"
+  }
+}

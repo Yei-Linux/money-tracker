@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 import { signInSetup } from './setup';
 
+// test.use({ storageState: { cookies: [], origins: [] } });
+
 test.describe.serial('Sign In Flow', () => {
   test('Sign In SuccessFully', async ({ page }) => {
     await signInSetup(page);

@@ -15,5 +15,5 @@ const sessionDBSchema = new mongoose.Schema<Session>({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 });
 
-export default mongoose?.models?.Sessions ||
+export default mongoose?.models?.['Sessions'] ||
   mongoose.model('Sessions', sessionDBSchema);
