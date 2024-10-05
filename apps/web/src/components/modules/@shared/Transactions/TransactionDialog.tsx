@@ -11,6 +11,7 @@ import {
 } from '@moneytrack/web/components/ui/dialog';
 import { TransactionForm } from './TransactionForm';
 import { useToggle } from '@moneytrack/web/hooks/@shared/useToggle';
+import { elementTestIds } from '@moneytrack/shared/constants';
 
 export const TransactionDialog = () => {
   const { active, toggle } = useToggle({ defaultValue: false });
@@ -18,7 +19,12 @@ export const TransactionDialog = () => {
   return (
     <Dialog open={active} onOpenChange={toggle}>
       <DialogTrigger asChild>
-        <Button className="rounded-full p-2">+ Add</Button>
+        <Button
+          data-testid={elementTestIds.ADD_POPUP_TRANSACTION_BTN_ELEMENT}
+          className="rounded-full p-2"
+        >
+          + Add
+        </Button>
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-md flex flex-col gap-7">

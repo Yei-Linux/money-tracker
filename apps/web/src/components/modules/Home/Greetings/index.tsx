@@ -1,8 +1,12 @@
+import { sectionsTestIds } from '@moneytrack/shared/constants';
 import { UserName } from '../../@shared/Auth/UserName';
 
 export const Greetings = () => {
   return (
-    <div className="flex justify-center items-center gap-1 w-full p-4 border shadow-sm">
+    <div
+      data-testid={sectionsTestIds.GREETINGS_SECTION}
+      className="flex justify-center items-center gap-1 w-full p-4 border shadow-sm"
+    >
       <div className="font-semibold text-4xl">
         <p className="font-snicker">
           Welcome Back <UserName />

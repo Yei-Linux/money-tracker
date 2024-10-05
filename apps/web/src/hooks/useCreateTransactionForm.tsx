@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
+import { toastMessages } from '@moneytrack/shared/constants';
 
 type UseCreateTransactionForm = {
   onComplete?: () => void;
@@ -43,7 +44,7 @@ export const useCreateTransactionForm = ({
         });
         refresh();
         onComplete?.();
-        toast.success('Your transaction was added sucessfully');
+        toast.success(toastMessages.CREATE_TRANSACTION_SUCCESS);
       } catch (error) {
         toast.error((error as Error).message);
       }

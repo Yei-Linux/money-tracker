@@ -1,3 +1,4 @@
+import { sectionsTestIds } from '@moneytrack/shared/constants';
 import { Badge } from '@moneytrack/web/components/ui/badge';
 import { EmptyText } from '@moneytrack/web/components/ui/empty';
 import { ScrollContainer } from '@moneytrack/web/components/ui/scroll-container';
@@ -14,7 +15,7 @@ export const MyCategories: FC<MyCategories> = async ({
   const categories = await getMyCategoriesService(sessionCookieString);
 
   return (
-    <ScrollContainer>
+    <ScrollContainer data-testid={sectionsTestIds.MY_CATEGORIES_SECTION}>
       <EmptyText text="You don't have any category used yet 💀">
         {categories.map(({ category, _id }) => (
           <Badge key={_id} variant="secondary" className="shadow-md">

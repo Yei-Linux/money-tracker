@@ -1,5 +1,6 @@
 'use client';
 
+import { elementTestIds } from '@moneytrack/shared/constants';
 import { Button } from '@moneytrack/web/components/ui/button';
 import { EmptyState, EmptyText } from '@moneytrack/web/components/ui/empty';
 import { FormField } from '@moneytrack/web/components/ui/form-field';
@@ -32,7 +33,11 @@ export const TransactionForm: FC<TransactionForm> = ({ toggle }) => {
   const action: () => void = handleSubmit(onSubmit);
 
   return (
-    <form action={action} className="flex flex-col gap-7">
+    <form
+      action={action}
+      className="flex flex-col gap-7"
+      data-testid={elementTestIds.TRANSACTION_FORM_ELEMENT}
+    >
       <div className="flex flex-col gap-3 [&_button]:![box-shadow:none]  [&_input]:![box-shadow:none] [&_textarea]:![box-shadow:none]">
         <FormField
           error={errors.transactionType?.message}
@@ -45,10 +50,18 @@ export const TransactionForm: FC<TransactionForm> = ({ toggle }) => {
             control={control}
             render={({ field }) => (
               <Select onValueChange={field.onChange}>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger
+                  className="w-[180px]"
+                  data-testid={
+                    elementTestIds.TRANSACTIONTYPE_TRANSACTION_SELECT_ELEMENT
+                  }
+                >
                   <SelectValue placeholder="Select a type..." />
                 </SelectTrigger>
                 <SelectContent
+                  data-testid={
+                    elementTestIds.TRANSACTIONTYPE_TRANSACTION_SELECTLIST_ELEMENT
+                  }
                   id="addForm_transactionType"
                   {...register('transactionType')}
                 >
@@ -78,11 +91,22 @@ export const TransactionForm: FC<TransactionForm> = ({ toggle }) => {
             control={control}
             render={({ field }) => (
               <Select onValueChange={field.onChange}>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger
+                  className="w-[180px]"
+                  data-testid={
+                    elementTestIds.CATEGORY_TRANSACTION_SELECT_ELEMENT
+                  }
+                >
                   <SelectValue placeholder="Select a category..." />
                 </SelectTrigger>
 
-                <SelectContent id="addForm_category" {...register('category')}>
+                <SelectContent
+                  data-testid={
+                    elementTestIds.CATEGORY_TRANSACTION_SELECTLIST_ELEMENT
+                  }
+                  id="addForm_category"
+                  {...register('category')}
+                >
                   <EmptyText>
                     {categories.map(({ category, categories, _id }) => (
                       <SelectGroup key={_id}>
@@ -112,6 +136,7 @@ export const TransactionForm: FC<TransactionForm> = ({ toggle }) => {
             id="addForm_title"
             type="text"
             placeholder="Type your title..."
+            data-testid={elementTestIds.TITLE_TRANSACTION_INPUT_ELEMENT}
           />
         </FormField>
 
@@ -125,6 +150,7 @@ export const TransactionForm: FC<TransactionForm> = ({ toggle }) => {
             {...register('description')}
             id="addForm_description"
             placeholder="Type your description..."
+            data-testid={elementTestIds.DESCRIPTION_TRANSACTION_INPUT_ELEMENT}
           />
         </FormField>
 
@@ -139,11 +165,17 @@ export const TransactionForm: FC<TransactionForm> = ({ toggle }) => {
             id="addForm_price"
             type="number"
             placeholder="Type the price..."
+            data-testid={elementTestIds.PRICE_TRANSACTION_INPUT_ELEMENT}
           />
         </FormField>
       </div>
 
-      <Button className="rounded-md p-2" type="submit" loading={isLoading}>
+      <Button
+        data-testid={elementTestIds.ADD_FORM_TRANSACTION_BTN_ELEMENT}
+        className="rounded-md p-2"
+        type="submit"
+        loading={isLoading}
+      >
         Add Transaction
       </Button>
     </form>

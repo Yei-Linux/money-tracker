@@ -1,5 +1,5 @@
 import { firstDayOfMonth } from '@moneytrack/web/lib/date';
-import { transactionsModel } from '@moneytrack/web/models';
+import { transactionsModel } from '@moneytrack/shared/models';
 import { TTransactionStats } from '@moneytrack/web/types/transaction-stats';
 import mongoose from 'mongoose';
 

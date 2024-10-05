@@ -9,7 +9,7 @@ export type MoneyAccount = {
 export const MoneyAccount: FC<MoneyAccount> = ({ money }) => {
   return (
     <div className="flex gap-4 max-h-[190px] h-full">
-      <FakeCard />
+      <FakeCard money={money} />
       <Balance money={money} />
     </div>
   );

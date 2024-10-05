@@ -9,10 +9,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import { useRouter } from 'next/navigation';
+import { toastMessages } from '@moneytrack/shared/constants';
 
 export const useSignUpUserForm = () => {
-  const router = useRouter();
   const [isLoading, startTransition] = useTransition();
   const switchState = useAuthFormStore((store) => store.switchState);
   const setStep = useAuthFormStore((store) => store.setStep);
@@ -33,7 +32,7 @@ export const useSignUpUserForm = () => {
         await signUpServerAction(data);
 
         resetValues();
-        toast.success('You account was created successfuly');
+        toast.success(toastMessages.SIGN_UP_SUCCESS);
       } catch (error) {
         toast.error((error as Error).message);
       }

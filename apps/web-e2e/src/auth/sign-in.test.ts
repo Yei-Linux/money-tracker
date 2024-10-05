@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { signInSetup } from './setup';
+import { toastMessages } from '@moneytrack/shared/constants';
 
 test.use({ storageState: { cookies: [], origins: [] } });
 
@@ -15,7 +16,7 @@ test.describe.serial('Sign In Flow', () => {
     expect(await submitButton.isVisible()).toBeTruthy();
     await submitButton.click();
 
-    const toast = page.getByText('Login successfull');
+    const toast = page.getByText(toastMessages.SIGN_IN_SUCCESS);
     await page.waitForTimeout(3000);
     expect(await toast.isVisible()).toBeTruthy();
   });
@@ -31,7 +32,9 @@ test.describe.serial('Sign In Flow', () => {
     expect(await submitButton.isVisible()).toBeTruthy();
     await submitButton.click();
 
-    const toast = page.getByText('Invalid Credentials');
+    const toast = page.getByText(
+      toastMessages.SIGN_IN_ERROR_WHEN_CREDENTIALS_ARE_INCORRET
+    );
     await page.waitForTimeout(3000);
 
     expect(await toast.isVisible()).toBeTruthy();

@@ -7,13 +7,17 @@ import { TransactionTypeFilters } from '../TransactionTypesFilters';
 import { useFetchTransactionsStore } from '@moneytrack/web/hooks/useFetchTransactionStats';
 import { pickIncomesAndExpenses } from './utils';
 import { Title } from '@moneytrack/web/components/ui/title';
+import { sectionsTestIds } from '@moneytrack/shared/constants';
 
 export const TransactionHeader = () => {
   const { transactionStats } = useFetchTransactionsStore();
   const { incomes, expenses } = pickIncomesAndExpenses(transactionStats);
 
   return (
-    <header className="flex flex-col gap-3 md:gap-1">
+    <header
+      data-testid={sectionsTestIds.TRANSACTIONS_FILTER_SECTION}
+      className="flex flex-col gap-3 md:gap-1"
+    >
       <Title as="h2">My Transactions</Title>
 
       <div className="flex justify-between items-center w-100 flex-wrap gap-3">

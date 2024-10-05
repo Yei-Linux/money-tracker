@@ -1,8 +1,10 @@
 'use server';
 
 import { TransactionError } from '@moneytrack/web/errors/TransactionError';
-import { transactionsModel } from '@moneytrack/web/models';
-import { moneyAccountModel } from '@moneytrack/shared/models';
+import {
+  moneyAccountModel,
+  transactionsModel,
+} from '@moneytrack/shared/models';
 import {
   CreateTransactionZodSchema,
   TCreateTransactionTypeSchema,
@@ -16,6 +18,7 @@ import { getAuthSessionInServerAction } from '@moneytrack/web/lib/auth/auth-sess
 import { InvalidFieldFormError } from '@moneytrack/web/errors/InvalidFieldFormError';
 import { getIncomesAndExpensesRepository } from '@moneytrack/web/repository/sum-transactions';
 import { sendEmailWatchingExpenseLimit } from '@moneytrack/shared/use-cases';
+import { toastMessages } from '@moneytrack/shared/constants';
 
 export const createTransactionServerAction = async (
   data: TCreateTransactionTypeSchema
@@ -23,7 +26,7 @@ export const createTransactionServerAction = async (
   const validation = CreateTransactionZodSchema.safeParse(data);
   if (!validation.success) {
     throw new InvalidFieldFormError(
-      'There was an error: ' + validation.error.issues
+      `There was an error: ${validation.error.issues}`
     );
   }
   const user = await getAuthSessionInServerAction();
@@ -31,13 +34,17 @@ export const createTransactionServerAction = async (
   try {
     const moneyAccount = await moneyAccountModel.findOne({ user });
     if (moneyAccount === undefined) {
-      throw new Error("You don't have a money account to do this transaction");
+      throw new Error(
+        toastMessages.CREATE_TRANSACTION_ERROR_WHEN_YOU_DONT_HAVE_MONEY_ACCOUNT
+      );
     }
     if (
       moneyAccount?.money === I_DONT_HAVE_MONEY &&
       data.transactionType === TransactionTypeIds.Expense
     ) {
-      throw new Error('You don have money to do this transaction');
+      throw new Error(
+        toastMessages.CREATE_TRANSACTION_ERROR_WHEN_YOU_DONT_HAVE_ENOUGH_MONEY
+      );
     }
 
     const transaction = await transactionsModel.create({ ...data, user });
@@ -46,7 +53,9 @@ export const createTransactionServerAction = async (
       transaction.price
     );
     if (isNaN(moneyUpdated)) {
-      throw new Error('Ocurred an unexpected error doing this transaction');
+      throw new Error(
+        toastMessages.CREATE_TRANSACTION_ERROR_WHEN_GENERAL_ERROR_HAPPENED
+      );
     }
     const { expenses, incomes } = await getIncomesAndExpensesRepository(user);
 

@@ -10,6 +10,7 @@ import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import { toastMessages } from '@moneytrack/shared/constants';
 
 export const useSignInUserForm = () => {
   const { refresh } = useRouter();
@@ -31,14 +32,18 @@ export const useSignInUserForm = () => {
         );
 
         if (!response) {
-          throw new SignInError('Error when user tried to sign in');
+          throw new SignInError(
+            toastMessages.SIGN_IN_ERROR_WHEN_IS_GENERAL_ERROR
+          );
         }
         if (response.error) {
-          throw new SignInError('Invalid Credentials');
+          throw new SignInError(
+            toastMessages.SIGN_IN_ERROR_WHEN_CREDENTIALS_ARE_INCORRET
+          );
         }
 
         refresh();
-        toast.success('Login successfull');
+        toast.success(toastMessages.SIGN_IN_SUCCESS);
       } catch (error) {
         toast.error((error as Error).message);
       }

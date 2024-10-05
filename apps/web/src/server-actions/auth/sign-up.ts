@@ -7,18 +7,19 @@ import {
   TSignUpSchema,
 } from '@moneytrack/web/validators/sign-up.validator';
 import { userModel } from '@moneytrack/shared/models';
+import { toastMessages } from '@moneytrack/shared/constants';
 
 export const signUpServerAction = async (data: TSignUpSchema) => {
   const validation = SignUpZodSchema.safeParse(data);
   if (!validation.success) {
     throw new InvalidFieldFormError(
-      'There was an error: ' + validation.error.issues
+      `There was an error: ${validation.error.issues}`
     );
   }
 
   try {
     const user = await userModel.findOne({ email: data.email });
-    if (user) throw new Error('This user already exists');
+    if (user) throw new Error(toastMessages.SIGN_UP_ERROR);
 
     await userModel.create(data);
     return {

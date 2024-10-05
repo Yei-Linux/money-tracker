@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "nx:web": "nx dev web",
+    "nx:web:seed": "cd apps/web && npm run db:seed",
     "nx:web:uat": "nx dev:uat web",
     "nx:web:build": "nx build web",
     "nx:lambdas": "nx serve lambdas",

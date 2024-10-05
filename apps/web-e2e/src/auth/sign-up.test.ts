@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test';
 import { signUpSetup } from './setup';
+import { toastMessages } from '@moneytrack/shared/constants';
 
 test.use({ storageState: { cookies: [], origins: [] } });
 
@@ -25,7 +26,7 @@ test.describe.serial('Sign Up Flow', () => {
     expect(await submitButton.isVisible()).toBeTruthy();
     await submitButton.click();
 
-    const toast = page.getByText('You account was created successfuly');
+    const toast = page.getByText(toastMessages.SIGN_UP_SUCCESS);
     await page.waitForTimeout(3000);
 
     expect(await toast.isVisible()).toBeTruthy();
@@ -50,7 +51,7 @@ test.describe.serial('Sign Up Flow', () => {
     expect(await submitButton.isVisible()).toBeTruthy();
     await submitButton.click();
 
-    const toast = page.getByText('This user already exists');
+    const toast = page.getByText(toastMessages.SIGN_UP_ERROR);
     await page.waitForTimeout(3000);
 
     expect(await toast.isVisible()).toBeTruthy();

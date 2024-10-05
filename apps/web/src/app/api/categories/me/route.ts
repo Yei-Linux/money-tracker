@@ -1,6 +1,6 @@
 import { catchApiError } from '@moneytrack/web/lib/api-error-handler';
 import { getUserIdFromReq } from '@moneytrack/web/lib/auth/auth';
-import { transactionsModel } from '@moneytrack/web/models';
+import { transactionsModel } from '@moneytrack/shared/models';
 import { NextResponse } from 'next/server';
 
 export const GET = async (req: NextRequest) => {

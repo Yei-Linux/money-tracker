@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 import { Crypt } from '../helpers';
-import moneyAccountModel from './account.model';
+import moneyAccountModel from './money-account.model';
 
 interface User {
   _id: mongoose.Types.ObjectId;

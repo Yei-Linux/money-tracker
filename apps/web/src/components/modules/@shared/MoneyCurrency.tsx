@@ -8,7 +8,10 @@ type MoneyCurrency = {
   variant?: MoneyVariants;
 };
 
-export const MoneyCurrency: FC<MoneyCurrency> = ({ money, variant = 'md' }) => {
+export const MoneyCurrency: FC<MoneyCurrency> = ({
+  money = 0,
+  variant = 'md',
+}) => {
   const variants: Record<
     MoneyVariants,
     { moneySize: string; currencySize: string }

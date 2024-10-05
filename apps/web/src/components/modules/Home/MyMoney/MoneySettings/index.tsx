@@ -7,6 +7,7 @@ import { EitherExpenseOrLimit } from './EitherExpenseOrIncomes';
 import { Title } from '@moneytrack/web/components/ui/title';
 import { ScrollContainer } from '@moneytrack/web/components/ui/scroll-container';
 import { HandyArrowToLeftIcon } from '@moneytrack/web/components/ui/icons/HandyArrowToLeftIcon';
+import { sectionsTestIds } from '@moneytrack/shared/constants';
 
 type MoneySettings = MoneyAccountSettings;
 
@@ -17,7 +18,10 @@ export const MoneySettings = (props: MoneySettings) => {
     <div className="flex flex-col gap-10">
       <Title as="h2">My Settings</Title>
 
-      <div className="flex items-center">
+      <div
+        className="flex items-center"
+        data-testid={sectionsTestIds.MONEY_SETTINGS_SECTION}
+      >
         <ScrollContainer>
           {settings.map(
             ({

@@ -1,15 +1,22 @@
-import { FC, PropsWithChildren, useEffect, useState } from "react";
-import EmptyStateIconSVG from "../../../public/assets/empty.svg";
-import Image from "next/image";
-import React from "react";
+import { FC, PropsWithChildren } from 'react';
+import EmptyStateIconSVG from '../../../public/assets/empty.svg';
+import Image from 'next/image';
+import React from 'react';
 
-type EmptyState = PropsWithChildren<{ isOnTable?: boolean }>;
+type EmptyState = PropsWithChildren<{
+  isOnTable?: boolean;
+  'data-testid'?: string;
+}>;
 
 export const EmptyIcon = () => (
   <Image src={EmptyStateIconSVG} alt="empty-icon" />
 );
 
-export const EmptyState: FC<EmptyState> = ({ children, isOnTable = false }) => {
+export const EmptyState: FC<EmptyState> = ({
+  children,
+  isOnTable = false,
+  ...props
+}) => {
   const childSize = React.Children.count(children);
 
   return (
@@ -17,13 +24,13 @@ export const EmptyState: FC<EmptyState> = ({ children, isOnTable = false }) => {
       {!!childSize ? (
         children
       ) : isOnTable ? (
-        <tr className="flex justify-center items-center">
+        <tr className="flex justify-center items-center" {...props}>
           <td>
             <EmptyIcon />
           </td>
         </tr>
       ) : (
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center" {...props}>
           <EmptyIcon />
         </div>
       )}

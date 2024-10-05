@@ -1,4 +1,4 @@
-import { transactionsModel } from '@moneytrack/web/models';
+import { transactionsModel } from '@moneytrack/shared/models';
 import { TransactionTypeIds } from '../../db/seeders/transaction-types';
 import mongoose from 'mongoose';
 

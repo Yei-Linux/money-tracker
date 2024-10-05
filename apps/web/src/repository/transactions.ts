@@ -1,4 +1,4 @@
-import { transactionsModel } from '@moneytrack/web/models';
+import { transactionsModel } from '@moneytrack/shared/models';
 import { Pagination } from '@moneytrack/web/types/@shared/pagination';
 import { TFilterKeysTransactionsAPI } from '@moneytrack/web/types/transactions';
 
