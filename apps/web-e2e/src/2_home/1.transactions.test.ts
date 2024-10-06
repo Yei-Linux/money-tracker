@@ -6,6 +6,32 @@ import {
 import { expect, test } from '@playwright/test';
 
 test.describe.serial('Transactions flow', () => {
+  test('Should show all section block of home page when user is logged in', async ({
+    page,
+  }) => {
+    await page.goto('/');
+
+    const summaryLabel = page.getByText('Summary');
+    await summaryLabel.textContent();
+    expect(await summaryLabel.isVisible()).toBeTruthy();
+
+    const userGreetings = page.getByText('Welcome Back Cesar Alvan');
+    await userGreetings.textContent();
+    expect(await userGreetings.isVisible()).toBeTruthy();
+
+    for (const value of Object.values(sectionsTestIds)) {
+      if (
+        [
+          sectionsTestIds.CHART_STATS_SECTION,
+          sectionsTestIds.TRANSACTION_TYPES_STATS_SECTION,
+        ].includes(value)
+      )
+        continue;
+      const isVisible = await page.getByTestId(value).isVisible();
+      expect(isVisible).toBeTruthy();
+    }
+  });
+
   test('Should cannot create an expense transaction because we dont have enough money', async ({
     page,
   }) => {
@@ -181,5 +207,156 @@ test.describe.serial('Transactions flow', () => {
       .getByTestId(sectionsTestIds.TRANSACTIONS_TABLE_SECTION)
       .getByText('Buying pizza on weeked!');
     expect(await transactionRowTable.first().isVisible()).toBeTruthy();
+  });
+
+  test('Should can see balance with expenses and incomes computed also categories used in that month successfuly', async ({
+    page,
+  }) => {
+    await page.goto('/');
+
+    expect(
+      await page
+        .getByTestId(sectionsTestIds.FAKECARD_TOTAL_BALANCE_SECTION)
+        .getByText('3985')
+        .isVisible()
+    ).toBeTruthy();
+
+    expect(
+      await page
+        .getByTestId(sectionsTestIds.BALANCE_SECTION)
+        .getByText('3985')
+        .isVisible()
+    ).toBeTruthy();
+
+    expect(
+      await page
+        .getByTestId(sectionsTestIds.INCOMES_SECTION)
+        .getByText('1')
+        .isVisible()
+    ).toBeTruthy();
+
+    expect(
+      await page
+        .getByTestId(sectionsTestIds.EXPENSES_SECTION)
+        .getByText('1')
+        .isVisible()
+    ).toBeTruthy();
+
+    expect(
+      await page
+        .getByTestId(sectionsTestIds.MY_CATEGORIES_SECTION)
+        .getByText('💵 Salary')
+        .isVisible()
+    ).toBeTruthy();
+    expect(
+      await page
+        .getByTestId(sectionsTestIds.MY_CATEGORIES_SECTION)
+        .getByText('🎒 Bought')
+        .isVisible()
+    ).toBeTruthy();
+  });
+
+  test('Should create EXPENSE LIMIT when user click on My Expense limit card', async ({
+    page,
+  }) => {
+    await page.goto('/');
+
+    await page.getByTestId(elementTestIds.EXPENSE_LIMIT_CARD_ELEMENT).click();
+    await page
+      .getByTestId(elementTestIds.EXPENSE_LIMIT_INPUT_ELEMENT)
+      .fill('100');
+    await page.getByTestId(elementTestIds.EXPENSE_LIMIT_BUTTON_ELEMENT).click();
+
+    const toast = page.getByText(toastMessages.SET_EXPENSE_LIMIT_SUCCESS);
+    await page.waitForTimeout(3000);
+    expect(await toast.isVisible()).toBeTruthy();
+
+    expect(
+      await page
+        .getByTestId(elementTestIds.EXPENSE_LIMIT_CURRENT_VALUE_CARD_ELEMENT)
+        .getByText('15')
+        .isVisible()
+    ).toBeTruthy();
+    expect(
+      await page
+        .getByTestId(elementTestIds.EXPENSE_LIMIT_CURRENT_VALUE_CARD_ELEMENT)
+        .getByText('100')
+        .isVisible()
+    ).toBeTruthy();
+    expect(
+      await page
+        .getByTestId(elementTestIds.EXPENSE_LIMIT_PERCENT_CARD_ELEMENT)
+        .getByText('15%')
+        .isVisible()
+    ).toBeTruthy();
+  });
+
+  test('Should create INCOME GOAL when user click on My Income goal card', async ({
+    page,
+  }) => {
+    await page.goto('/');
+
+    await page.getByTestId(elementTestIds.INCOME_GOAL_CARD_ELEMENT).click();
+    await page
+      .getByTestId(elementTestIds.INCOME_GOAL_INPUT_ELEMENT)
+      .fill('4500');
+    await page.getByTestId(elementTestIds.INCOME_GOAL_BUTTON_ELEMENT).click();
+
+    const toast = page.getByText(toastMessages.SET_INCOME_GOAL_SUCCESS);
+    await page.waitForTimeout(3000);
+    expect(await toast.isVisible()).toBeTruthy();
+
+    expect(
+      await page
+        .getByTestId(elementTestIds.INCOME_GOAL_CURRENT_VALUE_CARD_ELEMENT)
+        .getByText('4000')
+        .isVisible()
+    ).toBeTruthy();
+    expect(
+      await page
+        .getByTestId(elementTestIds.INCOME_GOAL_CURRENT_VALUE_CARD_ELEMENT)
+        .getByText('4500')
+        .isVisible()
+    ).toBeTruthy();
+    expect(
+      await page
+        .getByTestId(elementTestIds.INCOME_GOAL_PERCENT_CARD_ELEMENT)
+        .getByText('88.89%')
+        .isVisible()
+    ).toBeTruthy();
+  });
+
+  test('Should active EXPENSE WATCHER when user click on My Expense watcher card', async ({
+    page,
+  }) => {
+    await page.goto('/');
+
+    await page
+      .getByTestId(elementTestIds.EXPENSE_WATCHER_TOGGLE_ELEMENT)
+      .click();
+    const toast = page.getByText(toastMessages.EXPENSE_WATCHER_ENABLED);
+    await page.waitForTimeout(3000);
+    expect(await toast.isVisible()).toBeTruthy();
+    expect(
+      await page
+        .getByTestId(elementTestIds.EXPENSE_WATCHER_CARD_ELEMENT)
+        .getByText('You have actived it! 😉')
+        .isVisible()
+    ).toBeTruthy();
+
+    await page
+      .getByTestId(elementTestIds.EXPENSE_WATCHER_TOGGLE_ELEMENT)
+      .click();
+    const toastDisabled = page.getByText(
+      toastMessages.EXPENSE_WATCHER_DISABLED
+    );
+    await page.waitForTimeout(3000);
+    expect(await toastDisabled.isVisible()).toBeTruthy();
+    expect(
+      await page
+        .getByTestId(elementTestIds.EXPENSE_WATCHER_CARD_ELEMENT)
+        .getByText('You dont active it yet 😔')
+        .isVisible()
+    ).toBeTruthy();
   });
 });

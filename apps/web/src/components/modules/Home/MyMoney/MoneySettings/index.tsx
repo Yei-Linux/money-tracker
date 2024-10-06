@@ -3,7 +3,7 @@ import { SettingCard } from './SettingCard';
 import { WatcherToggle } from './WatcherToggle';
 import { MoneyAccountSettings } from '@moneytrack/web/types/settings';
 import { SettingsOptionsKeys } from '@moneytrack/web/constants';
-import { EitherExpenseOrLimit } from './EitherExpenseOrIncomes';
+import { EitherExpenseOrIncome } from './EitherExpenseOrIncomes';
 import { Title } from '@moneytrack/web/components/ui/title';
 import { ScrollContainer } from '@moneytrack/web/components/ui/scroll-container';
 import { HandyArrowToLeftIcon } from '@moneytrack/web/components/ui/icons/HandyArrowToLeftIcon';
@@ -36,6 +36,8 @@ export const MoneySettings = (props: MoneySettings) => {
               currentResult,
               watcherLimit,
               ComponentWrapper,
+              dataTestId,
+              dataTestIdPercent,
             }) => (
               <SettingCard
                 variant={variant}
@@ -59,6 +61,7 @@ export const MoneySettings = (props: MoneySettings) => {
                         percent={settingValue}
                         description={settingDescription}
                         type={type}
+                        data-testid={dataTestIdPercent}
                       />
                     )}
                 </SettingCard.HeaderLayout>
@@ -66,13 +69,17 @@ export const MoneySettings = (props: MoneySettings) => {
                   <SettingCard.Title>{title}</SettingCard.Title>
 
                   {type !== SettingsOptionsKeys.ExpenseWatch ? (
-                    <EitherExpenseOrLimit
+                    <EitherExpenseOrIncome
                       description={description}
                       goal={goal}
                       currentResult={currentResult}
+                      data-testid={dataTestId}
                     />
                   ) : (
-                    <WatcherToggle watcherLimit={!!watcherLimit} />
+                    <WatcherToggle
+                      data-testid={dataTestId}
+                      watcherLimit={!!watcherLimit}
+                    />
                   )}
                 </SettingCard.ContentLayout>
               </SettingCard>

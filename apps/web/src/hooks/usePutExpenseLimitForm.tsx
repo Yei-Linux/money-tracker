@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { toastMessages } from '@moneytrack/shared/constants';
 
 type UsePutExpenseLimitForm = {
   expenseLimit: number;
@@ -36,7 +37,7 @@ export const usePutExpenseLimitForm = ({
 
         refresh();
         togglePopup();
-        toast.success('Expense Limit updated successfuly');
+        toast.success(toastMessages.SET_EXPENSE_LIMIT_SUCCESS);
       } catch (error) {
         toast.error((error as Error).message);
       }

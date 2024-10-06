@@ -8,23 +8,23 @@ import {
   IncomesGoalZodSchema,
   TIncomesGoalSchema,
 } from '@moneytrack/web/validators/incomes-goal.validator';
+import { toastMessages } from '@moneytrack/shared/constants';
 
 export const putIncomesGoalServerAction = async (data: TIncomesGoalSchema) => {
   const validation = IncomesGoalZodSchema.safeParse(data);
   if (!validation.success) {
     throw new InvalidFieldFormError(
-      'There was an error: ' + validation.error.issues
+      `There was an error: ${validation.error.issues}`
     );
   }
   const user = await getAuthSessionInServerAction();
 
   try {
     const moneyAccount = await moneyAccountModel.findOne({ user });
-    if (!moneyAccount) throw new Error('You dont have a money account');
+    if (!moneyAccount)
+      throw new Error(toastMessages.SET_INCOME_GOAL_NOT_MONEY_ERROR);
     if (moneyAccount.incomes >= data.incomesGoal)
-      throw new Error(
-        'Your incomes Goal needs to be greater than your current incomes'
-      );
+      throw new Error(toastMessages.SET_INCOME_GOAL_NEEDS_TO_BE_GREATER_ERROR);
     await moneyAccountModel.updateOne(
       {
         user,

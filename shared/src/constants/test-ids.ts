@@ -10,6 +10,9 @@ export const sectionsTestIds = {
   MONEY_SETTINGS_SECTION: 'money_settings_section',
   TRANSACTIONS_FILTER_SECTION: 'transactions_filter_section',
   TRANSACTIONS_TABLE_SECTION: 'transactions_table_section',
+
+  CHART_STATS_SECTION: 'chart_stats_section',
+  TRANSACTION_TYPES_STATS_SECTION: 'transaction_types_stats_section',
 };
 
 export const elementTestIds = {
@@ -27,4 +30,18 @@ export const elementTestIds = {
     'transactiontype_transaction_select_element',
   TRANSACTIONTYPE_TRANSACTION_SELECTLIST_ELEMENT:
     'transactiontype_transaction_selectlist_element',
+  EXPENSE_LIMIT_CARD_ELEMENT: 'expense_limit_card_element',
+  EXPENSE_LIMIT_PERCENT_CARD_ELEMENT: 'expense_limit_percent_card_element',
+  EXPENSE_LIMIT_CURRENT_VALUE_CARD_ELEMENT:
+    'expense_limit_current_valuer_card_element',
+  EXPENSE_LIMIT_INPUT_ELEMENT: 'expense_limit_input_element',
+  EXPENSE_LIMIT_BUTTON_ELEMENT: 'expense_limit_button_element',
+  INCOME_GOAL_CARD_ELEMENT: 'income_goal_card_element',
+  INCOME_GOAL_PERCENT_CARD_ELEMENT: 'income_goal_percent_card_element',
+  INCOME_GOAL_CURRENT_VALUE_CARD_ELEMENT:
+    'income_goal_current_valuer_card_element',
+  INCOME_GOAL_INPUT_ELEMENT: 'income_goal_input_element',
+  INCOME_GOAL_BUTTON_ELEMENT: 'income_goal_button_element',
+  EXPENSE_WATCHER_CARD_ELEMENT: 'expense_watcher_card_element',
+  EXPENSE_WATCHER_TOGGLE_ELEMENT: 'expense_watcher_toggle_element',
 };

@@ -11,6 +11,7 @@ const PieChart = dynamic(() =>
 import { processInfoChart } from './utils';
 import { TTransactionStats } from '@moneytrack/web/types/transaction-stats';
 import { EmptyIcon } from '@moneytrack/web/components/ui/empty';
+import { sectionsTestIds } from '@moneytrack/shared/constants';
 
 interface IChart {
   info: TTransactionStats;
@@ -31,7 +32,10 @@ export const Chart: FC<IChart> = ({ info, totalValue }) => {
   };
 
   return (
-    <div style={{ width: chartSize, height: chartSize }}>
+    <div
+      style={{ width: chartSize, height: chartSize }}
+      data-testid={sectionsTestIds.CHART_STATS_SECTION}
+    >
       {data.every((item) => item !== 0) ? (
         <PieChart data={dataChart}>Browser does not support js</PieChart>
       ) : (

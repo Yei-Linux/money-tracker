@@ -1,3 +1,4 @@
+import { elementTestIds } from '@moneytrack/shared/constants';
 import { ExpenseLimitPopup } from '@moneytrack/web/components/modules/Home/MyMoney/MoneySettings/Popups/ExpenseLimitPopup';
 import { IncomeGoalPopup } from '@moneytrack/web/components/modules/Home/MyMoney/MoneySettings/Popups/IncomeGoalPopup';
 import { SettingsOptionsKeys } from '@moneytrack/web/constants';
@@ -23,6 +24,8 @@ export const SettingOptions = ({
     goal: expenseLimit?.goal,
     watcherLimit: undefined,
     ComponentWrapper: ExpenseLimitPopup,
+    dataTestIdPercent: elementTestIds.EXPENSE_LIMIT_PERCENT_CARD_ELEMENT,
+    dataTestId: elementTestIds.EXPENSE_LIMIT_CURRENT_VALUE_CARD_ELEMENT,
   },
   IncomeGoal: {
     type: SettingsOptionsKeys.IncomeGoal,
@@ -38,6 +41,8 @@ export const SettingOptions = ({
     goal: incomeGoal?.goal,
     watcherLimit: undefined,
     ComponentWrapper: IncomeGoalPopup,
+    dataTestIdPercent: elementTestIds.INCOME_GOAL_PERCENT_CARD_ELEMENT,
+    dataTestId: elementTestIds.INCOME_GOAL_CURRENT_VALUE_CARD_ELEMENT,
   },
   ExpenseWatch: {
     type: SettingsOptionsKeys.ExpenseWatch,
@@ -51,5 +56,7 @@ export const SettingOptions = ({
     goal: undefined,
     watcherLimit,
     ComponentWrapper: undefined,
+    dataTestIdPercent: '',
+    dataTestId: elementTestIds.EXPENSE_WATCHER_CARD_ELEMENT,
   },
 });

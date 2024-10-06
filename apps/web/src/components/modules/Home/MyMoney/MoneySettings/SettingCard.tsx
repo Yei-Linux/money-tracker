@@ -18,10 +18,16 @@ type SettingValue = {
   percent: number;
   description: string;
   type: string;
+  'data-testid'?: string;
 };
-const SettingValue: FC<SettingValue> = ({ percent, description, type }) => (
+const SettingValue: FC<SettingValue> = ({
+  percent,
+  description,
+  type,
+  ...props
+}) => (
   <div className="flex flex-col items-end">
-    <p className="font-semibold text-xl">
+    <p className="font-semibold text-xl" {...props}>
       {percent}%{' '}
       {percent === 100 && (
         <span> {type === SettingsOptionsKeys.IncomeGoal ? '✅' : '⛔'} </span>

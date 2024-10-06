@@ -1,5 +1,6 @@
 'use client';
 
+import { elementTestIds } from '@moneytrack/shared/constants';
 import { Button } from '@moneytrack/web/components/ui/button';
 import {
   DialogHeader,
@@ -31,7 +32,9 @@ export const ExpenseLimitPopup: FC<ExpenseLimitPopup> = ({
 
   return (
     <Dialog open={active} onOpenChange={toggle}>
-      <DialogTrigger>{children}</DialogTrigger>
+      <DialogTrigger data-testid={elementTestIds.EXPENSE_LIMIT_CARD_ELEMENT}>
+        {children}
+      </DialogTrigger>
 
       <DialogContent className="[&_input]:![box-shadow:none]">
         <DialogHeader>
@@ -47,9 +50,15 @@ export const ExpenseLimitPopup: FC<ExpenseLimitPopup> = ({
               {...register('expenseLimit')}
               type="number"
               placeholder="Put your expense limit"
+              data-testid={elementTestIds.EXPENSE_LIMIT_INPUT_ELEMENT}
             />
           </FormField>
-          <Button className="w-full" type="submit" loading={isLoading}>
+          <Button
+            data-testid={elementTestIds.EXPENSE_LIMIT_BUTTON_ELEMENT}
+            className="w-full"
+            type="submit"
+            loading={isLoading}
+          >
             Save
           </Button>
         </form>

@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { toastMessages } from '@moneytrack/shared/constants';
 
 type UsePutExpenseLimitForm = {
   incomesGoal: number;
@@ -36,7 +37,7 @@ export const usePutIncomesGoalForm = ({
 
         refresh();
         togglePopup();
-        toast.success('Incomes Goal updated successfuly');
+        toast.success(toastMessages.SET_INCOME_GOAL_SUCCESS);
       } catch (error) {
         toast.error((error as Error).message);
       }

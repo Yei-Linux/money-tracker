@@ -1,5 +1,6 @@
 'use client';
 
+import { elementTestIds } from '@moneytrack/shared/constants';
 import { Button } from '@moneytrack/web/components/ui/button';
 import {
   DialogHeader,
@@ -28,7 +29,9 @@ export const IncomeGoalPopup: FC<IncomeGoalPopup> = ({ children, goal }) => {
 
   return (
     <Dialog open={active} onOpenChange={toggle}>
-      <DialogTrigger>{children}</DialogTrigger>
+      <DialogTrigger data-testid={elementTestIds.INCOME_GOAL_CARD_ELEMENT}>
+        {children}
+      </DialogTrigger>
 
       <DialogContent className="[&_input]:![box-shadow:none]">
         <DialogHeader>
@@ -44,9 +47,15 @@ export const IncomeGoalPopup: FC<IncomeGoalPopup> = ({ children, goal }) => {
               {...register('incomesGoal')}
               type="number"
               placeholder="Put your incomes goal"
+              data-testid={elementTestIds.INCOME_GOAL_INPUT_ELEMENT}
             />
           </FormField>
-          <Button className="w-full" type="submit" loading={isLoading}>
+          <Button
+            data-testid={elementTestIds.INCOME_GOAL_BUTTON_ELEMENT}
+            className="w-full"
+            type="submit"
+            loading={isLoading}
+          >
             Save
           </Button>
         </form>

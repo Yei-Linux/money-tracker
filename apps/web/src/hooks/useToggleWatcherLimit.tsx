@@ -3,6 +3,7 @@ import { useToggle } from './@shared/useToggle';
 import { toggleWatcherLimitServerAction } from '@moneytrack/web/server-actions/settings/toggle-watcher-limit';
 import { toast } from 'react-hot-toast';
 import { useIsMounted } from './@shared/useIsMounted';
+import { toastMessages } from '@moneytrack/shared/constants';
 
 type UseToggleWatcherLimit = {
   watcherLimitDefaultValue: boolean;
@@ -16,11 +17,11 @@ export const useToggleWatcherLimit = ({
     defaultValue: watcherLimitDefaultValue,
   });
 
-  const toastMessages = [
-    'You just disactivate your watcher!',
-    'You just activate your watcher!',
+  const toastMessagesObj = [
+    toastMessages.EXPENSE_WATCHER_DISABLED,
+    toastMessages.EXPENSE_WATCHER_ENABLED,
   ];
-  const toastMessage = toastMessages[+active];
+  const toastMessage = toastMessagesObj[+active];
 
   useEffect(() => {
     if (!isMounted) return;

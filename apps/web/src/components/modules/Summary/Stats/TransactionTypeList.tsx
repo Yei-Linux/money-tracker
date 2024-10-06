@@ -5,6 +5,7 @@ import type { FC } from 'react';
 import { TrendAnalyzer } from '../../@shared/TrendAnalyzer';
 import { TTransactionStats } from '@moneytrack/web/types/transaction-stats';
 import { TThemes } from './utils';
+import { sectionsTestIds } from '@moneytrack/shared/constants';
 
 interface ITransactionTypeList {
   summaryListSplit: TTransactionStats;
@@ -14,7 +15,10 @@ export const TransactionTypeList: FC<ITransactionTypeList> = ({
   summaryListSplit,
 }) => {
   return (
-    <ul className="flex justify-between w-100 gap-10 flex-wrap">
+    <ul
+      className="flex justify-between w-100 gap-10 flex-wrap"
+      data-testid={sectionsTestIds.TRANSACTION_TYPES_STATS_SECTION}
+    >
       {summaryListSplit.map(({ theme, type, value }, index) => (
         <li key={index}>
           <TransactionTypeInfo
