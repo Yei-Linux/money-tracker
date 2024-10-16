@@ -16,7 +16,6 @@ import {
 } from '@moneytrack/web/constants';
 import { getAuthSessionInServerAction } from '@moneytrack/web/lib/auth/auth-session-handler';
 import { InvalidFieldFormError } from '@moneytrack/web/errors/InvalidFieldFormError';
-import { getIncomesAndExpensesRepository } from '@moneytrack/web/repository/sum-transactions';
 import { sendEmailWatchingExpenseLimit } from '@moneytrack/shared/use-cases';
 import { toastMessages } from '@moneytrack/shared/constants';
 
@@ -57,12 +56,8 @@ export const createTransactionServerAction = async (
         toastMessages.CREATE_TRANSACTION_ERROR_WHEN_GENERAL_ERROR_HAPPENED
       );
     }
-    const { expenses, incomes } = await getIncomesAndExpensesRepository(user);
 
-    await moneyAccountModel.updateOne(
-      { user },
-      { money: moneyUpdated, incomes, expenses }
-    );
+    await moneyAccountModel.updateOne({ user }, { money: moneyUpdated });
 
     data.transactionType === TransactionTypeIds.Expense &&
       sendEmailWatchingExpenseLimit(user, transaction.title);

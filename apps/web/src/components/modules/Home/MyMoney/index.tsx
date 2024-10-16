@@ -1,21 +1,14 @@
-import { COOKIES } from '@moneytrack/web/constants';
-import { getCookieString } from '@moneytrack/web/lib/cookies';
-import { getMoneyAccountService } from '@moneytrack/web/services/money-account.service';
-import { cookies } from 'next/headers';
+'use client';
+
 import { MoneyAccount } from './MoneyAccount';
 import { MoneySettings } from './MoneySettings';
 import { IncomesWithExpenses } from './IncomesWithExpenses';
 import { MyCategories } from './MyCategories';
+import { useFechMoneyAccount } from '@moneytrack/web/hooks/useFetchMoneyAccount';
 
-export const MyMoney = async () => {
-  const cookiesRes = cookies();
-  const sessionCookie = cookiesRes.get(COOKIES.NextAuthSession);
-  const sessionCookieString = getCookieString(sessionCookie);
-
-  const myMoneyAccount = await getMoneyAccountService(sessionCookieString);
-  if (!myMoneyAccount) {
-    return;
-  }
+export const MyMoney = () => {
+  const { myMoneyAccount } = useFechMoneyAccount();
+  if (!myMoneyAccount) return;
 
   return (
     <div className="flex flex-col gap-20">
@@ -26,7 +19,7 @@ export const MyMoney = async () => {
             transactionExpenses={myMoneyAccount.expenseLimit?.counter ?? 0}
             transactionIncomes={myMoneyAccount.incomeGoal?.counter ?? 0}
           />
-          <MyCategories sessionCookieString={sessionCookieString} />
+          <MyCategories />
         </div>
       </div>
 

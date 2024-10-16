@@ -3,12 +3,12 @@
 import { TransactionTypeList } from './TransactionTypeList';
 import { ChartTotal } from './ChartTotal';
 import { Chart } from './Chart';
-import { useFetchTransactionsStore } from '@moneytrack/web/hooks/useFetchTransactionStats';
+import { useFetchTransactionsStats } from '@moneytrack/web/hooks/useFetchTransactionStats';
 import { Title } from '@moneytrack/web/components/ui/title';
 import { getCurrentMonth } from '@moneytrack/web/lib/date';
 
 export const Stats = () => {
-  const { transactionStats } = useFetchTransactionsStore();
+  const { transactionStats } = useFetchTransactionsStats();
   const filterTerm = 'Total';
 
   if (!transactionStats) return;

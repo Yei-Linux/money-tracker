@@ -26,7 +26,7 @@ export const UserDropdown = () => {
           <DropdownMenuTrigger asChild>
             <Button
               variant="outline"
-              className="border-none outline-none ![box-shadow:none]"
+              className="p-0 border-none outline-none ![box-shadow:none]"
             >
               <UserCircle2 size={35} />
             </Button>

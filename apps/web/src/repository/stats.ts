@@ -1,15 +1,18 @@
-import { firstDayOfMonth } from '@moneytrack/web/lib/date';
 import { transactionsModel } from '@moneytrack/shared/models';
 import { TTransactionStats } from '@moneytrack/web/types/transaction-stats';
 import mongoose from 'mongoose';
+import { getStartEndDateByMonth } from '../lib/date';
 
-export const getStatsOfMonth = async (
-  userId: string
+export const getStatsByMonth = async (
+  userId: string,
+  monthDate: Date
 ): Promise<TTransactionStats> => {
+  const { startDate, endDate } = getStartEndDateByMonth(monthDate);
+
   return await transactionsModel.aggregate([
     {
       $match: {
-        createdAt: { $gte: new Date(firstDayOfMonth()) },
+        createdAt: { $gte: startDate, $lte: endDate },
         user: new mongoose.Types.ObjectId(userId),
       },
     },

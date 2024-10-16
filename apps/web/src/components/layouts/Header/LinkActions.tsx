@@ -8,9 +8,7 @@ export const LinkActions = () => {
   if (!session) return;
   return (
     <>
-      <li>
-        <Link href="/summary">Summary</Link>
-      </li>
+      <Link href="/summary">Summary</Link>
     </>
   );
 };

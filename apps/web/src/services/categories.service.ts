@@ -1,4 +1,5 @@
 import { TCategories } from '@moneytrack/web/types/categories';
+import { getMonthQueryParam } from '../utils/transactions';
 
 export const getCategoriesService = async (): Promise<TCategories> => {
   try {
@@ -11,12 +12,12 @@ export const getCategoriesService = async (): Promise<TCategories> => {
 };
 
 export const getMyCategoriesService = async (
-  cookie = ''
+  monthDate: Date
 ): Promise<TCategories> => {
   try {
-    const promise = await fetch(`${process.env.URL}/api/categories/me`, {
-      headers: { cookie },
-    });
+    const promise = await fetch(
+      `/api/categories/me?${getMonthQueryParam(monthDate)}`
+    );
     const json = await promise.json();
     return json.data;
   } catch (error) {

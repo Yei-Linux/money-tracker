@@ -1,16 +1,15 @@
 'use client';
 
-import { FC } from 'react';
 import { TransactionDialog } from '../../../@shared/Transactions/TransactionDialog';
 import { CategoryFilters } from '../CategoryFilters';
 import { TransactionTypeFilters } from '../TransactionTypesFilters';
-import { useFetchTransactionsStore } from '@moneytrack/web/hooks/useFetchTransactionStats';
+import { useFetchTransactionsStats } from '@moneytrack/web/hooks/useFetchTransactionStats';
 import { pickIncomesAndExpenses } from './utils';
 import { Title } from '@moneytrack/web/components/ui/title';
 import { sectionsTestIds } from '@moneytrack/shared/constants';
 
 export const TransactionHeader = () => {
-  const { transactionStats } = useFetchTransactionsStore();
+  const { transactionStats } = useFetchTransactionsStats();
   const { incomes, expenses } = pickIncomesAndExpenses(transactionStats);
 
   return (

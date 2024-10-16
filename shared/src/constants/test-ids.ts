@@ -1,7 +1,7 @@
 export const sectionsTestIds = {
   GREETINGS_SECTION: 'greetings_section',
-  FAKECARD_SECTION: 'fakecard_section',
-  FAKECARD_TOTAL_BALANCE_SECTION: 'fakecard_total_balance_section',
+  FAKECARD_SECTION: 'total_balance_wrapper_section',
+  FAKECARD_TOTAL_BALANCE_SECTION: 'total_balance_wrapper_total_balance_section',
   BALANCE_SECTION: 'balance_section',
   INCOME_WITH_EXPENSES_SECTION: 'income_with_expenses_section',
   INCOMES_SECTION: 'incomes_section',

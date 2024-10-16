@@ -1,8 +1,9 @@
 import { assertPercentValue, computePercent } from '@moneytrack/shared/helpers';
 import { ServerError } from '@moneytrack/web/errors/ServerError';
 import { moneyAccountModel } from '@moneytrack/shared/models';
-import { getTotalTransactionTypes } from '@moneytrack/web/repository/total-transactions-type';
+import { getTotalTransactionTypesByMonth } from '@moneytrack/web/repository/total-transactions-type';
 import mongoose from 'mongoose';
+import { getIncomesAndExpensesRepository } from '../repository/sum-transactions';
 
 export const createMoneyAccountIfIsNewUser = async (userId: string) => {
   try {
@@ -20,11 +21,12 @@ export const createMoneyAccountIfIsNewUser = async (userId: string) => {
   }
 };
 
-export const getSettingsMoneyAccount = async (user: string) => {
+export const getSettingsMoneyAccountByMonth = async (
+  user: string,
+  monthDate: Date
+) => {
   const moneyAccount = await moneyAccountModel.findOne({ user }).select({
     money: true,
-    incomes: true,
-    expenses: true,
     user: true,
     watcherLimit: true,
     expenseLimit: true,
@@ -35,18 +37,19 @@ export const getSettingsMoneyAccount = async (user: string) => {
     throw new ServerError('You dont have any money account asigned yet');
   }
 
-  const expensePercent = computePercent(
-    moneyAccount.expenses,
-    moneyAccount.expenseLimit
-  );
-  const incomePercent = computePercent(
-    moneyAccount.incomes,
-    moneyAccount.incomeGoal
+  const { expenses, incomes } = await getIncomesAndExpensesRepository(
+    user,
+    monthDate
   );
 
-  const { counterExpenses, counterIncomes } = await getTotalTransactionTypes({
-    user,
-  });
+  const expensePercent = computePercent(expenses, moneyAccount.expenseLimit);
+  const incomePercent = computePercent(incomes, moneyAccount.incomeGoal);
+
+  const { counterExpenses, counterIncomes } =
+    await getTotalTransactionTypesByMonth({
+      user,
+      monthDate,
+    });
 
   const response = {
     money: moneyAccount.money,
@@ -55,7 +58,7 @@ export const getSettingsMoneyAccount = async (user: string) => {
     expenseLimit: {
       counter: counterExpenses,
       goal: +moneyAccount.expenseLimit,
-      currentResult: +moneyAccount.expenses,
+      currentResult: expenses,
       settingValue: assertPercentValue(
         expensePercent,
         moneyAccount.expenseLimit
@@ -64,7 +67,7 @@ export const getSettingsMoneyAccount = async (user: string) => {
     incomeGoal: {
       counter: counterIncomes,
       goal: +moneyAccount.incomeGoal,
-      currentResult: +moneyAccount.incomes,
+      currentResult: incomes,
       settingValue: assertPercentValue(incomePercent, moneyAccount.incomeGoal),
     },
   };

@@ -52,3 +52,11 @@ export function buildAdvancedFiltersFromTransactions(
 
   return $filters;
 }
+
+export const getMonthDateFromRequest = (req: NextRequest): Date => {
+  const { searchParams } = new URL(req.url);
+  const monthDateStr = searchParams.get('month');
+  const monthDate = monthDateStr ? new Date(monthDateStr) : new Date();
+
+  return monthDate;
+};
