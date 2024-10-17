@@ -3,7 +3,7 @@ import { getUserIdFromReq } from '@moneytrack/web/lib/auth/auth';
 import { transactionsModel } from '@moneytrack/shared/models';
 import { NextResponse } from 'next/server';
 import { getMonthDateFromRequest } from '@moneytrack/web/lib/utils';
-import { getStartEndDateByMonth } from '@moneytrack/web/lib/date';
+import { getStartEndDateByMonth } from '@moneytrack/shared/lib/date';
 
 export const GET = async (req: NextRequest) => {
   try {

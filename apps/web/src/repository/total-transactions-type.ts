@@ -1,7 +1,7 @@
 import { transactionsModel } from '@moneytrack/shared/models';
 import mongoose from 'mongoose';
 import { TransactionTypeIds } from '../../db/seeders/transaction-types';
-import { getStartEndDateByMonth } from '../lib/date';
+import { getStartEndDateByMonth } from '@moneytrack/shared/lib/date';
 
 type GetTotalTransactionTypes = {
   user: string;

@@ -1,30 +1,31 @@
 import { assertPercentValue, computePercent } from './settings';
 import { moneyAccountModel } from '../models';
+import { getIncomesAndExpensesRepositoryByMonth } from '../repositories/sum-transactions';
+import { getExpenseLimitIncomeGoalsByMonth } from '../repositories/money-settings';
 
 export const getExpenseByUser = async (
   user: string
 ): Promise<{ percent: number; expensesOfMonth: number }> => {
-  const moneyAccount = await moneyAccountModel.findOne({ user }).select({
-    money: true,
-    incomes: true,
-    expenses: true,
-    user: true,
-    watcherLimit: true,
-    expenseLimit: true,
-  });
-
+  const moneyAccount = await moneyAccountModel.findOne({ user });
   if (!moneyAccount) {
     throw new Error('You dont have any money account asigned yet');
   }
 
-  const expensePercent = computePercent(
-    moneyAccount.expenses,
-    moneyAccount.expenseLimit
+  const currentMonth = new Date();
+
+  const { expenses } = await getIncomesAndExpensesRepositoryByMonth(
+    user,
+    currentMonth
+  );
+  const { expenseLimit } = await getExpenseLimitIncomeGoalsByMonth(
+    moneyAccount._id,
+    currentMonth
   );
 
-  const percent =
-    assertPercentValue(expensePercent, moneyAccount.expenseLimit) ?? 0;
-  const expensesOfMonth = moneyAccount.expenses;
+  const expensePercent = computePercent(expenses, expenseLimit);
+
+  const percent = assertPercentValue(expensePercent, expenseLimit) ?? 0;
+  const expensesOfMonth = expenses;
 
   return { percent, expensesOfMonth };
 };

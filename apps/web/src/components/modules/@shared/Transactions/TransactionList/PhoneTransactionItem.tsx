@@ -1,9 +1,9 @@
 import { Badge } from '@moneytrack/web/components/ui/badge';
-import { formatDateByDayNumber } from '@moneytrack/web/lib/date';
 import { TTransaction } from '@moneytrack/web/types/transactions';
 import { FC } from 'react';
 import { TransactionTypeIcon } from './TransactionTypeIcon';
 import { MoneyCurrency } from '../../MoneyCurrency';
+import { formatDateByDayNumber } from '@moneytrack/shared/lib/date';
 
 type PhoneTransactionItem = TTransaction;
 

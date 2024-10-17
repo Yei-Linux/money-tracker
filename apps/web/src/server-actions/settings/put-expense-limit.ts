@@ -9,9 +9,12 @@ import {
   TExpenseLimitSchema,
 } from '@moneytrack/web/validators/expense-limit.validator';
 import { toastMessages } from '@moneytrack/shared/constants';
+import { getIncomesAndExpensesRepositoryByMonth } from '@moneytrack/shared/repositories/sum-transactions';
+import { upsertExpenseLimitOrIncomeGoalByMonth } from '@moneytrack/shared/repositories/money-settings';
 
 export const putExpenseLimitServerAction = async (
-  data: TExpenseLimitSchema
+  data: TExpenseLimitSchema,
+  monthDate: Date
 ) => {
   const validation = ExpenseLimitZodSchema.safeParse(data);
   if (!validation.success) {
@@ -25,18 +28,21 @@ export const putExpenseLimitServerAction = async (
     const moneyAccount = await moneyAccountModel.findOne({ user });
     if (!moneyAccount)
       throw new Error(toastMessages.SET_EXPENSE_LIMIT_NOT_MONEY_ERROR);
-    if (moneyAccount.expenses >= data.expenseLimit)
+
+    const { expenses } = await getIncomesAndExpensesRepositoryByMonth(
+      user,
+      monthDate
+    );
+    if (expenses >= data.expenseLimit)
       throw new Error(
         toastMessages.SET_EXPENSE_LIMIT_NEEDS_TO_BE_GREATER_ERROR
       );
 
-    await moneyAccountModel.updateOne(
-      {
-        user,
-      },
-      {
-        expenseLimit: data.expenseLimit,
-      }
+    await upsertExpenseLimitOrIncomeGoalByMonth(
+      moneyAccount._id,
+      monthDate,
+      'expenseLimit',
+      data.expenseLimit
     );
   } catch (error) {
     throw new SettingsError((error as Error).message);

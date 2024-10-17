@@ -5,7 +5,7 @@ import { ChartTotal } from './ChartTotal';
 import { Chart } from './Chart';
 import { useFetchTransactionsStats } from '@moneytrack/web/hooks/useFetchTransactionStats';
 import { Title } from '@moneytrack/web/components/ui/title';
-import { getCurrentMonth } from '@moneytrack/web/lib/date';
+import { getCurrentMonth } from '@moneytrack/shared/lib/date';
 
 export const Stats = () => {
   const { transactionStats } = useFetchTransactionsStats();

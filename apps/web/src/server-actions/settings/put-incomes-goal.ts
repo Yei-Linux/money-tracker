@@ -9,8 +9,13 @@ import {
   TIncomesGoalSchema,
 } from '@moneytrack/web/validators/incomes-goal.validator';
 import { toastMessages } from '@moneytrack/shared/constants';
+import { upsertExpenseLimitOrIncomeGoalByMonth } from '@moneytrack/shared/repositories/money-settings';
+import { getIncomesAndExpensesRepositoryByMonth } from '@moneytrack/shared/repositories/sum-transactions';
 
-export const putIncomesGoalServerAction = async (data: TIncomesGoalSchema) => {
+export const putIncomesGoalServerAction = async (
+  data: TIncomesGoalSchema,
+  monthDate: Date
+) => {
   const validation = IncomesGoalZodSchema.safeParse(data);
   if (!validation.success) {
     throw new InvalidFieldFormError(
@@ -23,15 +28,19 @@ export const putIncomesGoalServerAction = async (data: TIncomesGoalSchema) => {
     const moneyAccount = await moneyAccountModel.findOne({ user });
     if (!moneyAccount)
       throw new Error(toastMessages.SET_INCOME_GOAL_NOT_MONEY_ERROR);
-    if (moneyAccount.incomes >= data.incomesGoal)
+
+    const { incomes } = await getIncomesAndExpensesRepositoryByMonth(
+      user,
+      monthDate
+    );
+    if (incomes >= data.incomesGoal)
       throw new Error(toastMessages.SET_INCOME_GOAL_NEEDS_TO_BE_GREATER_ERROR);
-    await moneyAccountModel.updateOne(
-      {
-        user,
-      },
-      {
-        incomeGoal: data.incomesGoal,
-      }
+
+    await upsertExpenseLimitOrIncomeGoalByMonth(
+      moneyAccount._id,
+      monthDate,
+      'incomeGoal',
+      data.incomesGoal
     );
   } catch (error) {
     throw new SettingsError((error as Error).message);

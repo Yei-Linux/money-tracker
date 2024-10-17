@@ -3,7 +3,7 @@ import { ServerError } from '@moneytrack/web/errors/ServerError';
 import { moneyAccountModel } from '@moneytrack/shared/models';
 import { getTotalTransactionTypesByMonth } from '@moneytrack/web/repository/total-transactions-type';
 import mongoose from 'mongoose';
-import { getIncomesAndExpensesRepository } from '../repository/sum-transactions';
+import { getIncomesAndExpensesRepositoryByMonth } from '@moneytrack/shared/repositories/sum-transactions';
 
 export const createMoneyAccountIfIsNewUser = async (userId: string) => {
   try {
@@ -37,7 +37,7 @@ export const getSettingsMoneyAccountByMonth = async (
     throw new ServerError('You dont have any money account asigned yet');
   }
 
-  const { expenses, incomes } = await getIncomesAndExpensesRepository(
+  const { expenses, incomes } = await getIncomesAndExpensesRepositoryByMonth(
     user,
     monthDate
   );

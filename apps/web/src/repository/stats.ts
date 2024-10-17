@@ -1,7 +1,7 @@
+import { getStartEndDateByMonth } from '@moneytrack/shared/lib/date';
 import { transactionsModel } from '@moneytrack/shared/models';
 import { TTransactionStats } from '@moneytrack/web/types/transaction-stats';
 import mongoose from 'mongoose';
-import { getStartEndDateByMonth } from '../lib/date';
 
 export const getStatsByMonth = async (
   userId: string,

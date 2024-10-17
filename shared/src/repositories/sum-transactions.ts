@@ -1,12 +1,17 @@
 import { transactionsModel } from '@moneytrack/shared/models';
-import { TransactionTypeIds } from '../../db/seeders/transaction-types';
 import mongoose from 'mongoose';
 import { getStartEndDateByMonth } from '../lib/date';
+
+// TODO: Move db/seeders here in shared
+export const TransactionTypeIds = {
+  Income: '668157bc20b65bf13bb8ca8c',
+  Expense: '668157c11ca7d7a74dcb6cac',
+};
 
 const getCountFromTransactionAggregate = (transactionRow: any[]): number =>
   !transactionRow.length ? 0 : transactionRow?.[0]?.count;
 
-export const getIncomesAndExpensesRepository = async (
+export const getIncomesAndExpensesRepositoryByMonth = async (
   user: string,
   monthDate: Date
 ) => {

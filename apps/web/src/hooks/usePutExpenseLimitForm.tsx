@@ -9,6 +9,7 @@ import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { toastMessages } from '@moneytrack/shared/constants';
+import { useDropdownsStore } from '../store/dropdowns';
 
 type UsePutExpenseLimitForm = {
   expenseLimit: number;
@@ -20,6 +21,7 @@ export const usePutExpenseLimitForm = ({
   togglePopup,
 }: UsePutExpenseLimitForm) => {
   const { refresh } = useRouter();
+  const month = useDropdownsStore((store) => store.month);
   const [isLoading, startTransition] = useTransition();
   const {
     register,
@@ -33,7 +35,7 @@ export const usePutExpenseLimitForm = ({
   const onSubmit = async (data: TExpenseLimitSchema) => {
     startTransition(async () => {
       try {
-        await putExpenseLimitServerAction(data);
+        await putExpenseLimitServerAction(data, month);
 
         refresh();
         togglePopup();
