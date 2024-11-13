@@ -2,6 +2,9 @@ import mongoose from 'mongoose';
 
 import { Crypt } from '../helpers';
 import moneyAccountModel from './money-account.model';
+import { categoriesInitialByUser } from '../constants/init-categories';
+import parentCategoriesModel from './parent-categories.model';
+import categoriesModel from './categories.model';
 
 interface User {
   _id: mongoose.Types.ObjectId;
@@ -49,6 +52,21 @@ userDBSchema.post('save', async function (userCreated, next) {
       money: 0,
       user: userCreated._id,
     });
+
+    for (const { category, children } of categoriesInitialByUser) {
+      const parentCategory = await parentCategoriesModel.create({
+        category,
+        user: userCreated._id,
+      });
+      if (!children.length) continue;
+
+      const childrens = children.map((item) => ({
+        ...item,
+        parentCategory: parentCategory._id,
+      }));
+      await categoriesModel.insertMany(childrens);
+    }
+
     next();
   } catch (error) {
     const errorMessage = (error as Error).message;

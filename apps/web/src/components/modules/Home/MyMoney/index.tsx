@@ -13,7 +13,10 @@ export const MyMoney = () => {
   return (
     <div className="flex flex-col gap-20">
       <div className="flex gap-14 md:gap-10 flex-wrap lg:flex-nowrap">
-        <MoneyAccount money={myMoneyAccount.money} />
+        <MoneyAccount
+          money={myMoneyAccount.money}
+          moneyByMonth={myMoneyAccount.moneyByMonth}
+        />
         <div className="w-full flex flex-col gap-7">
           <IncomesWithExpenses
             transactionExpenses={myMoneyAccount.expenseLimit?.counter ?? 0}

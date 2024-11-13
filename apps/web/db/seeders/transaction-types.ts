@@ -1,6 +1,8 @@
 export const TransactionTypeIds = {
   Income: '668157bc20b65bf13bb8ca8c',
   Expense: '668157c11ca7d7a74dcb6cac',
+  Investment: '668157c11ca7d7a74dcb6cad',
+  Savings: '668157c11ca7d7a74dcb6cae',
 };
 
 export const transactionTypesSeeder = [
@@ -15,12 +17,12 @@ export const transactionTypesSeeder = [
     theme: 'danger',
   },
   {
-    _id: '668157c11ca7d7a74dcb6cad',
+    _id: TransactionTypeIds.Investment,
     type: '↗️ Investment',
     theme: 'purple',
   },
   {
-    _id: '668157c11ca7d7a74dcb6cae',
+    _id: TransactionTypeIds.Savings,
     type: '↗️ Savings',
     theme: 'sunny',
   },

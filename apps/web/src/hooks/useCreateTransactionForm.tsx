@@ -27,6 +27,7 @@ export const useCreateTransactionForm = ({
     handleSubmit,
     control,
     formState: { errors },
+    watch,
   } = useForm<TCreateTransactionTypeSchema>({
     resolver: zodResolver(CreateTransactionZodSchema),
   });
@@ -51,5 +52,13 @@ export const useCreateTransactionForm = ({
     });
   };
 
-  return { register, handleSubmit, onSubmit, errors, control, isLoading };
+  return {
+    register,
+    handleSubmit,
+    onSubmit,
+    errors,
+    control,
+    isLoading,
+    watch,
+  };
 };

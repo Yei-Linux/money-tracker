@@ -6,6 +6,10 @@ const parentCategoryDBSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Users',
+    },
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
@@ -16,5 +20,5 @@ parentCategoryDBSchema.virtual('categories', {
   foreignField: 'parentCategory',
 });
 
-export default mongoose.models.ParentCategories ||
+export default mongoose.models?.['ParentCategories'] ||
   mongoose.model('ParentCategories', parentCategoryDBSchema);

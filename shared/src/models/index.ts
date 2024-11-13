@@ -4,6 +4,8 @@ import moneyAccountModel from './money-account.model';
 import sessionModel from './session.model';
 import transactionsModel from './transactions.model';
 import historyMoneySettingsModel from './history-money-settings.model';
+import parentCategoriesModel from './parent-categories.model';
+import categoriesModel from './categories.model';
 
 export {
   transactionsModel,
@@ -12,4 +14,6 @@ export {
   moneyAccountModel,
   sessionModel,
   historyMoneySettingsModel,
+  parentCategoriesModel,
+  categoriesModel,
 };

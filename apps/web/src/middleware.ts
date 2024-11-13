@@ -5,7 +5,7 @@ export const config = {
   matcher: [
     '/api/transactions/:path*',
     '/api/money-account/:path*',
-    '/api/categories/me',
+    '/api/categories/:path*',
   ],
   runtime: 'nodejs', // rather than "edge"
   unstable_allowDynamic: [

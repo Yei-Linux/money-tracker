@@ -8,6 +8,9 @@ import { cn } from '@moneytrack/web/lib/utils';
 import { getCategoriesService } from '@moneytrack/web/services/categories.service';
 import { getTransactionTypesService } from '@moneytrack/web/services/transaction-types.service';
 import { Layout } from '@moneytrack/web/components/layouts/Layout';
+import { cookies } from 'next/headers';
+import { COOKIES } from '../constants';
+import { getCookieString } from '../lib/cookies';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const roboto_mono = Roboto_Mono({
@@ -30,7 +33,11 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const categories = await getCategoriesService();
+  const cookiesRes = cookies();
+  const sessionCookie = cookiesRes.get(COOKIES.NextAuthSession);
+  const sessionCookieString = getCookieString(sessionCookie);
+
+  const categories = await getCategoriesService(sessionCookieString);
   const transactionTypes = await getTransactionTypesService();
 
   return (

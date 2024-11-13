@@ -53,6 +53,7 @@ export const getSettingsMoneyAccountByMonth = async (
 
   const response = {
     money: moneyAccount.money,
+    moneyByMonth: incomes - expenses,
     user: moneyAccount.user,
     watcherLimit: moneyAccount.watcherLimit,
     expenseLimit: {

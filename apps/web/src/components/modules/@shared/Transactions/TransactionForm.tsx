@@ -2,7 +2,7 @@
 
 import { elementTestIds } from '@moneytrack/shared/constants';
 import { Button } from '@moneytrack/web/components/ui/button';
-import { EmptyState, EmptyText } from '@moneytrack/web/components/ui/empty';
+import { EmptyText } from '@moneytrack/web/components/ui/empty';
 import { FormField } from '@moneytrack/web/components/ui/form-field';
 import { Input } from '@moneytrack/web/components/ui/input';
 import {
@@ -26,11 +26,20 @@ type TransactionForm = {
 };
 
 export const TransactionForm: FC<TransactionForm> = ({ toggle }) => {
-  const { register, onSubmit, handleSubmit, errors, control, isLoading } =
-    useCreateTransactionForm({ onComplete: toggle });
+  const {
+    register,
+    onSubmit,
+    handleSubmit,
+    errors,
+    control,
+    isLoading,
+    watch,
+  } = useCreateTransactionForm({ onComplete: toggle });
   const categories = useDropdownsStore((state) => state.categories);
   const transactionTypes = useDropdownsStore((state) => state.transactionTypes);
   const action: () => void = handleSubmit(onSubmit);
+
+  const transactionTypeSelected = watch('transactionType');
 
   return (
     <form
@@ -108,16 +117,27 @@ export const TransactionForm: FC<TransactionForm> = ({ toggle }) => {
                   {...register('category')}
                 >
                   <EmptyText>
-                    {categories.map(({ category, categories, _id }) => (
-                      <SelectGroup key={_id}>
-                        <SelectLabel>{category}</SelectLabel>
-                        {categories?.map(({ category, _id }) => (
-                          <SelectItem key={_id} value={_id}>
-                            {category}
-                          </SelectItem>
-                        ))}
-                      </SelectGroup>
-                    ))}
+                    {categories.map(({ category, categories, _id }) => {
+                      const categoriesChildrenFiltered = categories?.filter(
+                        (category) =>
+                          category.transactionType === transactionTypeSelected
+                      );
+
+                      if (!categoriesChildrenFiltered?.length) return [];
+
+                      return (
+                        <SelectGroup key={_id}>
+                          <SelectLabel>{category}</SelectLabel>
+                          {categoriesChildrenFiltered?.map(
+                            ({ category, _id }) => (
+                              <SelectItem key={_id} value={_id}>
+                                {category}
+                              </SelectItem>
+                            )
+                          )}
+                        </SelectGroup>
+                      );
+                    })}
                   </EmptyText>
                 </SelectContent>
               </Select>
