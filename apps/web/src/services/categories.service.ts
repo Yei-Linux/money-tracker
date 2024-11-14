@@ -1,5 +1,24 @@
-import { TCategories } from '@moneytrack/web/types/categories';
+import {
+  CategoriesBoardType,
+  TCategories,
+} from '@moneytrack/web/types/categories';
 import { getMonthQueryParam } from '../utils/transactions';
+
+export const getMyCategoriesBoardService = async (
+  cookie = ''
+): Promise<CategoriesBoardType | null> => {
+  try {
+    const promise = await fetch(`${process.env.URL}/api/categories/board`, {
+      headers: {
+        cookie,
+      },
+    });
+    const json = await promise.json();
+    return json.data;
+  } catch (error) {
+    return null;
+  }
+};
 
 export const getCategoriesService = async (
   cookie = ''

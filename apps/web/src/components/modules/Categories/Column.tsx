@@ -1,15 +1,15 @@
 import { Draggable, Droppable } from '@hello-pangea/dnd';
-import { Input } from '@moneytrack/web/components/ui/input';
 import { PlusCircleIcon } from 'lucide-react';
 import { Button } from '../../ui/button';
+import { CategoriesBoardType } from '@moneytrack/web/types/categories';
 
-type Column = {
+type TColumn = {
   id: string;
-  itemsOrder: any;
-  ITEMS: any;
+  itemsOrder: Array<string>;
+  categories: CategoriesBoardType['categories'];
 };
 
-export const Column = ({ itemsOrder, id, ITEMS }: Column) => {
+export const Column = ({ itemsOrder, id, categories }: TColumn) => {
   return (
     <Droppable droppableId={id}>
       {(provided) => (
@@ -18,8 +18,8 @@ export const Column = ({ itemsOrder, id, ITEMS }: Column) => {
           ref={provided.innerRef}
           className="flex flex-col w-full h-fit"
         >
-          {itemsOrder.map((item_id: any, index: number) => {
-            const item = ITEMS[item_id];
+          {itemsOrder?.map((item_id: any, index: number) => {
+            const item = categories[item_id];
 
             return (
               <Draggable draggableId={item.id} index={index} key={item.id}>
