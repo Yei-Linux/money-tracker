@@ -20,6 +20,7 @@ import { useCreateTransactionForm } from '@moneytrack/web/hooks/useCreateTransac
 import { useDropdownsStore } from '@moneytrack/web/store/dropdowns';
 import { FC } from 'react';
 import { Controller } from 'react-hook-form';
+import Link from 'next/link';
 
 type TransactionForm = {
   toggle: TTogleFn;
@@ -89,61 +90,67 @@ export const TransactionForm: FC<TransactionForm> = ({ toggle }) => {
           />
         </FormField>
 
-        <FormField
-          error={errors.category?.message}
-          required
-          id="addForm_category"
-          label="Select a Category"
-        >
-          <Controller
-            name="category"
-            control={control}
-            render={({ field }) => (
-              <Select onValueChange={field.onChange}>
-                <SelectTrigger
-                  className="w-[180px]"
-                  data-testid={
-                    elementTestIds.CATEGORY_TRANSACTION_SELECT_ELEMENT
-                  }
-                >
-                  <SelectValue placeholder="Select a category..." />
-                </SelectTrigger>
+        <div className="flex items-center gap-10">
+          <FormField
+            error={errors.category?.message}
+            required
+            id="addForm_category"
+            label="Select a Category"
+          >
+            <Controller
+              name="category"
+              control={control}
+              render={({ field }) => (
+                <Select onValueChange={field.onChange}>
+                  <SelectTrigger
+                    className="w-[180px]"
+                    data-testid={
+                      elementTestIds.CATEGORY_TRANSACTION_SELECT_ELEMENT
+                    }
+                  >
+                    <SelectValue placeholder="Select a category..." />
+                  </SelectTrigger>
 
-                <SelectContent
-                  data-testid={
-                    elementTestIds.CATEGORY_TRANSACTION_SELECTLIST_ELEMENT
-                  }
-                  id="addForm_category"
-                  {...register('category')}
-                >
-                  <EmptyText>
-                    {categories.map(({ category, categories, _id }) => {
-                      const categoriesChildrenFiltered = categories?.filter(
-                        (category) =>
-                          category.transactionType === transactionTypeSelected
-                      );
+                  <SelectContent
+                    data-testid={
+                      elementTestIds.CATEGORY_TRANSACTION_SELECTLIST_ELEMENT
+                    }
+                    id="addForm_category"
+                    {...register('category')}
+                  >
+                    <EmptyText>
+                      {categories.map(({ category, categories, _id }) => {
+                        const categoriesChildrenFiltered = categories?.filter(
+                          (category) =>
+                            category.transactionType === transactionTypeSelected
+                        );
 
-                      if (!categoriesChildrenFiltered?.length) return [];
+                        if (!categoriesChildrenFiltered?.length) return [];
 
-                      return (
-                        <SelectGroup key={_id}>
-                          <SelectLabel>{category}</SelectLabel>
-                          {categoriesChildrenFiltered?.map(
-                            ({ category, _id }) => (
-                              <SelectItem key={_id} value={_id}>
-                                {category}
-                              </SelectItem>
-                            )
-                          )}
-                        </SelectGroup>
-                      );
-                    })}
-                  </EmptyText>
-                </SelectContent>
-              </Select>
-            )}
-          />
-        </FormField>
+                        return (
+                          <SelectGroup key={_id}>
+                            <SelectLabel>{category}</SelectLabel>
+                            {categoriesChildrenFiltered?.map(
+                              ({ category, _id }) => (
+                                <SelectItem key={_id} value={_id}>
+                                  {category}
+                                </SelectItem>
+                              )
+                            )}
+                          </SelectGroup>
+                        );
+                      })}
+                    </EmptyText>
+                  </SelectContent>
+                </Select>
+              )}
+            />
+          </FormField>
+
+          <Link href="/my-categories" className="underline text-sm font-bold">
+            Create my category
+          </Link>
+        </div>
 
         <FormField
           error={errors.title?.message}
