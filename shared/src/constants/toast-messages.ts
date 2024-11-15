@@ -23,4 +23,6 @@ export const toastMessages = {
 
   EXPENSE_WATCHER_ENABLED: 'You just activate your watcher!',
   EXPENSE_WATCHER_DISABLED: 'You just disactivate your watcher!',
+
+  SET_CATEGORY_SUCCESS: 'Category updated successfuly',
 };

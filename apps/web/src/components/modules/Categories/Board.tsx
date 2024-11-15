@@ -4,6 +4,7 @@ import { DragDropContext } from '@hello-pangea/dnd';
 import { Column } from './Column';
 import { useDndCategories } from '@moneytrack/web/hooks/useDndCategories';
 import { CategoriesBoardType } from '@moneytrack/web/types/categories';
+import { ColumnTitleEditable } from './ColumnTitleEditable';
 
 type TCategoriesBoard = {
   parentCategoriesColumns: CategoriesBoardType['parentCategoriesColumns'];
@@ -20,7 +21,7 @@ export const CategoriesBoard = ({
 
   return (
     <DragDropContext onDragEnd={handleDragDrop}>
-      <div className="flex items-start w-full py-4 mt-6 rounded-md overflow-x-auto">
+      <div className="flex items-start mt-6 rounded-md overflow-x-auto max-w-[100vw]">
         {Object.keys(parentCategoriesColumns).map((colId, index) => {
           const columnData = data[colId];
           return (
@@ -28,9 +29,10 @@ export const CategoriesBoard = ({
               key={index}
               className="rounded-xl border flex flex-col min-w-[200px] mx-3 bg-[#101204] text-white"
             >
-              <div className="flex items-center justify-between gap-2 p-4 rounded-t-xl">
-                <p className="text-md font-bold">{columnData.title}</p>
-              </div>
+              <ColumnTitleEditable
+                defaultTitle={columnData.title}
+                columnId={colId}
+              />
 
               <Column {...columnData} categories={categories} />
             </div>

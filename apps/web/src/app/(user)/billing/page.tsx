@@ -1,9 +1,9 @@
-async function PricingPage() {
+async function BillingPage() {
   return (
     <div className="flex flex-col gap-24 min-h-screen max-w-[1200px] p-14 m-auto">
-      pricing
+      billing
     </div>
   );
 }
 
-export default PricingPage;
+export default BillingPage;

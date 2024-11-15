@@ -38,7 +38,14 @@ export const GET = async (req: NextRequest) => {
       .map(({ categories }) => categories ?? [])
       .flat()
       .reduce((acc, item: TCategories[number]) => {
-        return { ...acc, [item._id]: { id: item._id, title: item.category } };
+        return {
+          ...acc,
+          [item._id]: {
+            id: item._id,
+            title: item.category,
+            transactionType: item.transactionType,
+          },
+        };
       }, {});
 
     return NextResponse.json({

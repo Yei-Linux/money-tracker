@@ -36,30 +36,27 @@ export const UserDropdown = () => {
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <Link href="#">
-                <DropdownMenuItem>
+              <Link href="/profile" className="w-full">
+                <DropdownMenuItem className="cursor-pointer">
                   <User className="mr-2 h-4 w-4" />
                   <span>Profile</span>
                 </DropdownMenuItem>
               </Link>
-              <Link href="#">
-                <DropdownMenuItem>
+              <Link href="/billing" className="w-full">
+                <DropdownMenuItem className="cursor-pointer">
                   <User className="mr-2 h-4 w-4" />
                   <span>Billing</span>
                 </DropdownMenuItem>
               </Link>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem
+              className="cursor-pointer"
+              onClick={() => signOut()}
+            >
               <LogOut className="mr-2 h-4 w-4" />
 
-              <Button
-                variant="outline"
-                className="border-none outline-none ![box-shadow:none]"
-                onClick={() => signOut()}
-              >
-                Log out
-              </Button>
+              <p>Log out</p>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
