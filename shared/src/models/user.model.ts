@@ -16,16 +16,20 @@ interface User {
   image: string | null;
   phone: string | null;
   password: string | null;
+  address: string | null;
+  country: string | null;
 }
 
 const userDBSchema = new mongoose.Schema<User>(
   {
     name: { type: String },
     email: { type: String, unique: true },
-    password: { type: String, minlength: 8 },
     phone: { type: String },
+    password: { type: String, minlength: 8 },
     emailVerified: { type: Date, required: false },
     image: { type: String, required: false },
+    address: { type: String, required: false },
+    country: { type: String, required: false },
   },
   { timestamps: true }
 );

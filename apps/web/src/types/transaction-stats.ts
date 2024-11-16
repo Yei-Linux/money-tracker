@@ -4,6 +4,10 @@ export type TTransactionStats = Array<{
   value: number;
   theme: string;
   length: number;
+  trend?: {
+    direction: 'up' | 'down';
+    percent: number;
+  };
 }>;
 
 export type TTransactionStatItem = TTransactionStats[number];

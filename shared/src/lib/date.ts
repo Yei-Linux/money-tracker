@@ -11,3 +11,10 @@ export const getStartEndDateByMonth = (monthDate: Date) => {
 
   return { startDate, endDate };
 };
+
+export const getPreviousMonthDate = (monthDate: Date): Date => {
+  const previousMonth = new Date(monthDate.getTime());
+  previousMonth.setDate(0);
+
+  return previousMonth;
+};

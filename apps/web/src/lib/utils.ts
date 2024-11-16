@@ -60,3 +60,13 @@ export const getMonthDateFromRequest = (req: NextRequest): Date => {
 
   return monthDate;
 };
+
+/**
+ * Get Either Avatar or UserName Placeholder
+ * @param name
+ * @param imageProfile
+ * @returns
+ */
+export const avatarURL = (name: string, imageProfile?: string | null) =>
+  imageProfile ||
+  `https://ui-avatars.com/api/?name=${name}&background=1e99c9&color=fff`;

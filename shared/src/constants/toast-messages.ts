@@ -25,4 +25,5 @@ export const toastMessages = {
   EXPENSE_WATCHER_DISABLED: 'You just disactivate your watcher!',
 
   SET_CATEGORY_SUCCESS: 'Category updated successfuly',
+  UPDATE_PROFILE_SUCCESS: 'Your profile information successfully',
 };

@@ -6,6 +6,7 @@ export const config = {
     '/api/transactions/:path*',
     '/api/money-account/:path*',
     '/api/categories/:path*',
+    '/api/settings/:path*',
   ],
   runtime: 'nodejs', // rather than "edge"
   unstable_allowDynamic: [

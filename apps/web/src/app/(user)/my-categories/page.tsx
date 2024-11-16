@@ -12,7 +12,7 @@ async function MyCategoriesPage() {
   const response = await getMyCategoriesBoardService(sessionCookieString);
 
   return (
-    <div className="flex flex-col justify-center items-center gap-24 min-h-screen m-auto">
+    <div className="flex flex-col justify-center items-center gap-24 min-h-[85vh] m-auto">
       <Title as="h2" className="text-center w-full">
         My Categories
       </Title>

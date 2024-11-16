@@ -1,6 +1,11 @@
 'use client';
 
-import { LogOut, User, UserCircle2 } from 'lucide-react';
+import {
+  BookMarkedIcon,
+  LogOut,
+  SettingsIcon,
+  UserCircle2,
+} from 'lucide-react';
 
 import { Button } from '@moneytrack/web/components/ui/button';
 import {
@@ -8,7 +13,6 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@moneytrack/web/components/ui/dropdown-menu';
@@ -33,19 +37,17 @@ export const UserDropdown = () => {
           </DropdownMenuTrigger>
 
           <DropdownMenuContent className="w-56">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <Link href="/profile" className="w-full">
+              <Link href="/my-categories" className="w-full">
                 <DropdownMenuItem className="cursor-pointer">
-                  <User className="mr-2 h-4 w-4" />
-                  <span>Profile</span>
+                  <BookMarkedIcon className="mr-2 h-4 w-4" />
+                  <span>My categories</span>
                 </DropdownMenuItem>
               </Link>
-              <Link href="/billing" className="w-full">
+              <Link href="/settings" className="w-full">
                 <DropdownMenuItem className="cursor-pointer">
-                  <User className="mr-2 h-4 w-4" />
-                  <span>Billing</span>
+                  <SettingsIcon className="mr-2 h-4 w-4" />
+                  <span>Settings</span>
                 </DropdownMenuItem>
               </Link>
             </DropdownMenuGroup>

@@ -9,7 +9,7 @@ interface ITrendAnalyzer {
 export const TrendAnalyzer: FC<ITrendAnalyzer> = ({ percent, trend }) => {
   return (
     <p className="text-xs">
-      <span>{trendEmojis[trend]}</span> {percent}% vs last month
+      <span>{trendEmojis[trend]}</span> {percent}% vs previous month
     </p>
   );
 };
