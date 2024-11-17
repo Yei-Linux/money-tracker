@@ -4,7 +4,7 @@ export const getSettingsProfile = async (
   cookie = ''
 ): Promise<GetMySettings | null> => {
   try {
-    const promise = await fetch(`${process.env.URL}/api/settings`, {
+    const promise = await fetch(`${process.env.URL}/api/settings/profile`, {
       headers: {
         cookie,
       },

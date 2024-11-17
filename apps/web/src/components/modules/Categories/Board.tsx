@@ -21,7 +21,7 @@ export const CategoriesBoard = ({
 
   return (
     <DragDropContext onDragEnd={handleDragDrop}>
-      <div className="flex items-start rounded-md overflow-x-auto max-w-[100vw]">
+      <div className="flex items-start rounded-md overflow-x-auto max-w-[95vw]">
         {Object.keys(parentCategoriesColumns).map((colId, index) => {
           const columnData = data[colId];
           return (

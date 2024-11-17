@@ -1,4 +1,4 @@
-import { putExpenseLimitServerAction } from '@moneytrack/web/server-actions/settings/put-expense-limit';
+import { putExpenseLimitServerAction } from '@moneytrack/web/server-actions/money-account/put-expense-limit';
 import {
   ExpenseLimitZodSchema,
   TExpenseLimitSchema,

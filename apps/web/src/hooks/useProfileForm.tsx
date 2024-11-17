@@ -8,17 +8,20 @@ import {
   ProfileZodSchema,
   TProfileSchema,
 } from '../validators/profile.validator';
+import { putProfileServerAction } from '../server-actions/settings/put-profile';
+import { useSession } from '../lib/auth/auth';
 
 type UseProfileForm = { defaultValues: Omit<TProfileSchema, 'image'> };
 
 export const useProfileForm = ({ defaultValues }: UseProfileForm) => {
   const [isLoading, startTransition] = useTransition();
+  const { update } = useSession();
   const { refresh } = useRouter();
   const {
     register,
     handleSubmit,
     control,
-    formState: { errors },
+    formState: { errors, isDirty },
     watch,
   } = useForm<TProfileSchema>({
     resolver: zodResolver(ProfileZodSchema),
@@ -28,6 +31,8 @@ export const useProfileForm = ({ defaultValues }: UseProfileForm) => {
   const onSubmit = async (data: TProfileSchema) => {
     startTransition(async () => {
       try {
+        await putProfileServerAction(data);
+        await update({ name: data.name, image: data.image });
         refresh();
         toast.success(toastMessages.UPDATE_PROFILE_SUCCESS);
       } catch (error) {
@@ -44,5 +49,6 @@ export const useProfileForm = ({ defaultValues }: UseProfileForm) => {
     control,
     isLoading,
     watch,
+    isDirty,
   };
 };

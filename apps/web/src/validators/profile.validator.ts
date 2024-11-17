@@ -13,18 +13,12 @@ function checkFileType(file: File) {
 export const ProfileZodSchema = z
   .object({
     image: z
-      .instanceof(File, { message: 'Please upload a file' })
+      .any()
       .refine((f) => f.size < 100_000, 'Max 100 kB upload size')
       .refine((file) => checkFileType(file), 'Only images are supported.')
       .optional(),
-    country: z
-      .string()
-      .min(3, { message: 'Min required is 3 characters' })
-      .optional(),
-    address: z
-      .string()
-      .min(3, { message: 'Min required is 3 characters' })
-      .optional(),
+    country: z.string().optional(),
+    address: z.string().optional(),
   })
   .merge(UserZodSchema.merge(AuthZodSchema.omit({ password: true })));
 

@@ -4,6 +4,7 @@ import { AutocompleteSelect } from '@moneytrack/web/components/ui/autocomplete-s
 import { Avatar, AvatarImage } from '@moneytrack/web/components/ui/avatar';
 import { Button } from '@moneytrack/web/components/ui/button';
 import { FormField } from '@moneytrack/web/components/ui/form-field';
+import { HandyArrowToLeftIcon } from '@moneytrack/web/components/ui/icons/HandyArrowToLeftIcon';
 import { Input } from '@moneytrack/web/components/ui/input';
 
 import { useCountriesSelect } from '@moneytrack/web/hooks/useCountriesSelect';
@@ -17,21 +18,32 @@ type ProfileForm = GetMySettings['profile'];
 
 export const ProfileForm: FC<ProfileForm> = (props) => {
   const { countriesDropdown } = useCountriesSelect();
-  const { register, onSubmit, handleSubmit, errors, isLoading, control } =
-    useProfileForm({ defaultValues: props });
+  const {
+    register,
+    onSubmit,
+    handleSubmit,
+    errors,
+    isLoading,
+    control,
+    isDirty,
+  } = useProfileForm({ defaultValues: props });
   const action: () => void = handleSubmit(onSubmit);
 
   const avatar = avatarURL(props.name, props.image);
 
   return (
     <form action={action} className="flex flex-col gap-7">
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center gap-3 items-center">
         <Avatar className="shadow-md !w-[100px] !h-[100px]">
           <AvatarImage src={avatar} />
         </Avatar>
+
+        <span className="hidden md:flex mr-[-100px]">
+          <HandyArrowToLeftIcon />
+        </span>
       </div>
 
-      <div className="flex flex-col gap-3 [&_button]:![box-shadow:none]  [&_input]:![box-shadow:none] [&_textarea]:![box-shadow:none]">
+      <div className="flex flex-col gap-3 [&_button]:![box-shadow:none]  [&_input]:![box-shadow:none] [&_textarea]:![box-shadow:none] mt-10">
         <div className="grid md:grid-cols-2 gap-3">
           <FormField
             error={errors.name?.message}
@@ -78,7 +90,6 @@ export const ProfileForm: FC<ProfileForm> = (props) => {
         <div className="grid md:grid-cols-2 gap-3">
           <FormField
             error={errors.country?.message}
-            required
             id="profileform_country"
             label="Select a country"
           >
@@ -97,7 +108,6 @@ export const ProfileForm: FC<ProfileForm> = (props) => {
 
           <FormField
             error={errors.address?.message}
-            required
             id="profileform_address"
             label="Type the address"
           >
@@ -110,9 +120,16 @@ export const ProfileForm: FC<ProfileForm> = (props) => {
         </div>
       </div>
 
-      <Button className="rounded-md p-2" type="submit" loading={isLoading}>
-        Save
-      </Button>
+      <div className="flex justify-end">
+        <Button
+          className="rounded-md p-2 w-fit min-w-[300px]"
+          type="submit"
+          loading={isLoading}
+          disabled={!isDirty}
+        >
+          Save
+        </Button>
+      </div>
     </form>
   );
 };

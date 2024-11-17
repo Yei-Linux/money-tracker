@@ -21,12 +21,14 @@ type AutocompleteSelect = {
   }>;
   value: string;
   onChange: (value: string) => void;
+  placeholder?: string;
 };
 
 export function AutocompleteSelect({
   options,
   value,
   onChange,
+  placeholder = 'Select your option',
 }: AutocompleteSelect) {
   const [open, setOpen] = React.useState(false);
 
@@ -41,13 +43,13 @@ export function AutocompleteSelect({
         >
           {value
             ? options.find((framework) => framework.value === value)?.label
-            : 'Select framework...'}
+            : placeholder}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
-          <CommandInput placeholder="Search framework..." />
+          <CommandInput placeholder={placeholder} />
           <CommandList>
             <CommandEmpty>No framework found.</CommandEmpty>
             <CommandGroup>

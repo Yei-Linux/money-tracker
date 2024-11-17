@@ -1,4 +1,4 @@
-import { putIncomesGoalServerAction } from '@moneytrack/web/server-actions/settings/put-incomes-goal';
+import { putIncomesGoalServerAction } from '@moneytrack/web/server-actions/money-account/put-incomes-goal';
 import {
   IncomesGoalZodSchema,
   TIncomesGoalSchema,

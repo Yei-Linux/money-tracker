@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useToggle } from './@shared/useToggle';
-import { toggleWatcherLimitServerAction } from '@moneytrack/web/server-actions/settings/toggle-watcher-limit';
+import { toggleWatcherLimitServerAction } from '@moneytrack/web/server-actions/money-account/toggle-watcher-limit';
 import { toast } from 'react-hot-toast';
 import { useIsMounted } from './@shared/useIsMounted';
 import { toastMessages } from '@moneytrack/shared/constants';

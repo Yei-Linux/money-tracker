@@ -147,7 +147,7 @@ export const TransactionForm: FC<TransactionForm> = ({ toggle }) => {
             />
           </FormField>
 
-          <Link href="/my-categories" className="underline text-sm font-bold">
+          <Link href="/categories" className="underline text-sm font-bold">
             Create my category
           </Link>
         </div>

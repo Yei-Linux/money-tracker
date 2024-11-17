@@ -32,10 +32,19 @@ export const authOptions: AuthOptions = {
     },
   },
   callbacks: {
-    jwt({ token, user }) {
+    jwt({ token, user, session }) {
+      if (session) {
+        return {
+          ...token,
+          name: session.name,
+          image: session.image,
+        };
+      }
+
       if (!user) {
         return token;
       }
+
       return {
         ...token,
         id: user.id,

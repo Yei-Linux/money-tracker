@@ -35,6 +35,7 @@ export const authorize = async (
     id: userFound.id,
     email: userFound.email,
     name: userFound.name,
+    image: userFound.image,
   };
 };
 
