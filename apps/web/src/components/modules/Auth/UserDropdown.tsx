@@ -5,7 +5,6 @@ import {
   BookMarkedIcon,
   LogOut,
   SettingsIcon,
-  UserCircle2,
 } from 'lucide-react';
 
 import { Button } from '@moneytrack/web/components/ui/button';
