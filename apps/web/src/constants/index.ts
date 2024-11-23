@@ -1,20 +1,13 @@
 import { TAvatars } from '@moneytrack/web/types/avatars';
 import { TransactionTypeIds } from '../../db/seeders/transaction-types';
 import type { TTestimonials } from '@moneytrack/web/types/testiomonials';
-import { TPricingPlans } from '@moneytrack/web/types/pricing';
 import { FeaturesOn } from '@moneytrack/web/types/featured-on';
 import { ProductHuntIcon } from '@moneytrack/web/components/ui/icons/ProductHuntIcon';
 import { HackerNewsIcon } from '@moneytrack/web/components/ui/icons/HackerNewsIcon';
 import { XIcon } from '@moneytrack/web/components/ui/icons/XIcon';
 import { RedditIcon } from '@moneytrack/web/components/ui/icons/RedditIcon';
 import { FeaturesApp } from '@moneytrack/web/types/features-app';
-import {
-  BookIcon,
-  BoxIcon,
-  MailIcon,
-  PhoneCallIcon,
-  UserIcon,
-} from 'lucide-react';
+import { BookIcon, MailIcon, UserIcon } from 'lucide-react';
 
 export const trendEmojis = {
   up: '↗️',
@@ -111,51 +104,6 @@ export const Avatars: TAvatars = [
   {
     avatar: '/assets/avatar-sample.jpeg',
     fallbackName: 'CN',
-  },
-];
-
-export const PlansMocked: TPricingPlans = [
-  {
-    theme: 'light',
-    image: '/assets/free-plan.png',
-    type: 'Personal',
-    price: 'Free',
-    description: 'For people who are trying to use it as a hobby',
-    callToActionText: 'Get Started for Free',
-    benefits: [
-      'Up to 10 participants in an event at once',
-      'Unlimited events',
-      'Unlimited organizers',
-      'Standard and advanced mathcing',
-    ],
-  },
-  {
-    theme: 'dark',
-    image: '/assets/premium-plan.png',
-    type: 'Premium',
-    price: 5,
-    description: 'For people who are trying to use advanced features',
-    callToActionText: 'Get Started with Premium',
-    benefits: [
-      'Up to 10 participants in an event at once',
-      'Unlimited events',
-      'Unlimited organizers',
-      'Standard and advanced mathcing',
-    ],
-  },
-  {
-    theme: 'light',
-    image: '/assets/company-plan.png',
-    type: 'Enterprise',
-    price: 'Coming Soon',
-    description: 'For companies that required something advanced',
-    callToActionText: 'Coming Soon',
-    benefits: [
-      'Up to 10 participants in an event at once',
-      'Unlimited events',
-      'Unlimited organizers',
-      'Standard and advanced mathcing',
-    ],
   },
 ];
 

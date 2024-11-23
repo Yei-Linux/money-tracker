@@ -9,3 +9,11 @@ export const getAuthSessionInServerAction = async () => {
 
   return user;
 };
+
+export const getEmailSessionInServerAction = async () => {
+  const session = await getServerSession(authOptions);
+  const userEmail = session?.user.email;
+  if (!userEmail) throw new AuthError('You are not logged in');
+
+  return userEmail;
+};

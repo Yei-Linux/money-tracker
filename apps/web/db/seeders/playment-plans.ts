@@ -1,0 +1,47 @@
+export const paymentPlansSeeder = [
+  {
+    _id: '67421c48799dce0cce55d950',
+    type: 'Personal',
+    description: 'For people who are trying to use it as a hobby',
+    price: 5,
+    theme: 'light',
+    image: '/assets/free-plan.png',
+    callToActionText: 'Get Started with Personal',
+    benefits: [
+      'Up to 10 participants in an event at once',
+      'Unlimited events',
+      'Unlimited organizers',
+      'Standard and advanced mathcing',
+    ],
+  },
+  {
+    _id: '67421c5402d2cd222479efa5',
+    type: 'Premium',
+    description: 'For people who are trying to use advanced features',
+    price: 10,
+    theme: 'dark',
+    image: '/assets/premium-plan.png',
+    callToActionText: 'Get Started with Premium',
+    benefits: [
+      'Up to 10 participants in an event at once',
+      'Unlimited events',
+      'Unlimited organizers',
+      'Standard and advanced mathcing',
+    ],
+  },
+  {
+    _id: '67421c5af98cc4fb13ad37aa',
+    type: 'Enterprise',
+    description: 'For companies that required something advanced',
+    price: -1,
+    theme: 'light',
+    image: '/assets/company-plan.png',
+    callToActionText: 'Coming Soon',
+    benefits: [
+      'Up to 10 participants in an event at once',
+      'Unlimited events',
+      'Unlimited organizers',
+      'Standard and advanced mathcing',
+    ],
+  },
+];

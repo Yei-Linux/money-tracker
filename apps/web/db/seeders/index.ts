@@ -1,5 +1,7 @@
 import dbConnect from '../../src/lib/db/mongoose';
 import transactionTypesModel from '../../src/models/transaction-types.model';
+import plansModel from '../../src/models/plans.model';
+import { paymentPlansSeeder } from './playment-plans';
 
 import { transactionTypesSeeder } from './transaction-types';
 
@@ -17,8 +19,10 @@ const executeSeeders = async () => {
     await dbConnect();
 
     const transactionTypes = transactionTypesSeeder.map(buildUpsert);
+    const plans = paymentPlansSeeder.map(buildUpsert);
 
     transactionTypesModel.bulkWrite(transactionTypes);
+    plansModel.bulkWrite(plans);
     console.log('Operation completed!');
   } catch (error) {
     console.log('Operation stopped by an error');

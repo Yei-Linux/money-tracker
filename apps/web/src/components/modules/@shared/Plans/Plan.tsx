@@ -1,6 +1,6 @@
 import { Button } from '@moneytrack/web/components/ui/button';
 import { cn } from '@moneytrack/web/lib/utils';
-import { TPricingPlan } from '@moneytrack/web/types/pricing';
+import { TPricingPlan } from '@moneytrack/web/types/payment';
 import { FC, PropsWithChildren } from 'react';
 
 type PlanItem = {
@@ -9,7 +9,9 @@ type PlanItem = {
 
 const PlanItem: FC<PlanItem> = ({ item }) => <li>{item}</li>;
 
-type Plan = PropsWithChildren<Omit<TPricingPlan, 'benefits'>>;
+type Plan = PropsWithChildren<Omit<TPricingPlan, 'benefits'>> & {
+  onSubmit?: () => void;
+};
 
 type PlanCompound = {
   Item: typeof PlanItem;
@@ -23,6 +25,7 @@ export const Plan: FC<Plan> & PlanCompound = ({
   children,
   callToActionText,
   theme,
+  onSubmit,
 }) => {
   const themes = {
     dark: {
@@ -31,11 +34,12 @@ export const Plan: FC<Plan> & PlanCompound = ({
     },
     light: { button: 'bg-black text-white', container: 'bg-white text-black' },
   };
+  const isValidPricing = !isNaN(+price) && +price > 0;
 
   return (
     <div
       className={cn(
-        'flex flex-col gap-7 p-4 rounded-xl items-center shadow-md',
+        'flex flex-col gap-7 px-4 py-14 rounded-xl items-center shadow-md',
         themes[theme].container
       )}
     >
@@ -44,8 +48,8 @@ export const Plan: FC<Plan> & PlanCompound = ({
       <div className="flex flex-col items-center">
         <p className="font-bold text-2xl font-snicker">{type}</p>
         <h4 className="font-bold text-4xl">
-          {!isNaN(+price) && '$'}
-          {price}
+          {isValidPricing && '$'}
+          {isValidPricing ? price : 'Coming Soon'}
         </h4>
       </div>
 
@@ -53,7 +57,10 @@ export const Plan: FC<Plan> & PlanCompound = ({
 
       <ul className="text-sm">{children}</ul>
 
-      <Button className={cn('rounded-full', themes[theme].button)}>
+      <Button
+        className={cn('rounded-full', themes[theme].button)}
+        onClick={onSubmit}
+      >
         {callToActionText}
       </Button>
     </div>

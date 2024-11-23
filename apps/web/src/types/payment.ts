@@ -1,10 +1,10 @@
 export type TPricingPlan = {
   image: string;
   type: string;
-  price: number | string;
+  price: number;
   description: string;
   callToActionText: string;
-  theme: "dark" | "light";
+  theme: 'dark' | 'light';
 
   benefits: Array<string>;
 };

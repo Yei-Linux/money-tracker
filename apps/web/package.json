@@ -10,7 +10,7 @@
     "start": "next start",
     "start:uat": "env-cmd .env.uat next start",
     "lint": "next lint",
-    "db:seed": "DOTENV_CONFIG_PATH=.env.local  ts-node -r dotenv/config --compiler-options \"{\\\"module\\\":\\\"CommonJS\\\"}\" db/seeders/index.ts"
+    "db:seed": "DOTENV_CONFIG_PATH=.env.prod  ts-node -r dotenv/config --compiler-options \"{\\\"module\\\":\\\"CommonJS\\\"}\" db/seeders/index.ts"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.0",
