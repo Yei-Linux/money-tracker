@@ -19,7 +19,6 @@ export const mercadoPagoSuscriptionServerAction = async (
 
     return initPoint;
   } catch (error) {
-    console.log(error);
     throw new PaymentError((error as Error).message);
   }
 };
