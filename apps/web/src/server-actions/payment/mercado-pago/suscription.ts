@@ -6,7 +6,8 @@ import { mercadoPagoLib } from '@moneytrack/web/lib/payment/mercadopago';
 
 export const mercadoPagoSuscriptionServerAction = async (
   reason: string,
-  amount: number
+  amount: number,
+  planId: string
 ) => {
   try {
     const email = await getEmailSessionInServerAction();
@@ -15,6 +16,7 @@ export const mercadoPagoSuscriptionServerAction = async (
       email,
       reason,
       amount,
+      planId,
     });
 
     return initPoint;

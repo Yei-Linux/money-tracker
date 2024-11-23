@@ -14,10 +14,13 @@ export const Plans = ({ plans }: TPlans) => {
   const handlePayment = async (
     plan: Omit<TPricingPlans[number], 'benefits'>
   ) => {
+    if (!plan.id) return;
+
     try {
       const uri = await mercadoPagoSuscriptionServerAction(
         formatReasonPayment(plan.type),
-        plan.price
+        plan.price,
+        plan.id
       );
 
       window.location.href = uri;

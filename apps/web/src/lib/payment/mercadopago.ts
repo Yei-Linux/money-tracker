@@ -1,5 +1,7 @@
 import { envs } from '@moneytrack/web/constants/env';
-import MercadoPagoConfig, { PreApproval } from 'mercadopago';
+import MercadoPagoConfig, { Payment, PreApproval } from 'mercadopago';
+import { PaymentResponse } from 'mercadopago/dist/clients/payment/commonTypes';
+import { PreApprovalResponse } from 'mercadopago/dist/clients/preApproval/commonTypes';
 
 export class MercadoPago {
   private mercadopago: MercadoPagoConfig;
@@ -13,15 +15,18 @@ export class MercadoPago {
     email,
     reason,
     amount,
+    planId,
   }: {
     email: string;
     reason: string;
     amount: number;
+    planId: string;
   }): Promise<string> {
     const suscription = await new PreApproval(this.mercadopago).create({
       body: {
         back_url: envs.MP_APP_URL,
         reason,
+        external_reference: planId,
         auto_recurring: {
           frequency: 1,
           frequency_type: 'months',
@@ -34,6 +39,20 @@ export class MercadoPago {
     });
 
     return suscription.init_point!;
+  }
+
+  async getSuscription(paymentId: string): Promise<PreApprovalResponse> {
+    const preapproval = await new PreApproval(this.mercadopago).get({
+      id: paymentId,
+    });
+
+    return preapproval;
+  }
+
+  async getPayment(paymentId: string): Promise<PaymentResponse> {
+    const payment = await new Payment(this.mercadopago).get({ id: paymentId });
+
+    return payment;
   }
 }
 

@@ -18,6 +18,7 @@ interface User {
   password: string | null;
   address: string | null;
   country: string | null;
+  planId: string | null;
 }
 
 const userDBSchema = new mongoose.Schema<User>(
@@ -30,6 +31,7 @@ const userDBSchema = new mongoose.Schema<User>(
     image: { type: String, required: false },
     address: { type: String, required: false },
     country: { type: String, required: false },
+    planId: { type: String, required: false },
   },
   { timestamps: true }
 );
