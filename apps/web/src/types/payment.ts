@@ -11,3 +11,9 @@ export type TPricingPlan = {
 };
 
 export type TPricingPlans = Array<TPricingPlan>;
+
+export type PaymentWebhookPayload = {
+  data: { id: string };
+  type: string;
+  id: string;
+};

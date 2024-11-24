@@ -3,6 +3,7 @@ export type UserSession = {
   email: string;
   name: string;
   image: string;
+  planId?: string | null;
 };
 
 export type AuthStatesForm = 'signin' | 'signup';

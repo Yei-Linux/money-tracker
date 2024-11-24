@@ -38,6 +38,7 @@ export const authOptions: AuthOptions = {
           ...token,
           name: session.name,
           image: session.image,
+          planId: session?.planId,
         };
       }
 
@@ -58,6 +59,7 @@ export const authOptions: AuthOptions = {
           ...session.user,
           id: token.id,
           name: token.name,
+          planId: token?.planId,
         },
       };
     },
