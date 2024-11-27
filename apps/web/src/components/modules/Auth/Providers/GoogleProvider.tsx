@@ -13,7 +13,8 @@ export const GoogleProvider = () => {
   const authState = useAuthFormStore((store) => store.state);
   const callbackUrl = useAuthFormStore((state) => state.callbackUrl);
   const text = gmailText[authState];
-  const handleGoogleAuth = () => signIn('google', { callbackUrl });
+  const handleGoogleAuth = () =>
+    signIn('google', { callbackUrl, redirect: false });
 
   return (
     <Button

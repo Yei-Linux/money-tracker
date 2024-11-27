@@ -3,13 +3,16 @@ import { mercadoPagoLib } from '../lib/payment/mercadopago';
 import { PaymentWebhookPayload } from '../types/payment';
 import { cardsModel, paymenstModel } from '../models';
 
+// TODO: Add card feature
 export const paymentSuscriptionUseCase = async (
   body: PaymentWebhookPayload
 ) => {
   const preapproval = await mercadoPagoLib().getSuscription(body.data.id);
-
+  const paymentId = preapproval.id;
   if (preapproval.status !== 'authorized')
-    throw new Error('Payment not authorized yet');
+    throw new Error('Unauthorized subscription');
+
+  if (!paymentId) throw new Error('PaymetId required');
   if (!preapproval.external_reference)
     throw new Error('External payload is empty');
 
@@ -19,22 +22,24 @@ export const paymentSuscriptionUseCase = async (
   if (!email) throw new Error('Email is empty');
   if (!planId) throw new Error('PlanId is empty');
 
-  const payment = await mercadoPagoLib().getPayment(body.id);
-  const cardMask = payment.card
-    ? `**** **** **** ${payment.card?.last_four_digits}`
-    : '';
-  const cardId = payment.card?.id;
-  const cartType = payment.payment_method?.type;
-
-  const transaction = payment.description!;
-  const pricing = payment.transaction_amount;
+  if (!preapproval.auto_recurring?.transaction_amount)
+    throw new Error('Charged not found');
 
   const userFound = await userModel.findOne({ email });
+  if (!userFound) throw new Error('User not found');
+
+  const cardMask = '';
+  const cardId = '';
+  const cartType = preapproval.payment_method_id;
+
+  const transaction = preapproval.reason;
+  const pricing = +preapproval.auto_recurring?.transaction_amount;
+
   const user = userFound._id;
 
   cardId &&
-    cartType &&
     cardMask &&
+    cartType &&
     (await cardsModel.findOneAndUpdate(
       { cardId, user },
       { type: cartType, mask: cardMask, cardId, active: true, user },
@@ -47,5 +52,5 @@ export const paymentSuscriptionUseCase = async (
     pricing,
     cardMask,
   });
-  await userModel.updateOne({ _id: user }, { planId });
+  await userModel.updateOne({ _id: user }, { plan: planId });
 };

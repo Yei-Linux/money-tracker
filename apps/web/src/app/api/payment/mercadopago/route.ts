@@ -6,12 +6,13 @@ export async function POST(request: NextRequest) {
   try {
     const body: PaymentWebhookPayload = await request.json();
 
-    if (body.type === 'subscription_preapproval')
-      await paymentSuscriptionUseCase(body);
+    if (body.type !== 'subscription_preapproval')
+      throw new Error('Payment type not authorized');
 
+    await paymentSuscriptionUseCase(body);
     return new Response(null, { status: 200 });
   } catch (error) {
-    console.log(error);
+    console.log((error as Error).message);
     return catchApiError(error);
   }
 }

@@ -20,7 +20,7 @@ const paymentsDBSchema = new mongoose.Schema(
     },
     cardMask: {
       type: String,
-      required: true,
+      required: false,
     },
   },
   { timestamps: true }

@@ -30,6 +30,7 @@ export const useSignInUserForm = () => {
             email: data.email,
             password: data.password,
             callbackUrl,
+            redirect: false,
           }
         );
 
