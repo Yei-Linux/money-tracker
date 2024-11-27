@@ -18,8 +18,10 @@ type SignUpStep = StepFactory<
 >;
 
 type UseAuthFormStore = {
+  callbackUrl: string;
   state: AuthStatesForm;
   switchState: SwitchStateMethod;
+  setCallbackUrl: (prop: string) => void;
 } & GeneralAuthStep &
   SignUpStep &
   Popup;
@@ -65,15 +67,21 @@ const stepFactoryObjects = <T>({
 
 export const useAuthFormStore = create<UseAuthFormStore>((set) => ({
   open: false,
+  callbackUrl: '/',
   state: 'signup',
 
   setOpen: (value) =>
-    set(() => ({
+    set((store) => ({
+      callbackUrl: !value ? '/' : store.callbackUrl,
       open: value,
     })),
   switchState: (state) =>
     set((store) => ({
       state: state ?? (store.state === 'signin' ? 'signup' : 'signin'),
+    })),
+  setCallbackUrl: (value) =>
+    set(() => ({
+      callbackUrl: value,
     })),
 
   ...stepFactoryObjects<GeneralAuthStep>({

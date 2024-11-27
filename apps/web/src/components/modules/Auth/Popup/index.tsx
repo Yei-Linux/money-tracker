@@ -14,7 +14,12 @@ export const AuthPopup = () => {
   const switchState = useAuthFormStore((store) => store.switchState);
 
   return (
-    <Dialog open={open} onOpenChange={(newOpen) => setOpen(newOpen)}>
+    <Dialog
+      open={open}
+      onOpenChange={(newOpen) => {
+        setOpen(newOpen);
+      }}
+    >
       <DialogTrigger asChild>
         <Button variant="secondary" onClick={() => switchState('signin')}>
           Sign In

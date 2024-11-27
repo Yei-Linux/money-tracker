@@ -1,4 +1,5 @@
-import { StartAppButton } from "../../@shared/StartAppButton";
+import { StartAppButton } from '../../@shared/StartAppButton';
+import { CallToAction } from '../Hero/CallToAction';
 
 export const GetApp = () => {
   return (
@@ -10,7 +11,7 @@ export const GetApp = () => {
         <p>Control your money every time and improve your budget...</p>
       </div>
 
-      <StartAppButton />
+      <CallToAction />
     </div>
   );
 };

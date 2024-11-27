@@ -7,33 +7,45 @@ export const paymentSuscriptionUseCase = async (
   body: PaymentWebhookPayload
 ) => {
   const preapproval = await mercadoPagoLib().getSuscription(body.data.id);
-  const payment = await mercadoPagoLib().getPayment(body.id);
 
-  const email = preapproval.payer_email;
-  const planId = preapproval.external_reference;
-  const cardMask = `**** **** **** ${payment.card?.last_four_digits}`;
+  if (preapproval.status !== 'authorized')
+    throw new Error('Payment not authorized yet');
+  if (!preapproval.external_reference)
+    throw new Error('External payload is empty');
+
+  const externalPayload = JSON.parse(preapproval.external_reference);
+  const email: string | null = externalPayload.email;
+  const planId: string | null = externalPayload.planId;
+  if (!email) throw new Error('Email is empty');
+  if (!planId) throw new Error('PlanId is empty');
+
+  const payment = await mercadoPagoLib().getPayment(body.id);
+  const cardMask = payment.card
+    ? `**** **** **** ${payment.card?.last_four_digits}`
+    : '';
   const cardId = payment.card?.id;
   const cartType = payment.payment_method?.type;
 
   const transaction = payment.description!;
   const pricing = payment.transaction_amount;
 
-  if (preapproval.status === 'authorized' && email && planId) {
-    const userFound = await userModel.findOne({ email });
-    const user = userFound._id;
+  const userFound = await userModel.findOne({ email });
+  const user = userFound._id;
 
-    await cardsModel.findOneAndUpdate(
+  cardId &&
+    cartType &&
+    cardMask &&
+    (await cardsModel.findOneAndUpdate(
       { cardId, user },
       { type: cartType, mask: cardMask, cardId, active: true, user },
       { upsert: true }
-    );
-    await paymenstModel.create({
-      transaction,
-      user,
-      plan: planId,
-      pricing,
-      cardMask,
-    });
-    await userModel.updateOne({ _id: user }, { planId });
-  }
+    ));
+  await paymenstModel.create({
+    transaction,
+    user,
+    plan: planId,
+    pricing,
+    cardMask,
+  });
+  await userModel.updateOne({ _id: user }, { planId });
 };

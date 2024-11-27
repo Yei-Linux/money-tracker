@@ -1,5 +1,5 @@
 export type TPricingPlan = {
-  id: string;
+  _id: string;
   image: string;
   type: string;
   price: number;

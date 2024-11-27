@@ -16,3 +16,5 @@ export const GET = async (req: NextRequest) => {
     return catchApiError(error);
   }
 };
+
+export const revalidate = 10;

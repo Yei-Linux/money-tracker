@@ -5,6 +5,11 @@ import { PreApprovalResponse } from 'mercadopago/dist/clients/preApproval/common
 
 export class MercadoPago {
   private mercadopago: MercadoPagoConfig;
+  private isTesting = true;
+  private testInfo = {
+    email: 'test_user_71867124@testuser.com',
+  };
+
   constructor() {
     this.mercadopago = new MercadoPagoConfig({
       accessToken: envs.MP_ACCESS_TOKEN,
@@ -26,14 +31,14 @@ export class MercadoPago {
       body: {
         back_url: envs.MP_APP_URL,
         reason,
-        external_reference: planId,
+        external_reference: JSON.stringify({ planId, email }),
         auto_recurring: {
           frequency: 1,
           frequency_type: 'months',
           transaction_amount: amount,
           currency_id: 'PEN',
         },
-        payer_email: email,
+        payer_email: this.isTesting ? this.testInfo.email : email,
         status: 'pending',
       },
     });

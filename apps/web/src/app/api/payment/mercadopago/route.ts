@@ -11,6 +11,7 @@ export async function POST(request: NextRequest) {
 
     return new Response(null, { status: 200 });
   } catch (error) {
+    console.log(error);
     return catchApiError(error);
   }
 }

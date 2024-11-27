@@ -11,9 +11,11 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { toastMessages } from '@moneytrack/shared/constants';
+import { useAuthFormStore } from '../store/auth-form';
 
 export const useSignInUserForm = () => {
   const { refresh } = useRouter();
+  const callbackUrl = useAuthFormStore((state) => state.callbackUrl);
   const [isLoading, startTransition] = useTransition();
   const methods = useForm<TSignInSchema>({
     resolver: zodResolver(SignInZodSchema),
@@ -27,7 +29,7 @@ export const useSignInUserForm = () => {
           {
             email: data.email,
             password: data.password,
-            redirect: false,
+            callbackUrl,
           }
         );
 

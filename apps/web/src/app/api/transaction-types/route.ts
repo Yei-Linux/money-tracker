@@ -17,3 +17,5 @@ export const GET = async () => {
     return catchApiError(error);
   }
 };
+
+export const revalidate = 10;

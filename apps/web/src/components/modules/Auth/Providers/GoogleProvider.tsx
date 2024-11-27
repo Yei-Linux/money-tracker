@@ -11,8 +11,9 @@ const gmailText: Record<AuthStatesForm, string> = {
 
 export const GoogleProvider = () => {
   const authState = useAuthFormStore((store) => store.state);
+  const callbackUrl = useAuthFormStore((state) => state.callbackUrl);
   const text = gmailText[authState];
-  const handleGoogleAuth = () => signIn('google');
+  const handleGoogleAuth = () => signIn('google', { callbackUrl });
 
   return (
     <Button
