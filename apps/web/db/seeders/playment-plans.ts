@@ -33,7 +33,7 @@ export const paymentPlansSeeder = [
     _id: '67421c5af98cc4fb13ad37aa',
     type: 'Enterprise',
     description: 'For companies that required something advanced',
-    price: -1,
+    price: 15,
     theme: 'light',
     image: '/assets/company-plan.png',
     callToActionText: 'Coming Soon',

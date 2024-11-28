@@ -3,41 +3,28 @@ import { CardSelector } from '../../../@shared/CardSelector';
 import { MoneyCurrency } from '../../../@shared/MoneyCurrency';
 import { cn } from '@moneytrack/web/lib/utils';
 import { CheckIcon } from 'lucide-react';
+import { TPricingPlans } from '@moneytrack/web/types/payment';
 
-const plans = [
-  {
-    plan: 'Beginner',
-    description: 'Basic plan',
-    price: 5,
-    active: true,
-  },
-  {
-    plan: 'Intermediate',
-    description: 'Intermediate plan',
-    price: 10,
-    active: false,
-  },
-  {
-    plan: 'Pro',
-    description: 'Pro plan',
-    price: 15,
-    active: false,
-  },
-];
-
-export const Plans = () => {
+export const Plans = ({
+  plans,
+  plan,
+}: {
+  plans: TPricingPlans;
+  plan?: string;
+}) => {
   return (
     <div className="flex flex-wrap gap-3">
-      {plans.map(({ plan, description, price, active }) => (
+      {plans.map(({ _id, type, description, price }) => (
         <CardSelector
           className={cn('border border-2 relative', {
-            'border-purple': active,
+            'border-purple': _id === plan,
           })}
+          key={_id}
         >
           <div className="flex justify-between items-center">
             <div className="flex flex-col gap-1">
-              <h3 className="font-semibold text-md">{plan}</h3>
-              <p className="text-xs">{description}</p>
+              <h3 className="font-semibold text-md">{type}</h3>
+              <p className="text-xs max-w-[220px]">{description}</p>
             </div>
             <span className="flex items-center gap-1 text-sm">
               <MoneyCurrency money={price} variant="xl" /> <span>/ month</span>
@@ -48,10 +35,10 @@ export const Plans = () => {
             variant="outline"
             className={cn('!text-sm w-fit !bg-purple !text-white')}
           >
-            {active ? 'Cancel Suscription' : 'Upgrade'}
+            {_id === plan ? 'Cancel Suscription' : 'Upgrade'}
           </Button>
 
-          {active && (
+          {_id === plan && (
             <CheckIcon className="rounded-full bg-purple text-white absolute -right-[10px] -top-[10px]" />
           )}
         </CardSelector>

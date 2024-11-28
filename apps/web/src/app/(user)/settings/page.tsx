@@ -6,6 +6,7 @@ import { Title } from '@moneytrack/web/components/ui/title';
 import { COOKIES } from '@moneytrack/web/constants';
 import { WithAuth } from '@moneytrack/web/hocs/WithAuth';
 import { getCookieString } from '@moneytrack/web/lib/cookies';
+import { getPlansService } from '@moneytrack/web/services/payment/plans.service';
 import { getSettingsProfile } from '@moneytrack/web/services/settings-profile.service';
 import { cookies } from 'next/headers';
 
@@ -14,6 +15,8 @@ async function SettingsPage() {
   const sessionCookie = cookiesRes.get(COOKIES.NextAuthSession);
   const sessionCookieString = getCookieString(sessionCookie);
   const mySettings = await getSettingsProfile(sessionCookieString);
+  const plans = await getPlansService();
+  const hidePaymentMethods = true;
 
   if (!mySettings) return;
   const { profile } = mySettings;
@@ -27,14 +30,17 @@ async function SettingsPage() {
         <Title as="h3" className="text-4xl">
           Plans
         </Title>
-        <Plans />
+        <Plans plans={plans} plan={mySettings.profile.plan} />
       </div>
-      <div className="flex flex-col gap-7">
-        <Title as="h3" className="text-4xl">
-          Payment methods
-        </Title>
-        <PaymentMethods />
-      </div>
+
+      {!hidePaymentMethods && (
+        <div className="flex flex-col gap-7">
+          <Title as="h3" className="text-4xl">
+            Payment methods
+          </Title>
+          <PaymentMethods />
+        </div>
+      )}
     </div>
   );
 }

@@ -11,6 +11,7 @@ import { Layout } from '@moneytrack/web/components/layouts/Layout';
 import { cookies } from 'next/headers';
 import { COOKIES } from '../constants';
 import { getCookieString } from '../lib/cookies';
+import { Spinner } from '../components/layouts/Spinner';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const roboto_mono = Roboto_Mono({
@@ -51,6 +52,7 @@ export default async function RootLayout({
         )}
       >
         <Providers categories={categories} transactionTypes={transactionTypes}>
+          <Spinner hasSpinner={!!sessionCookieString} />
           <Layout>
             <Layout.Header />
             <Layout.Main>{children}</Layout.Main>

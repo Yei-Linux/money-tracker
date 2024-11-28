@@ -9,7 +9,19 @@ export const getMySettings = async (user: string): Promise<GetMySettings> => {
     image: true,
     country: true,
     address: true,
+    plan: true,
   });
 
   return { profile };
+};
+
+export const getMyPaymentSettings = async (user: string) => {
+  const payment = await userModel
+    .findOne({ _id: user })
+    .select({
+      plan: true,
+    })
+    .populate('plan', '_id type description price');
+
+  return payment;
 };
