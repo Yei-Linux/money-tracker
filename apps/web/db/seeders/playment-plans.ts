@@ -13,6 +13,7 @@ export const paymentPlansSeeder = [
       'Unlimited organizers',
       'Standard and advanced mathcing',
     ],
+    disable: false,
   },
   {
     _id: '67421c5402d2cd222479efa5',
@@ -28,6 +29,7 @@ export const paymentPlansSeeder = [
       'Unlimited organizers',
       'Standard and advanced mathcing',
     ],
+    disable: false,
   },
   {
     _id: '67421c5af98cc4fb13ad37aa',
@@ -43,5 +45,6 @@ export const paymentPlansSeeder = [
       'Unlimited organizers',
       'Standard and advanced mathcing',
     ],
+    disable: true,
   },
 ];

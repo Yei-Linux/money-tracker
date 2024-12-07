@@ -19,6 +19,7 @@ interface User {
   address: string | null;
   country: string | null;
   plan: string | null;
+  paymentSubscriptionId: string | null;
 }
 
 const userDBSchema = new mongoose.Schema<User>(
@@ -35,6 +36,7 @@ const userDBSchema = new mongoose.Schema<User>(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Plans',
     },
+    paymentSubscriptionId: { type: String, required: false },
   },
   { timestamps: true }
 );

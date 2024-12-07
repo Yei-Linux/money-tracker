@@ -30,7 +30,7 @@ async function SettingsPage() {
         <Title as="h3" className="text-4xl">
           Plans
         </Title>
-        <Plans plans={plans} plan={mySettings.profile.plan} />
+        <Plans plans={plans} currentPlan={mySettings.profile.plan} />
       </div>
 
       {!hidePaymentMethods && (

@@ -7,6 +7,7 @@ export type TPricingPlan = {
   callToActionText: string;
   theme: 'dark' | 'light';
 
+  disable: boolean;
   benefits: Array<string>;
 };
 

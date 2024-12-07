@@ -3,6 +3,7 @@
 import {
   BarChartIcon,
   BookMarkedIcon,
+  CreditCardIcon,
   LogOut,
   SettingsIcon,
 } from 'lucide-react';
@@ -60,6 +61,12 @@ export const UserDropdown = () => {
                 <DropdownMenuItem className="cursor-pointer">
                   <BarChartIcon className="mr-2 h-4 w-4" />
                   <span>My Summary</span>
+                </DropdownMenuItem>
+              </Link>
+              <Link href="/plans" className="w-full">
+                <DropdownMenuItem className="cursor-pointer">
+                  <CreditCardIcon className="mr-2 h-4 w-4" />
+                  <span>Discover Plans</span>
                 </DropdownMenuItem>
               </Link>
             </DropdownMenuGroup>

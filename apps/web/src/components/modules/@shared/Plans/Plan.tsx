@@ -1,7 +1,8 @@
-import { Button } from '@moneytrack/web/components/ui/button';
 import { cn } from '@moneytrack/web/lib/utils';
 import { TPricingPlan } from '@moneytrack/web/types/payment';
 import { FC, PropsWithChildren } from 'react';
+import { PlanButtonAction } from './PlanButtonAction';
+import { isValidPricing } from '@moneytrack/web/helpers/payment';
 
 type PlanItem = {
   item: string;
@@ -11,6 +12,7 @@ const PlanItem: FC<PlanItem> = ({ item }) => <li>{item}</li>;
 
 type Plan = PropsWithChildren<Omit<TPricingPlan, 'benefits'>> & {
   onSubmit?: () => void;
+  currentPlanId?: string;
 };
 
 type PlanCompound = {
@@ -18,6 +20,7 @@ type PlanCompound = {
 };
 
 export const Plan: FC<Plan> & PlanCompound = ({
+  _id,
   image,
   type,
   price,
@@ -25,7 +28,8 @@ export const Plan: FC<Plan> & PlanCompound = ({
   children,
   callToActionText,
   theme,
-  onSubmit,
+  currentPlanId,
+  disable,
 }) => {
   const themes = {
     dark: {
@@ -34,7 +38,6 @@ export const Plan: FC<Plan> & PlanCompound = ({
     },
     light: { button: 'bg-black text-white', container: 'bg-white text-black' },
   };
-  const isValidPricing = !isNaN(+price) && +price > 0;
 
   return (
     <div
@@ -48,8 +51,7 @@ export const Plan: FC<Plan> & PlanCompound = ({
       <div className="flex flex-col items-center">
         <p className="font-bold text-2xl font-snicker">{type}</p>
         <h4 className="font-bold text-4xl">
-          {isValidPricing && '$'}
-          {isValidPricing ? price : 'Coming Soon'}
+          {isValidPricing(price) ? `$${price}` : 'Coming Soon'}
         </h4>
       </div>
 
@@ -57,12 +59,12 @@ export const Plan: FC<Plan> & PlanCompound = ({
 
       <ul className="text-sm">{children}</ul>
 
-      <Button
-        className={cn('rounded-full', themes[theme].button)}
-        onClick={onSubmit}
-      >
-        {callToActionText}
-      </Button>
+      <PlanButtonAction
+        className={themes[theme].button}
+        currentPlanId={currentPlanId}
+        callToActionText={callToActionText}
+        plan={{ price, type, _id, disable }}
+      />
     </div>
   );
 };

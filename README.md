@@ -11,15 +11,20 @@
 - DNI: 123456789
 - Email: mysticadev2024@gmail.com
 
+## Webhook for testing
+
+https://6361-179-6-15-110.ngrok-free.app/api/payment/mercadopago
+
 ## User for testing
 
 COMPRADOR:
 
-- TESTUSER71867124
-- 5OfloxaRM6
-- test_user_71867124@testuser.com
+- test_user_71867124@testuser.com (email)
+- TESTUSER71867124 (user)
+- 5OfloxaRM6 (pass)
 
 VENDEDOR:
 
-- TEST
-- TEST
+- test_user_1723586450@testuser.com (email)
+- TESTUSER1723586450 (user)
+- ZvCo7J5Nwg (pass)

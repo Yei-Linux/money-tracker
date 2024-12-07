@@ -33,6 +33,10 @@ const plansDBSchema = new mongoose.Schema(
         required: true,
       },
     ],
+    disable: {
+      type: Boolean,
+      required: false,
+    },
   },
   { timestamps: true }
 );

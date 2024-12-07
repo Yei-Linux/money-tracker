@@ -3,16 +3,17 @@ import { mercadoPagoLib } from '../lib/payment/mercadopago';
 import { PaymentWebhookPayload } from '../types/payment';
 import { cardsModel, paymenstModel } from '../models';
 
-// TODO: Add card feature
+// TODO: Add credit card feature
 export const paymentSuscriptionUseCase = async (
   body: PaymentWebhookPayload
 ) => {
+  const paymentSubscriptionId = body.data.id;
   const preapproval = await mercadoPagoLib().getSuscription(body.data.id);
-  const paymentId = preapproval.id;
+  const preApprovalId = preapproval.id;
   if (preapproval.status !== 'authorized')
     throw new Error('Unauthorized subscription');
 
-  if (!paymentId) throw new Error('PaymetId required');
+  if (!preApprovalId) throw new Error('PreApprovalId required');
   if (!preapproval.external_reference)
     throw new Error('External payload is empty');
 
@@ -27,6 +28,7 @@ export const paymentSuscriptionUseCase = async (
 
   const userFound = await userModel.findOne({ email });
   if (!userFound) throw new Error('User not found');
+  if (!!userFound.plan) throw new Error('You already have a plan');
 
   const cardMask = '';
   const cardId = '';
@@ -51,6 +53,10 @@ export const paymentSuscriptionUseCase = async (
     plan: planId,
     pricing,
     cardMask,
+    paymentSubscriptionId,
   });
-  await userModel.updateOne({ _id: user }, { plan: planId });
+  await userModel.updateOne(
+    { _id: user },
+    { plan: planId, paymentSubscriptionId }
+  );
 };

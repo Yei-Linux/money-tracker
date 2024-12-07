@@ -1,23 +1,23 @@
-import { Button } from '@moneytrack/web/components/ui/button';
 import { CardSelector } from '../../../@shared/CardSelector';
 import { MoneyCurrency } from '../../../@shared/MoneyCurrency';
 import { cn } from '@moneytrack/web/lib/utils';
 import { CheckIcon } from 'lucide-react';
 import { TPricingPlans } from '@moneytrack/web/types/payment';
+import { ButtonActions } from './ButtonAction';
 
 export const Plans = ({
   plans,
-  plan,
+  currentPlan,
 }: {
   plans: TPricingPlans;
-  plan?: string;
+  currentPlan?: string;
 }) => {
   return (
     <div className="flex flex-wrap gap-3">
-      {plans.map(({ _id, type, description, price }) => (
+      {plans.map(({ _id, type, description, price, disable }) => (
         <CardSelector
           className={cn('border border-2 relative', {
-            'border-purple': _id === plan,
+            'border-purple': _id === currentPlan,
           })}
           key={_id}
         >
@@ -31,14 +31,12 @@ export const Plans = ({
             </span>
           </div>
 
-          <Button
-            variant="outline"
-            className={cn('!text-sm w-fit !bg-purple !text-white')}
-          >
-            {_id === plan ? 'Cancel Suscription' : 'Upgrade'}
-          </Button>
+          <ButtonActions
+            plan={{ _id, type, price, disable }}
+            currentPlanId={currentPlan}
+          />
 
-          {_id === plan && (
+          {_id === currentPlan && (
             <CheckIcon className="rounded-full bg-purple text-white absolute -right-[10px] -top-[10px]" />
           )}
         </CardSelector>
